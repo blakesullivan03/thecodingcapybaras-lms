@@ -21,8 +21,10 @@ public class DataLoader extends DataConstants{
 				String firstName = (String)personJSON.get(STUDENT_FIRST_NAME);
 				String lastName = (String)personJSON.get(STUDENT_LAST_NAME);
 				String email = (String)personJSON.get(STUDENT_EMAIL);
-				
-				people.add(new Person(firstName, lastName, phoneNumber));
+				String username = (String)personJSON.get(STUDENT_USERNAME);
+				String password = (String)personJSON.get(STUDENT_PASSWORD);
+
+				people.add(new Student(firstName, lastName, email, username, password));
 			}
 			
 			return people;
@@ -44,11 +46,11 @@ public class DataLoader extends DataConstants{
 			
 			for(int i=0; i < peopleJSON.size(); i++) {
 				JSONObject personJSON = (JSONObject)peopleJSON.get(i);
-				String firstName = (String)personJSON.get(PEOPLE_FIRST_NAME);
-				String lastName = (String)personJSON.get(PEOPLE_LAST_NAME);
-				String phoneNumber = (String)personJSON.get(PEOPLE_PHONE_NUMBER);
+				String firstName = (String)personJSON.get(COURSE_CREATOR_FIRST_NAME);
+				String lastName = (String)personJSON.get(COURSE_CREATOR_LAST_NAME);
+				String email = (String)personJSON.get(COURSE_CREATOR_EMAIL);
 				
-				people.add(new Person(firstName, lastName, phoneNumber));
+				people.add(new CourseCreator(firstName, lastName, email, username, password));
 			}
 			
 			return people;
@@ -64,7 +66,7 @@ public class DataLoader extends DataConstants{
 		ArrayList<CourseList> people = new ArrayList<CourseList>();
 		
 		try {
-			FileReader reader = new FileReader(PEOPLE_FILE_NAME);
+			FileReader reader = new FileReader(COURSE_FILE_NAME);
 			JSONParser parser = new JSONParser();
 			JSONArray peopleJSON = (JSONArray)new JSONParser().parse(reader);
 			
