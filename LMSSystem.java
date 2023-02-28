@@ -1,8 +1,9 @@
-public class LMSSystem {
+import java.util.ArrayList;
+
+public class LMSSystem{
     private UserList users;
     private Module module;
     private Comment comment;
-    private CommentList comments;
     private User currentUser;
     private Course currentCourse;
     private Quiz currentQuiz;
@@ -60,11 +61,11 @@ public class LMSSystem {
      * Student View
      */
 
-     public ArrayList<Course> getCourses(Language){
+     public ArrayList<Course> getCourses(Language language){
 
      }
      
-     public ArrayList<Course> getCourses(keyword){
+     public ArrayList<Course> getCourses(String keyword){
 
      }
      public Course getCourseByIndex(int index){

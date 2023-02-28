@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class UserList {
     private static UserList userList;
     private ArrayList<User> users;
@@ -12,11 +14,11 @@ public class UserList {
 
     }
 
-    public void addUser(User){
+    public void addUser(User user){
 
     }
     
-    public void deleteUser(User){
+    public void deleteUser(User user){
 
     }
 
@@ -24,7 +26,7 @@ public class UserList {
 
     }
 
-    public ArrayList<User> getUser(userName){
+    public ArrayList<User> getUser(String userName){
         
     }
 

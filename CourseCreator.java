@@ -1,3 +1,3 @@
-public class CourseCreator {
+public class CourseCreator extends User{
     
 }
