@@ -5,7 +5,19 @@ public class CourseProfile {
     private double CourseGrade;
     private Student student;
 
-    public CourseProfile(Course course, ArrayList<double> moduleGrades, Student student){
+    public CourseProfile(Course course, ArrayList<Double> moduleGrades, Student student){
 
+    }
+
+    public double getGrade(){
+
+    }
+
+    public Student getStudent(){
+
+    }
+
+    public void enterGrade(int moduleIndex, double grade){
+        
     }
 }
