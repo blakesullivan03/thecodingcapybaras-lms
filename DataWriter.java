@@ -17,7 +17,7 @@ public class DataWriter extends DataConstants{
 		}
 		
 		//Write JSON file
-        try (FileWriter file = new FileWriter(PEOPLE_FILE_NAME)) {
+        try (FileWriter file = new FileWriter(COURSE_FILE_NAME)) {
  
             file.write(jsonFriends.toJSONString());
             file.flush();
@@ -55,11 +55,11 @@ public class DataWriter extends DataConstants{
 		
 		//creating all the json objects
 		for(int i=0; i< friends.size(); i++) {
-			jsonFriends.add(getStudentJSON(friends.get(i)));
+			jsonFriends.add(getCourseCreatorJSON(friends.get(i)));
 		}
 		
 		//Write JSON file
-        try (FileWriter file = new FileWriter(PEOPLE_FILE_NAME)) {
+        try (FileWriter file = new FileWriter(COURSE_CREATOR_FILE_NAME)) {
  
             file.write(jsonFriends.toJSONString());
             file.flush();
@@ -75,7 +75,20 @@ public class DataWriter extends DataConstants{
     public static JSONObject getStudentJSON(User user) {
 		JSONObject userDetails = new JSONObject();
 		userDetails.put(STUDENT_ID, user.getId().toString());
-		userDetails.put(USER_USER_NAME, user.getUserName());
+		userDetails.put(STUDENT_FIRST_NAME, user.getFirstName());
+		userDetails.put(STUDENT_LAST_NAME, user.getLastName());
+		userDetails.put(USER_AGE, user.getAge());
+		userDetails.put(STUDENT_EMAIL, user.getEmail());
+        
+        return userDetails;
+	}
+
+    /**
+     * 
+     */
+    public static JSONObject courseCreatorJSON(User user) {
+		JSONObject userDetails = new JSONObject();
+		userDetails.put(STUDENT_ID, user.getId().toString());
 		userDetails.put(STUDENT_FIRST_NAME, user.getFirstName());
 		userDetails.put(STUDENT_LAST_NAME, user.getLastName());
 		userDetails.put(USER_AGE, user.getAge());
