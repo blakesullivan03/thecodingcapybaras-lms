@@ -1,7 +1,8 @@
 import java.util.Scanner;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
-
+/**
+ * User Interface for the System
+ * @author Blake Turner
+ */
 public class SystemUI{
     private String[] mainMenuStrings = {"Begin Course", "Resume Course", "Check Course Progress", "Logout"};
     private Scanner scanner;
