@@ -3,18 +3,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import java.util.HashMap;
 
 public class DataWriter extends DataConstants{
 
-    /**public static void saveCourses() {
+    public static void saveCourses() {
 		CourseList course = CourseList.getInstance();
-		ArrayList<CourseList> friends = course.getCourses();
+		ArrayList<Course> friends = course.getCourses();
 		JSONArray jsonFriends = new JSONArray();
 		
 		//creating all the json objects
 		for(int i=0; i< friends.size(); i++) {
-			jsonFriends.add(getPersonJSON(friends.get(i)));
+			jsonFriends.add(getCourseJSON(friends.get(i)));
 		}
 		
 		//Write JSON file
@@ -26,7 +25,7 @@ public class DataWriter extends DataConstants{
         } catch (IOException e) {
             e.printStackTrace();
         }
-	}*/
+	}
 
     public static void saveStudents() {
 		UserList user = UserList.getInstance();
@@ -91,7 +90,7 @@ public class DataWriter extends DataConstants{
     /**
      *
      */ 
-    public static JSONObject getCourseCreatorJSON(User courseCreator) {
+    public static JSONObject getCourseCreatorJSON(CourseCreator courseCreator) {
 		JSONObject userDetails = new JSONObject();
 		userDetails.put(COURSE_CREATOR_ID, courseCreator.getId().toString());
 		userDetails.put(COURSE_CREATOR_FIRST_NAME, courseCreator.getFirstName());
@@ -101,6 +100,24 @@ public class DataWriter extends DataConstants{
         userDetails.put(COURSE_CREATOR_PASSWORD, courseCreator.getPassword());
         
         return userDetails;
+	}
+
+    /**
+     * 
+     */
+    public static JSONObject getCourseJSON(Course course) {
+		JSONObject userDetails = new JSONObject();
+		userDetails.put(STUDENT_ID, course.getId().toString());
+		userDetails.put(STUDENT_FIRST_NAME, course.getFirstName());
+		userDetails.put(STUDENT_LAST_NAME, course.getLastName());
+        userDetails.put(STUDENT_DOB, course.getDateOfBirth());
+		userDetails.put(STUDENT_EMAIL, course.getEmail());
+        userDetails.put(STUDENT_USERNAME, course.getUserName());
+        userDetails.put(STUDENT_PASSWORD, course.getPassword());
+
+
+        
+    return userDetails;
 	}
 
 }
