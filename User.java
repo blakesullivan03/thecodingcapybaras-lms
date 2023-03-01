@@ -12,6 +12,7 @@ public abstract class User {
 
     public User(UUID id, String firstName, String lastName, String email,
         String username, String password, Date DoB) { // loading from json
+<<<<<<< HEAD
             this.id = UUID.randomUUID();
             this.firstName = firstName;
             this.lastName = lastName;
@@ -19,10 +20,21 @@ public abstract class User {
             this.username = username;
             this.password = password;
             this.DoB = DoB;
+=======
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.DoB = DoB;
+
+>>>>>>> 99c23605dfc54d8fa816c8db784047e5801126cc
     }
     
     public User(String firstName, String lastName, String email,
         String username, String password, Date DoB) { // not loading from json
+<<<<<<< HEAD
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
@@ -72,4 +84,13 @@ public abstract class User {
 	}
 
 
+=======
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.DoB = DoB;
+     }
+>>>>>>> 99c23605dfc54d8fa816c8db784047e5801126cc
 }
