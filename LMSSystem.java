@@ -96,7 +96,7 @@ public class LMSSystem{
 
      }
 
-     public boolean checkAnswers(ArrayList<int> userInput, Quiz quiz){
+     public boolean checkAnswers(ArrayList<Integer> userInput, Quiz quiz){
 
      }
 

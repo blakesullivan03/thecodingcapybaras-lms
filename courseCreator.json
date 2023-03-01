@@ -5,7 +5,7 @@
         "lastName":"Flippina", 
         "dateOfBirth":"8/27/1996",
         "email":"GeorgieF@email.sdsu.edu",
-        "passowrd":"sharksarecool9?",
+        "password":"sharksarecool9?",
         "courses":["Python, Javascript"]
     }
 ]
