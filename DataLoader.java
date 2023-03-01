@@ -8,8 +8,8 @@ import org.json.simple.parser.JSONParser;;
 
 public class DataLoader extends DataConstants{
 
-    public static ArrayList<User> loadStudents() {
-		ArrayList<User> students = new ArrayList<User>();
+    public static ArrayList<Student> getStudents() {
+		ArrayList<Student> students = new ArrayList<Student>();
 		
 		try {
 			FileReader reader = new FileReader(STUDENT_FILE_NAME);
@@ -26,7 +26,7 @@ public class DataLoader extends DataConstants{
 				String password = (String)personJSON.get(STUDENT_PASSWORD);
                 String dob = (String)personJSON.get(STUDENT_DOB);
 
-                students.add(new Student(firstName, lastName, email, username, password, dob));
+                students.add(new Student(id, firstName, lastName, email, username, password, dob));
 			}
 			
 			return students;
@@ -38,8 +38,8 @@ public class DataLoader extends DataConstants{
 		return null;
 	}
 
-    public static ArrayList<User> loadCourseCreator() {
-		ArrayList<User> courseCreator = new ArrayList<User>();
+    public static ArrayList<CourseCreator> getCourseCreator(){
+		ArrayList<CourseCreator> courseCreator = new ArrayList<CourseCreator>();
 		
 		try {
 			FileReader reader = new FileReader(STUDENT_FILE_NAME);
@@ -48,13 +48,14 @@ public class DataLoader extends DataConstants{
 			
 			for(int i=0; i < peopleJSON.size(); i++) {
 				JSONObject personJSON = (JSONObject)peopleJSON.get(i);
+                UUID id = UUID.fromString((String)personJSON.get(STUDENT_ID));
 				String firstName = (String)personJSON.get(COURSE_CREATOR_FIRST_NAME);
 				String lastName = (String)personJSON.get(COURSE_CREATOR_LAST_NAME);
 				String email = (String)personJSON.get(COURSE_CREATOR_EMAIL);
                 String username = (String)personJSON.get(STUDENT_USERNAME);
 				String password = (String)personJSON.get(STUDENT_PASSWORD);
 				
-				courseCreator.add(new CourseCreator(firstName, lastName, email, username, password));
+				courseCreator.add(new CourseCreator(id, firstName, lastName, email, username, password));
 			}
 			
 			return courseCreator;
