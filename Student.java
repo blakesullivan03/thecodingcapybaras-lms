@@ -8,7 +8,7 @@ public class Student extends User{
     private ArrayList<Language> favoriteLanguage;
 
     public Student(UUID id, String firstName, String lastName, String email, String username, String password, String DoB){
-        super(id, firstName, lastName, email, username, password, DoB);
+        super(id,firstName, lastName, email, username, password, DoB);
     }
     
     public void enroll(Course course){

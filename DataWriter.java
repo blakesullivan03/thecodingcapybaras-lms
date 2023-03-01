@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import java.util.HashMap;
 
 public class DataWriter extends DataConstants{
 
@@ -27,20 +28,20 @@ public class DataWriter extends DataConstants{
         }
 	}*/
 
-    public static void saveStudent() {
+    public static void saveStudents() {
 		UserList user = UserList.getInstance();
-		ArrayList<UserList> friends = user.getStudent();
-		JSONArray jsonFriends = new JSONArray();
+		ArrayList<Student> studentList = user.getStudent();
+		JSONArray jsonStudents = new JSONArray();
 		
 		//creating all the json objects
-		for(int i=0; i< friends.size(); i++) {
-			jsonFriends.add(getStudentJSON(friends.get(i)));
+		for(int i=0; i < studentList.size(); i++) {
+			jsonStudents.add(getStudentJSON(studentList.get(i)));
 		}
 		
 		//Write JSON file
         try (FileWriter file = new FileWriter(STUDENT_FILE_NAME)) {
  
-            file.write(jsonFriends.toJSONString());
+            file.write(jsonStudents.toJSONString());
             file.flush();
  
         } catch (IOException e) {
@@ -48,10 +49,9 @@ public class DataWriter extends DataConstants{
         }
 	}
 
-    /**
-     public static void saveCourseCreator() {
+    public static void saveCourseCreator() {
 		UserList user = UserList.getInstance();
-		ArrayList<UserList> friends = user.getUser();
+		ArrayList<CourseCreator> friends = user.getCourseCreator();
 		JSONArray jsonFriends = new JSONArray();
 		
 		//creating all the json objects
@@ -68,7 +68,7 @@ public class DataWriter extends DataConstants{
         } catch (IOException e) {
             e.printStackTrace();
         }
-	}*/
+	}
 
     /**
      * 
@@ -85,6 +85,8 @@ public class DataWriter extends DataConstants{
 	}
 
     /**
+     *
+     */ 
     public static JSONObject getCourseCreatorJSON(User courseCreator) {
 		JSONObject userDetails = new JSONObject();
 		userDetails.put(STUDENT_ID, courseCreator.getId().toString());
@@ -95,6 +97,5 @@ public class DataWriter extends DataConstants{
         
         return userDetails;
 	}
-    */
 
 }

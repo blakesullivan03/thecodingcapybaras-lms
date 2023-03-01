@@ -8,8 +8,8 @@ import org.json.simple.parser.JSONParser;;
 
 public class DataLoader extends DataConstants{
 
-    public static ArrayList<User> getStudent() {
-		ArrayList<User> students = new ArrayList<User>();
+    public static ArrayList<Student> getStudents() {
+		ArrayList<Student> students = new ArrayList<Student>();
 		
 		try {
 			FileReader reader = new FileReader(STUDENT_FILE_NAME);
@@ -38,8 +38,8 @@ public class DataLoader extends DataConstants{
 		return null;
 	}
 
-    public static ArrayList<User> getCourseCreator(){
-		ArrayList<User> courseCreator = new ArrayList<User>();
+    public static ArrayList<CourseCreator> getCourseCreator(){
+		ArrayList<CourseCreator> courseCreator = new ArrayList<CourseCreator>();
 		
 		try {
 			FileReader reader = new FileReader(STUDENT_FILE_NAME);

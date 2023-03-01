@@ -10,7 +10,7 @@ public abstract class User {
     protected String password;
     protected String DoB;
 
-    public User(UUID id, String firstName, String lastName, String email,
+    public User(String firstName, String lastName, String email,
         String username, String password, String DoB) { // loading from json
             this.id = UUID.randomUUID();
             this.firstName = firstName;
@@ -21,8 +21,9 @@ public abstract class User {
             this.DoB = DoB;
     }
     
-    public User(String firstName, String lastName, String email,
+    public User(UUID id, String firstName, String lastName, String email,
         String username, String password, String DoB) { // not loading from json
+            this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
@@ -59,7 +60,7 @@ public abstract class User {
 		this.lastName = lastName;
 	}
 	
-	public Date getDateOfBirth(){
+	public String getDateOfBirth(){
 		return DoB;
 	}
 	

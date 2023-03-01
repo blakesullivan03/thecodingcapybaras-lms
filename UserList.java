@@ -8,7 +8,7 @@ public class UserList {
     private ArrayList<CourseCreator> courseCreators;
 
     private UserList(){
-        students = DataLoader.getStudent();
+        students = DataLoader.getStudents();
         courseCreators = DataLoader.getCourseCreator();
     }
 
@@ -58,15 +58,15 @@ public class UserList {
 		return null;
     }
 
-    public ArrayList<User> getUser(){
+    public ArrayList<User> getUsers(){
         return users;
     }
 
-    public ArrayList<Student> getStudent(){
+    public ArrayList<Student> getStudents(){
         return students;
     }
 
-    public ArrayList<CourseCreator> getCourseCreator(){
+    public ArrayList<CourseCreator> getCourseCreators(){
         return courseCreators;
     }
 
@@ -77,6 +77,14 @@ public class UserList {
 
         students.add(new Student(id,firstName, lastName, email, username, password, dob));
         return true;
+    }
+
+    public void saveStudents(){
+        DataWriter.saveStudents();
+    }
+
+    public void saveCourseCreators(){
+        DataWriter.saveCourseCreator();
     }
 
 }
