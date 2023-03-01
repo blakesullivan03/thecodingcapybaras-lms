@@ -6,7 +6,7 @@ import org.json.simple.JSONObject;
 
 public class DataWriter extends DataConstants{
 
-    public static void saveCourses() {
+    /**public static void saveCourses() {
 		CourseList course = CourseList.getInstance();
 		ArrayList<CourseList> friends = course.getCourses();
 		JSONArray jsonFriends = new JSONArray();
@@ -25,11 +25,11 @@ public class DataWriter extends DataConstants{
         } catch (IOException e) {
             e.printStackTrace();
         }
-	}
+	}*/
 
     public static void saveStudent() {
 		UserList user = UserList.getInstance();
-		ArrayList<UserList> friends = user.getUser();
+		ArrayList<UserList> friends = user.getStudent();
 		JSONArray jsonFriends = new JSONArray();
 		
 		//creating all the json objects
@@ -48,7 +48,8 @@ public class DataWriter extends DataConstants{
         }
 	}
 
-    public static void saveCourseCreator() {
+    /**
+     public static void saveCourseCreator() {
 		UserList user = UserList.getInstance();
 		ArrayList<UserList> friends = user.getUser();
 		JSONArray jsonFriends = new JSONArray();
@@ -67,33 +68,33 @@ public class DataWriter extends DataConstants{
         } catch (IOException e) {
             e.printStackTrace();
         }
-	}
+	}*/
 
     /**
      * 
      */
-    public static JSONObject getStudentJSON(User user) {
+    public static JSONObject getStudentJSON(Student student) {
 		JSONObject userDetails = new JSONObject();
-		userDetails.put(STUDENT_ID, user.getId().toString());
-		userDetails.put(STUDENT_FIRST_NAME, user.getFirstName());
-		userDetails.put(STUDENT_LAST_NAME, user.getLastName());
-		userDetails.put(USER_AGE, user.getAge());
-		userDetails.put(STUDENT_EMAIL, user.getEmail());
+		userDetails.put(STUDENT_ID, student.getId().toString());
+		userDetails.put(STUDENT_FIRST_NAME, student.getFirstName());
+		userDetails.put(STUDENT_LAST_NAME, student.getLastName());
+		userDetails.put(STUDENT_EMAIL, student.getEmail());
+
         
     return userDetails;
 	}
 
     /**
-     * 
-     */
-    public static JSONObject getCourseCreatorJSON(User user) {
+    public static JSONObject getCourseCreatorJSON(User courseCreator) {
 		JSONObject userDetails = new JSONObject();
-		userDetails.put(STUDENT_ID, user.getId().toString());
-		userDetails.put(STUDENT_FIRST_NAME, user.getFirstName());
-		userDetails.put(STUDENT_LAST_NAME, user.getLastName());
-		userDetails.put(USER_AGE, user.getAge());
-		userDetails.put(STUDENT_EMAIL, user.getPhoneNumber());
+		userDetails.put(STUDENT_ID, courseCreator.getId().toString());
+		userDetails.put(STUDENT_FIRST_NAME, courseCreator.getFirstName());
+		userDetails.put(STUDENT_LAST_NAME, courseCreator.getLastName());
+		userDetails.put(USER_AGE, courseCreator.getAge());
+		userDetails.put(STUDENT_EMAIL, courseCreator.getPhoneNumber());
         
         return userDetails;
 	}
+    */
+
 }

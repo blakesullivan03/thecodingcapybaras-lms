@@ -1,9 +1,10 @@
+import java.util.UUID;
+
 public class CourseCreator extends User{
     private CourseList courses;
 
-    public CourseCreator(String firstName, String lastName, String email, String
-    username, String password){
-
+    public CourseCreator(UUID id, String firstName, String lastName, String email, String username, String password){
+        super(id, firstName, lastName, email, username, password, password);
 
     }
 
@@ -16,6 +17,6 @@ public class CourseCreator extends User{
     }
 
     public boolean isMyCourse(){
-        
+
     }
 }
