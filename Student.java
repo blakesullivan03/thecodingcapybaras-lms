@@ -1,14 +1,17 @@
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.Date;
 
 public class Student extends User{
     private HashMap<Course, CourseProfile> courses;
     private double overallGPA;
-    private ArrayList<Language> favoriteLanguage;
+    private ArrayList<Language> favoriteLanguages;
 
-    public Student(UUID id, String firstName, String lastName, String email, String username, String password, String DoB){
-        super(id,firstName, lastName, email, username, password, DoB);
+    public Student(UUID id, String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages){
+        super(id,firstName, lastName, email, password, DoB);
+        this.overallGPA = overallGPA;
+        this.favoriteLanguages = favoriteLanguages;
     }
     
     public void enroll(Course course){
@@ -23,7 +26,7 @@ public class Student extends User{
     }
 
     public void addFavoriteLanguage(Language language){
-        favoriteLanguage.add(language);
+        favoriteLanguages.add(language);
 
     }
 
@@ -31,8 +34,8 @@ public class Student extends User{
         // TODO not sure if returning a bool is right,
         // but i think we need a way to tell if it actually removed something 
         // or did nothing (the language wasnt there to begin with).
-        if (!favoriteLanguage.contains(language)) return false;
-        favoriteLanguage.remove(language);
+        if (!favoriteLanguages.contains(language)) return false;
+        favoriteLanguages.remove(language);
         return true;
 
     }

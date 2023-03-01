@@ -1,4 +1,5 @@
 import java.util.UUID;
+import java.util.Date;
 
 public abstract class User {
     protected UUID id;
@@ -7,26 +8,22 @@ public abstract class User {
     protected String email;
     protected String username;
     protected String password;
-    protected String DoB;
+    protected Date DoB;
 
-    public User(String firstName, String lastName, String email,
-        String username, String password, String DoB) { // loading from json
+    public User(String firstName, String lastName, String email,String password, Date DoB) { // loading from json
             this.id = UUID.randomUUID();
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
-            this.username = username;
             this.password = password;
             this.DoB = DoB;
     }
     
-    public User(UUID id, String firstName, String lastName, String email,
-        String username, String password, String DoB) { // not loading from json
+    public User(UUID id, String firstName, String lastName, String email,String password, Date DoB) { // not loading from json
             this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
-            this.username = username;
             this.password = password;
             this.DoB = DoB;
     }
@@ -59,7 +56,7 @@ public abstract class User {
 		this.lastName = lastName;
 	}
 	
-	public String getDateOfBirth(){
+	public Date getDateOfBirth(){
 		return DoB;
 	}
 	
