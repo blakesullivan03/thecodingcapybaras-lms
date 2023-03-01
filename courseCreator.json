@@ -5,7 +5,18 @@
         "lastName":"Flippina", 
         "dateOfBirth":"8/27/1996",
         "email":"GeorgieF@email.sdsu.edu",
-        "passowrd":"sharksarecool9?",
-        "courses":["Python, Javascript"]
+        "password":"sharksarecool9?",
+        "type":"Course Creator"
+    },{
+        "id": "260c9289-a36a-4135-bf93-f21a118d0f61",
+        "firstName":"John", 
+        "lastName":"Pippen", 
+        "dateOfBirth":"5/12/2001",
+        "email":"JbPippen@gmail.com",
+        "username":"JbPippen1",
+        "password":"basketballismylifeee22!",
+        "type": "Student",
+        "overallGPA":4.0,
+        "favLanguages":["Python", "C#"]
     }
 ]

@@ -1,1 +1,14 @@
-[]
+[
+    {
+      "id":1,
+      "title":"Foundations of Python",
+      "language": "Python",
+      "courseID":"9a812c80-9970-4d48-9b87-8e80fc233a70",
+      "courseCreatorID": "d022ea4a-1f9b-4203-ad9f-48d57ef8802f",
+      "modules":["Basics", "Conditional Statements"],
+      "questions":[
+        {"modules":"Basics", "question": "Choose which print line uses the Correct Syntax"}, 
+        {"modules":"Basics", "question": "Does python require a semicolon to print"}
+        ]
+    }
+  ]
