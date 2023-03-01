@@ -34,7 +34,7 @@ public class DataWriter extends DataConstants{
 		
 		//creating all the json objects
 		for(int i=0; i< friends.size(); i++) {
-			jsonFriends.add(getPersonJSON(friends.get(i)));
+			jsonFriends.add(getStudentJSON(friends.get(i)));
 		}
 		
 		//Write JSON file
@@ -80,13 +80,13 @@ public class DataWriter extends DataConstants{
 		userDetails.put(USER_AGE, user.getAge());
 		userDetails.put(STUDENT_EMAIL, user.getEmail());
         
-        return userDetails;
+    return userDetails;
 	}
 
     /**
      * 
      */
-    public static JSONObject courseCreatorJSON(User user) {
+    public static JSONObject getCourseCreatorJSON(User user) {
 		JSONObject userDetails = new JSONObject();
 		userDetails.put(STUDENT_ID, user.getId().toString());
 		userDetails.put(STUDENT_FIRST_NAME, user.getFirstName());

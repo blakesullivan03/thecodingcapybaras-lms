@@ -12,12 +12,64 @@ public abstract class User {
 
     public User(UUID id, String firstName, String lastName, String email,
         String username, String password, Date DoB) { // loading from json
-        
+            this.id = UUID.randomUUID();
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+            this.username = username;
+            this.password = password;
+            this.DoB = DoB;
     }
     
     public User(String firstName, String lastName, String email,
         String username, String password, Date DoB) { // not loading from json
-        
-
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+            this.username = username;
+            this.password = password;
+            this.DoB = DoB;
     }
+
+    public UUID getId(){
+		return id;
+	}
+	
+	public String getUserName(){
+		return username;
+	}
+
+    public String getPassword(){
+        return password;
+    }
+	
+	public String getFirstName(){
+		return firstName;
+	}
+	
+	public void setFirstName(String firstName){
+		this.firstName = firstName;
+	}
+	
+	public String getLastName(){
+		return lastName;
+	}
+	
+	public void setLastName(String lastName){
+		this.lastName = lastName;
+	}
+	
+	public Date getDateOfBirth(){
+		return DoB;
+	}
+	
+	public String getEmail(){
+		return email;
+	}
+	
+	public void setPhoneNumber(String email){
+		this.email = email;
+	}
+
+
 }

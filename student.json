@@ -5,6 +5,7 @@
         "lastName":"Pippen", 
         "dateOfBirth":"5/12/2001",
         "email":"JbPippen@gmail.com",
+        "username":"username",
         "passowrd":"basketballismylifeee22!",
         "overallGPA":4.0,
         "favLanguages":["Python", "C#"],
