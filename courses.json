@@ -1,14 +1,27 @@
 [
     {
-      "id":1,
+      "courseID":"9a812c80-9970-4d48-9b87-8e80fc233a70",
       "title":"Foundations of Python",
       "language": "Python",
-      "courseID":"9a812c80-9970-4d48-9b87-8e80fc233a70",
       "courseCreatorID": "d022ea4a-1f9b-4203-ad9f-48d57ef8802f",
-      "modules":["Basics", "Conditional Statements"],
-      "questions":[
-        {"modules":"Basics", "question": "Choose which print line uses the Correct Syntax"}, 
-        {"modules":"Basics", "question": "Does python require a semicolon to print"}
+      "modules":[{"title": "Basics",
+                  "topics": [{"title":"Basics",
+                              "lesson": ""}
+                            ],
+                "questions": [{"question":"Is a semicolon required to print?",
+                              "answers": ["Yes", "No"],
+                              "correct-ans": 2},
+                              {"question": "Choose which print line uses the Correct Syntax?",
+                              "answers": ["Print(HelloWord)", "Print(\"HelloWorld\")", "P(HelloWord)"],
+                              "correct-ans":2}],
+                "comments": [{"StudentId": "260c9289-a36a-4135-bf93-f21a118d0f61", "Text": "Your mom lol"}, "1v1 me in rust kid", "Your code is aight"]
+                }
+              ],
+        "student":[
+          {
+            "id":"260c9289-a36a-4135-bf93-f21a118d0f61",
+            "grades":[4,5,3]
+          }
         ]
     }
   ]
