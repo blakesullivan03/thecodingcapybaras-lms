@@ -67,7 +67,7 @@ public class DataLoader extends DataConstants{
 		return null;
 	}
 
-    /**public static ArrayList<CourseList> loadCourses() {
+    public static ArrayList<CourseList> getCourses(){
 		ArrayList<CourseList> people = new ArrayList<CourseList>();
 		
 		try {
@@ -91,5 +91,5 @@ public class DataLoader extends DataConstants{
 		}
 		
 		return null;
-	}*/
+	}
 }

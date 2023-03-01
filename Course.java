@@ -32,6 +32,10 @@ public class Course {
 
     }
 
+    public Language getLanguage(){
+        
+    }
+
     public String getTitle(){
 
     }
@@ -47,6 +51,7 @@ public class Course {
     public void deleteModule(Module module){
 
     }
+
 
     public void editModuleTitle(Module old, Module new){
 
