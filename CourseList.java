@@ -17,12 +17,12 @@ public class CourseList {
         return courseList;
     }
 
-    public getCourseByUUID(UUID id){
-
+    public UUID getCourseByUUID(UUID id){
+        return id;
     }
 
     public Course addCourse(String title, Language language){
-
+        Course.add();
     }
 
     public void deleteCourse(Course course){

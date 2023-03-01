@@ -8,6 +8,13 @@ import org.json.simple.parser.JSONParser;;
 
 public class DataLoader extends DataConstants{
 
+	public static void main(String[] args) {
+		ArrayList<Student> students = getStudents();
+		for(Student student : students){
+			System.out.println(student);
+		}
+	}
+
     public static ArrayList<Student> getStudents() {
 		ArrayList<Student> students = new ArrayList<Student>();
 		

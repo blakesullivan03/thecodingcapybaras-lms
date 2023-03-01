@@ -41,4 +41,7 @@ public class Student extends User{
         // Where are we storing each quiz grade? and where are we averaging all of them together for course grade?
     }
 
+    public String toString(){
+        return firstName + " " + lastName;
+    }
 }

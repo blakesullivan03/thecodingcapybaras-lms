@@ -33,7 +33,7 @@ public class Course {
     }
 
     public Language getLanguage(){
-        
+
     }
 
     public String getTitle(){
