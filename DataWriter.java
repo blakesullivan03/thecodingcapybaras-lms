@@ -72,7 +72,7 @@ public class DataWriter extends DataConstants{
     /**
      * 
      */
-    public static JSONObject getStudentJSON(Student student) {
+    public static JSONObject getUserJSON(Student student) {
 		JSONObject userDetails = new JSONObject();
 		userDetails.put(STUDENT_ID, student.getId().toString());
 		userDetails.put(STUDENT_FIRST_NAME, student.getFirstName());

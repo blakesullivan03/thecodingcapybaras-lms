@@ -38,6 +38,11 @@ public class UserList {
 		return false;
 	}
 
+    //Loop throught user list
+    public User getUserById(UUID id){
+        return null;
+    }
+
     public User getUser(String userName){
         for(User user : users) {
 			if(user.getUserName().equals(userName)) {

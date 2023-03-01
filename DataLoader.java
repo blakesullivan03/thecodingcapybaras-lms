@@ -1,4 +1,5 @@
 import java.io.FileReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -10,10 +11,13 @@ import org.json.simple.parser.JSONParser;;
 public class DataLoader extends DataConstants{
 
 	public static void main(String[] args) {
-		ArrayList<User> students = getUsers();
+/*ArrayList<User> students = getUsers();
 		for(User student : students){
 			System.out.println(student);
 		}
+*/
+		//get instance of userlist
+		UserList.getInstance();
 	}
 
     public static ArrayList<User> getUsers() {
@@ -58,19 +62,27 @@ public class DataLoader extends DataConstants{
 
 		for(int i=0; i < jsonLangs.size(); i++) {
 			String langString = (String)jsonLangs.get(i);
-			System.out.println(langString);
+			languages.add(Language.valueOf(langString));
 		}
 
 		return languages;
 	}
 
 	private static Date getDateFromString(String data){
-		return new Date();
+		try {
+            return new SimpleDateFormat("MM/dd/yyyy").parse(data);
+        } catch (Exception e) {
+            System.out.println("here");
+            return new Date();
+        }
 	}
 
+
+	//before I start this
+	//Finish the UserList
     public static ArrayList<Course> getCourses(){
 		ArrayList<Course> course = new ArrayList<Course>();
-		
+		//UserList.getInstance().getUserByID
 		try {
 			FileReader reader = new FileReader(COURSE_FILE_NAME);
 			JSONParser parser = new JSONParser();

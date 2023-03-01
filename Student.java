@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.Date;
@@ -45,6 +46,11 @@ public class Student extends User{
     }
 
     public String toString(){
-        return firstName + " " + lastName;
+        return firstName + " " + lastName + " - " + favoriteLanguages + " " + getFormattedDate(DoB);
+    }
+
+    private String getFormattedDate(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        return simpleDateFormat.format(date);
     }
 }
