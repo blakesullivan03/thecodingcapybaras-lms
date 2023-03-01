@@ -67,24 +67,24 @@ public class DataLoader extends DataConstants{
 		return null;
 	}
 
-    public static ArrayList<CourseList> getCourses(){
-		ArrayList<CourseList> people = new ArrayList<CourseList>();
+    public static ArrayList<Course> getCourses(){
+		ArrayList<Course> course = new ArrayList<Course>();
 		
 		try {
 			FileReader reader = new FileReader(COURSE_FILE_NAME);
 			JSONParser parser = new JSONParser();
-			JSONArray peopleJSON = (JSONArray)new JSONParser().parse(reader);
+			JSONArray courseJSON = (JSONArray)new JSONParser().parse(reader);
 			
-			for(int i=0; i < peopleJSON.size(); i++) {
+			for(int i=0; i < courseJSON.size(); i++) {
 				JSONObject personJSON = (JSONObject)peopleJSON.get(i);
 				String firstName = (String)personJSON.get(COURSE_NAME);
 				String lastName = (String)personJSON.get(PEOPLE_LAST_NAME);
 				String phoneNumber = (String)personJSON.get(PEOPLE_PHONE_NUMBER);
 				
-				people.add(new Course(firstName, lastName, phoneNumber));
+				course.add(new Course(firstName, lastName, phoneNumber));
 			}
 			
-			return people;
+			return course;
 			
 		} catch (Exception e) {
 			e.printStackTrace();

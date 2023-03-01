@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.ArrayList;
 
 public class CourseList {
     private static CourseList courseList;
@@ -30,10 +29,11 @@ public class CourseList {
 
     }
 
-    public ArrayList<Course> getCourses(Language language){
-        for(Course course : courses){
+    public ArrayList<Course> getCourse(Language language){
+        ArrayList<Course> courseLanguages = new ArrayList();
+        for(Course course : courseLanguages){
             if(course.getLanguage().equals(language)){
-                courses.add(course);
+                courseLanguages.add(course);
                 return courses;
             }
         }
