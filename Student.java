@@ -1,16 +1,13 @@
 import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Student extends User{
     private HashMap<Course, CourseProfile> courses;
     private double overallGPA;
     private ArrayList<Language> favoriteLanguage;
 
-    public Student(String firstName, String lastName, String email,
-        String username, String password, Date DoB){
+    public Student(String firstName, String lastName, String email, String username, String password, String DoB){
         super(firstName, lastName, email, username, password, DoB);
-
     }
     
     public void enroll(Course course){
