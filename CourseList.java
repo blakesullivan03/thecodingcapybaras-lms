@@ -34,10 +34,9 @@ public class CourseList {
         for(Course course : courseLanguages){
             if(course.getLanguage().equals(language)){
                 courseLanguages.add(course);
-                return courses;
             }
         }
-        return null;
+        return courses;
     }
 
     public ArrayList<Course> getCourses(String keyword){
