@@ -14,10 +14,38 @@
                               {"question": "Choose which print line uses the Correct Syntax?",
                               "answers": ["Print(HelloWord)", "Print(\"HelloWorld\")", "P(HelloWord)"],
                               "correct-ans":2}],
-                "comments": [{"StudentId": "260c9289-a36a-4135-bf93-f21a118d0f61", "Text": "Your mom lol"}, "1v1 me in rust kid", "Your code is aight"]
-                }
+                "comments": [{"StudentId": "260c9289-a36a-4135-bf93-f21a118d0f61", 
+                              "Text": "Your mom lol",
+                             "replies":[
+                              {
+                                "studentId":"88e183f7-0a67-4983-b0e5-37c4ddf16b57",
+                                "text": "Just focus on your code bruh",
+                                "replies":[]
+                              }
+                             ]}, 
+                              {"StudentId": "88e183f7-0a67-4983-b0e5-37c4ddf16b57",
+                              "Text": "1v1 me in rust kid", 
+                              "replies": [
+                                {
+                                  "studentid": "260c9289-a36a-4135-bf93-f21a118d0f61",
+                                  "text": "Bro I would literally go 30-0 on you don't try me",
+                                  "replies": []
+                                }
+                              ]},
+                              [{"StudentId": "174a27fb-9632-44ad-a5cb-31f549e52731",
+                                "Text": "Your code is aight",
+                                "replies": [
+                                  {
+                                    "studentid": "260c9289-a36a-4135-bf93-f21a118d0f61",
+                                    "text": "Literally post your code you wont lol",
+                                    "replies": []
+                                  }
+                                ]
+                              }]
+                              ]
+              }
               ],
-        "student":[
+        "students":[
           {
             "id":"260c9289-a36a-4135-bf93-f21a118d0f61",
             "grades":[4,5,3]

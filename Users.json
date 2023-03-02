@@ -13,10 +13,29 @@
         "lastName":"Pippen", 
         "dateOfBirth":"5/12/2001",
         "email":"JbPippen@gmail.com",
-        "username":"JbPippen1",
         "password":"basketballismylifeee22!",
         "type": "Student",
         "overallGPA":4.0,
         "favLanguages":["Python", "C#"]
+    },{
+        "id": "174a27fb-9632-44ad-a5cb-31f549e52731",
+        "firstName":"Miles", 
+        "lastName":"Stark", 
+        "dateOfBirth":"5/12/1997",
+        "email":"IamMilesStark@outlook.com",
+        "password":"IamRelatedtoIronMan1!",
+        "type": "Student",
+        "overallGPA":3.0,
+        "favLanguages":["Python", "Javascript"]
+    },{
+        "id": "88e183f7-0a67-4983-b0e5-37c4ddf16b57",
+        "firstName":"Peter", 
+        "lastName":"Parker", 
+        "dateOfBirth":"5/12/2003",
+        "email":"IamtotallynotSpiderMan1@starkindustries.org",
+        "password":"GreenGoblinDeezNuts12!",
+        "type": "Student",
+        "overallGPA":3.5,
+        "favLanguages":["C#", "Javascript"]
     }
 ]
