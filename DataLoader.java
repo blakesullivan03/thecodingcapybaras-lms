@@ -89,12 +89,13 @@ public class DataLoader extends DataConstants{
 			JSONArray courseJSON = (JSONArray)new JSONParser().parse(reader);
 			
 			for(int i=0; i < courseJSON.size(); i++) {
-				JSONObject personJSON = (JSONObject)peopleJSON.get(i);
-				String firstName = (String)personJSON.get(COURSE_NAME);
-				String lastName = (String)personJSON.get(PEOPLE_LAST_NAME);
-				String phoneNumber = (String)personJSON.get(PEOPLE_PHONE_NUMBER);
+				JSONObject personJSON = (JSONObject)courseJSON.get(i);
+				UUID id = UUID.fromString((String)personJSON.get(COURSE_ID));
+				String title = (String)personJSON.get(COURSE_TITLE);
+				Language language = (Language)personJSON.get(COURSE_LANGUAGE);
+				UUID courseCreatorUUID = UUID.fromString((String)personJSON.get(COURSE_CREATOR_ID));
 				
-				course.add(new Course(firstName, lastName, phoneNumber));
+				course.add(new Course(id, title, language));
 			}
 			
 			return course;

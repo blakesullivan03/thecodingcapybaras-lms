@@ -7,7 +7,7 @@ public class Module {
     private ArrayList<Comment> comments;
 
     public Module(String title){
-
+        this.title = title;
     }
 
     public void editTitle(String title){
@@ -31,6 +31,6 @@ public class Module {
     }
 
     public String toString(){
-        
+
     }
 }

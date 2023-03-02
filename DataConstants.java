@@ -11,11 +11,8 @@ public abstract class DataConstants {
     protected static final String STUDENT_FAV_LANGUAGES = "favLanguages";
     
     protected static final String COURSE_FILE_NAME = "courses.json";
-	protected static final String COURSE_UUID = "student";
-	protected static final String COURSE_ID = "firstName";
-	protected static final String COURSE_LAST_NAME = "lastName";
-	protected static final String COURSE_EMAIL = "email";
-    protected static final String COURSE_USERNAME = "userName";
-    protected static final String COURSE_PASSWORD = "password";
-    //protected static final String DOB_STRING = "DoB";
+    protected static final String COURSE_ID = "id";
+	protected static final String COURSE_TITLE = "student";
+	protected static final String COURSE_LANGUAGE = "language";
+    protected static final String COURSE_CREATOR_ID = "courseCreatorID";
 }
