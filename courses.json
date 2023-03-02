@@ -49,7 +49,42 @@
           {
             "id":"260c9289-a36a-4135-bf93-f21a118d0f61",
             "grades":[4,5,3]
+          },{
+            "id": "88e183f7-0a67-4983-b0e5-37c4ddf16b57",
+            "grades": [8,9,1]
+          },{
+            "id": "174a27fb-9632-44ad-a5cb-31f549e52731",
+            "grades": [9,5,7]
           }
-        ]
+        ],
+        "comments": [{"StudentId": "260c9289-a36a-4135-bf93-f21a118d0f61", 
+                              "Text": "This code is slight",
+                             "replies":[
+                              {
+                                "studentId":"88e183f7-0a67-4983-b0e5-37c4ddf16b57",
+                                "text": "No duh the title of the course is literally basics",
+                                "replies":[]
+                              }
+                             ]}, 
+                              {"StudentId": "88e183f7-0a67-4983-b0e5-37c4ddf16b57",
+                              "Text": "This is the class of all time", 
+                              "replies": [
+                                {
+                                  "studentid": "260c9289-a36a-4135-bf93-f21a118d0f61",
+                                  "text": "Facts",
+                                  "replies": []
+                                }
+                              ]},
+                              [{"StudentId": "174a27fb-9632-44ad-a5cb-31f549e52731",
+                                "Text": "What even encompasses a basic class",
+                                "replies": [
+                                  {
+                                    "studentid": "260c9289-a36a-4135-bf93-f21a118d0f61",
+                                    "text": "The knowledge you should already have but ik you dont lol.",
+                                    "replies": []
+                                  }
+                                ]
+                              }]
+                      ]
     }
   ]
