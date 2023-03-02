@@ -17,12 +17,27 @@ public class CourseList {
         return courseList;
     }
 
-    public getCourseByUUID(UUID id){
-
+    public UUID getCourseByUUID(UUID id){
+        return id;
     }
 
-    public Course addCourse(String title, Language language){
+    public boolean haveCourse(UUID id) {
+		for(Course course : courses) {
+			if(course.getID().equals(id)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 
+    public boolean addCourse(UUID id, String title, Language language, UUID courseCreatorUUID){
+        if(haveCourse(id)){
+            return false;
+        }
+
+        courses.add(new Course(id, title, language, courseCreatorUUID));
+        return true;
     }
 
     public void deleteCourse(Course course){
@@ -39,7 +54,7 @@ public class CourseList {
         return courses;
     }
 
-    public ArrayList<Course> getCourses(String keyword){
+    public ArrayList<Course> getCourse(String keyword){
         for(Course course : courses){
             if(course.equals(keyword)){
                 courses.add(course);
@@ -49,5 +64,7 @@ public class CourseList {
         return null;
     } 
 
-
+    public ArrayList<Course> getCourses(){
+        return courses;
+    }
 }

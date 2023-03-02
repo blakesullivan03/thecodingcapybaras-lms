@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.Date;
 
 public class UserList {
     private static UserList userList;
@@ -8,8 +9,7 @@ public class UserList {
     private ArrayList<CourseCreator> courseCreators;
 
     private UserList(){
-        students = DataLoader.getStudents();
-        courseCreators = DataLoader.getCourseCreator();
+        users = DataLoader.getUsers();
     }
 
     public static UserList getInstance(){
@@ -28,9 +28,9 @@ public class UserList {
 
     }
 
-    public boolean haveUser(String userName) {
+    public boolean haveUser(UUID id) {
 		for(User user : users) {
-			if(user.getUserName().equals(userName)) {
+			if(user.getId().equals(id)) {
 				return true;
 			}
 		}
@@ -38,9 +38,19 @@ public class UserList {
 		return false;
 	}
 
-    public User getUser(String userName){
+    //Loop throught user list
+    public User getUserById(UUID id){
         for(User user : users) {
-			if(user.getUserName().equals(userName)) {
+			if(user.getId().equals(id)) {
+				return user;
+			}
+		}
+        return null;
+    }
+
+    public User getUser(String id){
+        for(User user : users) {
+			if(user.getUserName().equals(id)) {
 				return user;
 			}
 		}
@@ -70,12 +80,12 @@ public class UserList {
         return courseCreators;
     }
 
-    public boolean createStudent(UUID id, String firstName, String lastName, String email, String username, String password, String dob){
-        if(haveUser(username)){
+    public boolean createStudent(UUID id, String firstName, String lastName, String email, String password, Date dob,double overallGPA, ArrayList<Language> favoriteLanguages ){
+        if(haveUser(id)){
             return false;
         }
 
-        students.add(new Student(id,firstName, lastName, email, username, password, dob));
+        users.add(new Student(id,firstName, lastName, email, password, dob, overallGPA, favoriteLanguages));
         return true;
     }
 

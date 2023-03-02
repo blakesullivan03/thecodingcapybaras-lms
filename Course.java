@@ -8,14 +8,18 @@ public class Course {
     private String title;
     private ArrayList<CourseProfile> profiles;
     private ArrayList<Comment> comments;
+    private UUID courseCreatorUUID;
 
     /**
      * Creating New Instance of Course 
      * @param title
      * @param language
      */
-    public Course(String title, Language language){
-         //creating new course
+    public Course(String title, Language language, UUID courseCreatorUUID){
+        this.id = UUID.randomUUID();
+        this.title = title;
+        this.language = language;
+        this.courseCreatorUUID = courseCreatorUUID;
     }
     
     /**
@@ -24,20 +28,27 @@ public class Course {
      * @param title
      * @param language
      */
-    public Course(UUID id, String title, Language language){
-
+    public Course(UUID id, String title, Language language, UUID courseCreatorUUID){
+        this.id = id;
+        this.title = title;
+        this.language = language;
+        this.courseCreatorUUID = courseCreatorUUID;
     }
     
     public UUID getID(){
+        return id;
+    }
 
+    public UUID getCourseCreatorUUID(){
+        return courseCreatorUUID;
     }
 
     public Language getLanguage(){
-        
+        return language;
     }
 
     public String getTitle(){
-
+        return title;
     }
 
     public void enroll(Student student){
@@ -53,7 +64,7 @@ public class Course {
     }
 
 
-    public void editModuleTitle(Module old, Module new){
+    public void editModuleTitle(Module old, Module newTitle){
 
     }
 
@@ -62,12 +73,15 @@ public class Course {
     }
 
     public ArrayList<CourseProfile> getProfiles(){
-
+        return profiles;
     }
 
-    public Module getMoudleByIndex(int index){
-
+    public Module getModuleByIndex(int index){
+        return modules.get(index);
     }
 
+    public String toString(){
+        return title + " " + language;
+    }
 
 }

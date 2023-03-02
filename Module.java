@@ -7,30 +7,30 @@ public class Module {
     private ArrayList<Comment> comments;
 
     public Module(String title){
-
+        this.title = title;
     }
 
     public void editTitle(String title){
-
+        this.title = title;
     }
 
     public ArrayList<Topic> getTopics(){
-
+        return topics;
     }
 
-    public Topic getTopicByIndex(){
-
+    public Topic getTopicByIndex(int index){
+        return topics.get(index); 
     }
 
     public void addQuiz(Quiz quiz){
-
+        this.quiz = quiz;
     }
 
     public Quiz getQuiz(){
-
+        return this.quiz;
     }
 
     public String toString(){
-        
+        return title + " " + quiz;
     }
 }
