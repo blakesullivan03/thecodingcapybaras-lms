@@ -78,9 +78,6 @@ public class Course {
 
     public Module getMoudleByIndex(int index){
         return modules.get(index);
-
-        }
-        return null;
     }
 
     public String toString(){

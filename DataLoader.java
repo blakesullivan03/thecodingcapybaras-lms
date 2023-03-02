@@ -8,6 +8,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;;
 
+/**
+ * Data Loader for the JSON
+ * @author Blake Turner
+ */
 public class DataLoader extends DataConstants{
 
 	public static void main(String[] args) {
@@ -71,6 +75,11 @@ public class DataLoader extends DataConstants{
 		return languages;
 	}
 
+	private static Language getLanguage(String language){
+		Language lang = Language.valueOf(language);
+		return lang;
+	}
+
 	private static Date getDateFromString(String data){
 		try {
             return new SimpleDateFormat("MM/dd/yyyy").parse(data);
@@ -96,7 +105,7 @@ public class DataLoader extends DataConstants{
 				JSONObject personJSON = (JSONObject)courseJSON.get(i);
 				UUID courseID = UUID.fromString( (String)personJSON.get(COURSE_ID) );
 				String title = (String)personJSON.get(COURSE_TITLE);
-				Language language = (Language)personJSON.get(COURSE_LANGUAGE);
+				Language language = getLanguage( (String)personJSON.get(COURSE_LANGUAGE) );
 				UUID courseCreatorUUID = (UUID)personJSON.get(COURSE_CREATOR_ID);
 				
 				course.add(new Course(courseID, title, language, courseCreatorUUID));
@@ -110,4 +119,5 @@ public class DataLoader extends DataConstants{
 		
 		return null;
 	}
+
 }
