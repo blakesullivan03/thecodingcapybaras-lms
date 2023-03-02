@@ -81,7 +81,8 @@ public class Course {
 <<<<<<< HEAD
 =======
 
->>>>>>> 066820bdbc5b0d9edc391fe0aef7b187f1feb7c9
+        }
+        return null;
     }
 
     public String toString(){
