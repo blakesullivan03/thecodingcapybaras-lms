@@ -77,10 +77,8 @@ public class Course {
     }
 
     public Module getMoudleByIndex(int index){
-        for(Module module : modules){
-            if(index == modules.indexOf(index)) {
-				return module;
-            }
+        return modules.get(index);
+
         }
         return null;
     }
