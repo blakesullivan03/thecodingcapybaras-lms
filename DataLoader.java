@@ -24,19 +24,19 @@ public class DataLoader extends DataConstants{
 		ArrayList<User> users = new ArrayList<User>();
 		
 		try {
-			FileReader reader = new FileReader(STUDENT_FILE_NAME);
+			FileReader reader = new FileReader(USER_FILE_NAME);
 			JSONParser parser = new JSONParser();
 			JSONArray peopleJSON = (JSONArray)new JSONParser().parse(reader);
 			
 			for(int i=0; i < peopleJSON.size(); i++) {
 				JSONObject personJSON = (JSONObject)peopleJSON.get(i);
-                UUID id = UUID.fromString((String)personJSON.get(STUDENT_ID));
-				String firstName = (String)personJSON.get(STUDENT_FIRST_NAME);
-				String lastName = (String)personJSON.get(STUDENT_LAST_NAME);
-				String email = (String)personJSON.get(STUDENT_EMAIL);
+                UUID id = UUID.fromString((String)personJSON.get(USER_ID));
+				String firstName = (String)personJSON.get(USER_FIRST_NAME);
+				String lastName = (String)personJSON.get(USER_LAST_NAME);
+				String email = (String)personJSON.get(USER_EMAIL);
 				String type = (String)personJSON.get(STUDENT_TYPE);
-				String password = (String)personJSON.get(STUDENT_PASSWORD);
-                Date dob = getDateFromString((String)personJSON.get(STUDENT_DOB));
+				String password = (String)personJSON.get(USER_PASSWORD);
+                Date dob = getDateFromString((String)personJSON.get(USER_DOB));
 
 				if(type.equalsIgnoreCase("student")){
 					ArrayList<Language> favoriteLanguages = getLanguages((JSONArray)personJSON.get(STUDENT_FAV_LANGUAGES));
@@ -83,6 +83,7 @@ public class DataLoader extends DataConstants{
     public static ArrayList<Course> getCourses(){
 		ArrayList<Course> course = new ArrayList<Course>();
 		//UserList.getInstance().getUserByID
+		UserList user = UserList.getInstance();
 		try {
 			FileReader reader = new FileReader(COURSE_FILE_NAME);
 			JSONParser parser = new JSONParser();
@@ -93,9 +94,9 @@ public class DataLoader extends DataConstants{
 				UUID id = UUID.fromString((String)personJSON.get(COURSE_ID));
 				String title = (String)personJSON.get(COURSE_TITLE);
 				Language language = (Language)personJSON.get(COURSE_LANGUAGE);
-				UUID courseCreatorUUID = UUID.fromString((String)personJSON.get(COURSE_CREATOR_ID));
+				UUID courseCreatorUUID = (UUID)personJSON.get(COURSE_CREATOR_ID);
 				
-				course.add(new Course(id, title, language));
+				course.add(new Course(id, title, language, courseCreatorUUID));
 			}
 			
 			return course;

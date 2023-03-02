@@ -15,11 +15,11 @@ public class Module {
     }
 
     public ArrayList<Topic> getTopics(){
-
+        return topics;
     }
 
     public Topic getTopicByIndex(){
-
+        
     }
 
     public void addQuiz(Quiz quiz){
@@ -31,6 +31,6 @@ public class Module {
     }
 
     public String toString(){
-
+        return title + " " + quiz;
     }
 }

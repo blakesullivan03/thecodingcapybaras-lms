@@ -1,12 +1,12 @@
 public abstract class DataConstants {
-    protected static final String STUDENT_FILE_NAME = "Users.json";
-	protected static final String STUDENT_ID = "id";
-	protected static final String STUDENT_FIRST_NAME = "firstName";
-	protected static final String STUDENT_LAST_NAME = "lastName";
-    protected static final String STUDENT_DOB = "dateOfBirth";
-	protected static final String STUDENT_EMAIL = "email";
+    protected static final String USER_FILE_NAME = "Users.json";
+	protected static final String USER_ID = "id";
+	protected static final String USER_FIRST_NAME = "firstName";
+	protected static final String USER_LAST_NAME = "lastName";
+    protected static final String USER_DOB = "dateOfBirth";
+	protected static final String USER_EMAIL = "email";
     protected static final String STUDENT_TYPE = "type";
-    protected static final String STUDENT_PASSWORD = "password";
+    protected static final String USER_PASSWORD = "password";
     protected static final String STUDENT_OVERALL_GPA = "overallGPA";
     protected static final String STUDENT_FAV_LANGUAGES = "favLanguages";
     

@@ -10,7 +10,7 @@ public class Question {
     }
 
     public ArrayList<String> getAnswers(){
-
+        return answers;
     }
 
     public boolean isCorrect(int userAnswer){

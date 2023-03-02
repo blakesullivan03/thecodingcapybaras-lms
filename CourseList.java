@@ -31,12 +31,12 @@ public class CourseList {
 		return false;
 	}
 
-    public boolean addCourse(UUID id, String title, Language language){
+    public boolean addCourse(UUID id, String title, Language language, UUID courseCreatorUUID){
         if(haveCourse(id)){
             return false;
         }
 
-        courses.add(new Course(id, title, language));
+        courses.add(new Course(id, title, language, courseCreatorUUID));
         return true;
     }
 
@@ -64,5 +64,7 @@ public class CourseList {
         return null;
     } 
 
-
+    public ArrayList<Course> getCourses(){
+        return courses;
+    }
 }
