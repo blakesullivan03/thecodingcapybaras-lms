@@ -4,22 +4,21 @@ import java.util.Scanner;
  * @author Blake Turner
  */
 public class SystemUI{
-    private String[] mainMenuStrings = {"Begin Course", "Resume Course", "Check Course Progress", "Logout"};
-    private String[] coursesStrings = {"Intro to JavaScript", "Intro to C", "Intro to Python"};
-    private Scanner scanner;
-    private LMSSystem system;
-    Scanner keyboard = new Scanner(System.in);
+    private static String[] mainMenuStrings = {"Begin Course", "Resume Course", "Check Course Progress", "Logout"};
+    private static String[] coursesStrings = {"Intro to JavaScript", "Intro to C", "Intro to Python"};
+    private static Scanner scanner = new Scanner(System.in);
+    private static LMSSystem system;
 
     public static void main(String[] args){
-        system.run();
+        run();
     }
 
     SystemUI(){
-        scanner = new Scanner(System.in);
+        //scanner = new Scanner(System.in);
         system = new LMSSystem();
     }
 
-    public void run(){
+    public static void run(){
         System.out.println("Welcome to the LMS!");
 
         while(true){
@@ -59,12 +58,12 @@ public class SystemUI{
     public void showLogInScreen(){
         System.out.println("Please enter the following info. If you do not have an account, press enter.");
         System.out.println("E-Mail: ");
-        String username = keyboard.nextLine();
+        String username = scanner.nextLine();
         System.out.println("Password: ");
-        String password = keyboard.nextLine();
+        String password = scanner.nextLine();
     }
 
-    public void showWelcomeScreen(){
+    public static void showWelcomeScreen(){
         System.out.println("********Main Menu********");
         System.out.println("Please Choose one of the Following:");
         for(int i = 0; i < mainMenuStrings.length; i++){
@@ -73,8 +72,10 @@ public class SystemUI{
         System.out.println("\n");
     }
 
-    private int getUserCommand(int numCommand){
+    private static int getUserCommand(int numCommand){
+
         String input = scanner.nextLine();
+
         int command = Integer.parseInt(input) - 1;
     
         if(command >= 0 && command <= numCommand -1){
@@ -84,7 +85,7 @@ public class SystemUI{
         return -1;
     }
 
-    private void beginCourse(){
+    private static void beginCourse(){
         System.out.println("Choose a New Course to Begin: ");
         for(int i = 0; i < coursesStrings.length; i++){
             System.out.println((i+1) + ". " + coursesStrings[i]);
@@ -101,23 +102,32 @@ public class SystemUI{
             switch(command){
                 case(0):
                     //Insert (JavaScirpt) Course Lesson Home Screen Here
-
+                    System.out.println("\nIntro to JavaScript");
                 case(1):
-                    
+                    System.out.println("\nIntro to C");
 
                 case(2):
-                    checkCourseProgress();
-                    break;
+                    System.out.println("\nIntro to Python");
+                    //Call Course Instance of Python (Modules, Topics, ETC)
+                    showModules();
             }
         }
 
     }
 
-    private void resumeCourse(){
-
+    private static void showModules(){
+        system.getModules();
     }
 
-    private void checkCourseProgress(){
+    private static void showTopics(){
+        
+    }
 
+    private static void resumeCourse(){
+        System.out.println("Resume Course");
+    }
+
+    private static void checkCourseProgress(){
+        System.out.println("Checking Course Progress");
     }
 }

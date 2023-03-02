@@ -96,7 +96,7 @@ public class LMSSystem{
     * Student View
     */
 
-   public ArrayList<Course> getCourses(Language language){
+   public static ArrayList<Course> getCourses(Language language){
       ArrayList<Course> courseLanguages = new ArrayList();
         for(Course course : courseLanguages){
             if(course.getLanguage().equals(language)){
@@ -121,7 +121,7 @@ public class LMSSystem{
         return courses.get(index);
    }
 
-   public ArrayList<Course> getModules(){
+   public ArrayList<Module> getModules(){
       return modules;
    }
 
@@ -129,7 +129,7 @@ public class LMSSystem{
       return modules.get(index);
    }
 
-   public ArrayList<Course> getTopics(){
+   public ArrayList<Topic> getTopics(){
       return topics;
    }
 
