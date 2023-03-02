@@ -108,7 +108,7 @@ public class DataWriter extends DataConstants{
 		userDetails.put(COURSE_ID, course.getID().toString());
 		userDetails.put(COURSE_TITLE, course.getTitle());
         userDetails.put(COURSE_LANGUAGE, course.getLanguage());
-		userDetails.put(COURSE_CREATOR_ID, course.getCourseCreatorUUID());
+		//userDetails.put(COURSE_CREATOR_ID, course.getId());
 
         
     return userDetails;

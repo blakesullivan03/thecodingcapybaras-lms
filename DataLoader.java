@@ -14,18 +14,18 @@ import org.json.simple.parser.JSONParser;;
  */
 public class DataLoader extends DataConstants{
 
-	public static void main(String[] args) {
+	/**public static void main(String[] args) {
 	ArrayList<User> students = getUsers();
 		for(User student : students){
 			System.out.println(student);
 		}
 		//get instance of userlist
-		//UserList.getInstance();*/
+		//UserList.getInstance();
 	ArrayList<Course> courses = getCourses();
 		for(Course course : courses){
 			System.out.println(course);
 		}
-	}
+	}*/
 
     public static ArrayList<User> getUsers() {
 		ArrayList<User> users = new ArrayList<User>();

@@ -5,9 +5,15 @@ import java.util.Scanner;
  */
 public class SystemUI{
     private String[] mainMenuStrings = {"Begin Course", "Resume Course", "Check Course Progress", "Logout"};
+    private String[] coursesStrings = {"Intro to JavaScript", "Intro to C", "Intro to Python"};
     private Scanner scanner;
     private LMSSystem system;
     Scanner keyboard = new Scanner(System.in);
+
+    SystemUI(){
+        scanner = new Scanner(System.in);
+        system = new LMSSystem();
+    }
 
     public void run(){
         System.out.println("Welcome to the LMS!");
@@ -48,7 +54,7 @@ public class SystemUI{
 
     public void showLogInScreen(){
         System.out.println("Please enter the following info. If you do not have an account, press enter.");
-        System.out.println("Username: ");
+        System.out.println("E-Mail: ");
         String username = keyboard.nextLine();
         System.out.println("Password: ");
         String password = keyboard.nextLine();
@@ -76,6 +82,31 @@ public class SystemUI{
 
     private void beginCourse(){
         System.out.println("Choose a New Course to Begin: ");
+        for(int i = 0; i < coursesStrings.length; i++){
+            System.out.println((i+1) + ". " + coursesStrings[i]);
+        }
+
+        while(true){
+            int command = getUserCommand(coursesStrings.length);
+
+            if(command == -1){
+                System.out.println("Invalid Command");
+                continue;
+            }
+
+            switch(command){
+                case(0):
+                    //Insert (JavaScirpt) Course Lesson Home Screen Here
+
+                case(1):
+                    
+
+                case(2):
+                    checkCourseProgress();
+                    break;
+            }
+        }
+
     }
 
     private void resumeCourse(){
