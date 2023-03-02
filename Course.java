@@ -19,7 +19,7 @@ public class Course {
         this.id = UUID.randomUUID();
         this.title = title;
         this.language = language;
-        this.courseCreatorUUID = UUID.randomUUID();
+        this.courseCreatorUUID = courseCreatorUUID;
     }
     
     /**
@@ -85,5 +85,8 @@ public class Course {
         return null;
     }
 
+    public String toString(){
+        return title + " " + language;
+    }
 
 }

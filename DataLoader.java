@@ -11,13 +11,16 @@ import org.json.simple.parser.JSONParser;;
 public class DataLoader extends DataConstants{
 
 	public static void main(String[] args) {
-/*ArrayList<User> students = getUsers();
+	ArrayList<User> students = getUsers();
 		for(User student : students){
 			System.out.println(student);
 		}
-*/
 		//get instance of userlist
-		UserList.getInstance();
+		//UserList.getInstance();
+	ArrayList<Course> courses = getCourses();
+		for(Course course : courses){
+			System.out.println(course);
+		}
 	}
 
     public static ArrayList<User> getUsers() {
@@ -91,12 +94,12 @@ public class DataLoader extends DataConstants{
 			
 			for(int i=0; i < courseJSON.size(); i++) {
 				JSONObject personJSON = (JSONObject)courseJSON.get(i);
-				UUID id = UUID.fromString((String)personJSON.get(COURSE_ID));
+				UUID courseID = UUID.fromString( (String)personJSON.get(COURSE_ID) );
 				String title = (String)personJSON.get(COURSE_TITLE);
 				Language language = (Language)personJSON.get(COURSE_LANGUAGE);
 				UUID courseCreatorUUID = (UUID)personJSON.get(COURSE_CREATOR_ID);
 				
-				course.add(new Course(id, title, language, courseCreatorUUID));
+				course.add(new Course(courseID, title, language, courseCreatorUUID));
 			}
 			
 			return course;

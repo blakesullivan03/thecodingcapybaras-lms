@@ -6,7 +6,9 @@ public class Question {
     private int correctAnswer;
 
     public Question(String question, ArrayList<String> answers, int correctAnswers){
-
+        this.question = question;
+        this.answers = answers;
+        this.correctAnswer = correctAnswers;
     }
 
     public ArrayList<String> getAnswers(){
@@ -14,6 +16,10 @@ public class Question {
     }
 
     public boolean isCorrect(int userAnswer){
-        
+        if(userAnswer == correctAnswer){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
