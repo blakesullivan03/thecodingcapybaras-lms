@@ -9,4 +9,12 @@ public class Topic {
     public String getLesson(){
         return lesson;
     }
+
+    public void setTitle(String title){
+        this.title = title;
+    }
+
+    public void setLesson(String lesson){
+        this.lesson = lesson;
+    }
 }

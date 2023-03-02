@@ -51,7 +51,7 @@ public class CourseList {
                 courseLanguages.add(course);
             }
         }
-        return courses;
+        return courseLanguages;
     }
 
     public ArrayList<Course> getCourse(String keyword){

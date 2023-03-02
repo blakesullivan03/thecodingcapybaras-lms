@@ -51,6 +51,14 @@ public class Course {
         return title;
     }
 
+    public void setLanguage(Language language){
+        this.language = language;
+    }
+
+    public void setTitle(String title){
+        this.title = title;
+    }
+
     public void enroll(Student student){
 
     }

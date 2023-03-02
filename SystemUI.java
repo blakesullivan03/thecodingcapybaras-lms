@@ -10,6 +10,10 @@ public class SystemUI{
     private LMSSystem system;
     Scanner keyboard = new Scanner(System.in);
 
+    public static void main(String[] args){
+        system.run();
+    }
+
     SystemUI(){
         scanner = new Scanner(System.in);
         system = new LMSSystem();
