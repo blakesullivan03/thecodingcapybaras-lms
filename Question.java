@@ -11,6 +11,10 @@ public class Question {
         this.correctAnswer = correctAnswers;
     }
 
+    public String getQuestion() {
+        return this.question;
+
+    }
     public ArrayList<String> getAnswers(){
         return answers;
     }
@@ -18,7 +22,7 @@ public class Question {
     public boolean isCorrect(int userAnswer){
         if(userAnswer == correctAnswer){
             return true;
-        }else{
+        } else {
             return false;
         }
     }

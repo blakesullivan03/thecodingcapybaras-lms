@@ -76,11 +76,9 @@ public class Course {
         return profiles;
     }
 
-    public Module getMoudleByIndex(int index){
+    public Module getModuleByIndex(int index){
         return modules.get(index);
 
-        }
-        return null;
     }
 
     public String toString(){
