@@ -76,8 +76,12 @@ public class Course {
         return profiles;
     }
 
-    public Module getMoudleByIndex(int index){
+    public Module getModuleByIndex(int index){
         return modules.get(index);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 066820bdbc5b0d9edc391fe0aef7b187f1feb7c9
     }
 
     public String toString(){
