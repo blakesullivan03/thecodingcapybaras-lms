@@ -8,14 +8,14 @@ public class Course {
     private String title;
     private ArrayList<CourseProfile> profiles;
     private ArrayList<Comment> comments;
-    private UUID courseCreatorUUID;
+    private User courseCreatorUUID;
 
     /**
      * Creating New Instance of Course 
      * @param title
      * @param language
      */
-    public Course(String title, Language language, UUID courseCreatorUUID){
+    public Course(String title, Language language, User courseCreatorUUID){
         this.id = UUID.randomUUID();
         this.title = title;
         this.language = language;
@@ -28,7 +28,7 @@ public class Course {
      * @param title
      * @param language
      */
-    public Course(UUID id, String title, Language language, UUID courseCreatorUUID){
+    public Course(UUID id, String title, Language language, User courseCreatorUUID){
         this.id = id;
         this.title = title;
         this.language = language;
@@ -39,9 +39,9 @@ public class Course {
         return id;
     }
 
-    public UUID getCourseCreatorUUID(){
-        return courseCreatorUUID;
-    }
+    /**public UUID getCourseCreatorUUID(){
+        return User.getInstance().getUserById();
+    }*/
 
     public Language getLanguage(){
         return language;
@@ -81,7 +81,7 @@ public class Course {
     }
 
     public String toString(){
-        return title + " " + language;
+        return "Course: " + title + " Language: " + language + " " + courseCreatorUUID.getId();
     }
 
 }

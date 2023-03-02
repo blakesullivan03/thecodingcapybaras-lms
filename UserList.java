@@ -39,7 +39,7 @@ public class UserList {
 	}
 
     //Loop throught user list
-    public User getUserById(UUID id){
+    public User getUserByID(UUID id){
         for(User user : users) {
 			if(user.getId().equals(id)) {
 				return user;

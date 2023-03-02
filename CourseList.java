@@ -31,7 +31,7 @@ public class CourseList {
 		return false;
 	}
 
-    public boolean addCourse(UUID id, String title, Language language, UUID courseCreatorUUID){
+    public boolean addCourse(UUID id, String title, Language language, User courseCreatorUUID){
         if(haveCourse(id)){
             return false;
         }

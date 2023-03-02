@@ -20,7 +20,7 @@ public class DataLoader extends DataConstants{
 			System.out.println(student);
 		}
 		//get instance of userlist
-		//UserList.getInstance();
+		//UserList.getInstance();*/
 	ArrayList<Course> courses = getCourses();
 		for(Course course : courses){
 			System.out.println(course);
@@ -69,16 +69,13 @@ public class DataLoader extends DataConstants{
 
 		for(int i=0; i < jsonLangs.size(); i++) {
 			String langString = (String)jsonLangs.get(i);
-			languages.add(Language.valueOf(langString));
+			languages.add(Language.valueOf(langString.toUpperCase()));
 		}
 
 		return languages;
 	}
 
-	private static Language getLanguage(String language){
-		Language lang = Language.valueOf(language);
-		return lang;
-	}
+	
 
 	private static Date getDateFromString(String data){
 		try {
@@ -94,7 +91,6 @@ public class DataLoader extends DataConstants{
 	//Finish the UserList
     public static ArrayList<Course> getCourses(){
 		ArrayList<Course> course = new ArrayList<Course>();
-		//UserList.getInstance().getUserByID
 		UserList user = UserList.getInstance();
 		try {
 			FileReader reader = new FileReader(COURSE_FILE_NAME);
@@ -106,9 +102,9 @@ public class DataLoader extends DataConstants{
 				UUID courseID = UUID.fromString( (String)personJSON.get(COURSE_ID) );
 				String title = (String)personJSON.get(COURSE_TITLE);
 				Language language = getLanguage( (String)personJSON.get(COURSE_LANGUAGE) );
-				UUID courseCreatorUUID = (UUID)personJSON.get(COURSE_CREATOR_ID);
-				
-				course.add(new Course(courseID, title, language, courseCreatorUUID));
+				UUID courseCreatorUUID = UUID.fromString((String)personJSON.get(COURSE_CREATOR_ID));
+				User courseCreatorID = (CourseCreator)UserList.getInstance().getUserByID(courseCreatorUUID);
+				course.add(new Course(courseID, title, language, courseCreatorID));
 			}
 			
 			return course;
@@ -119,5 +115,9 @@ public class DataLoader extends DataConstants{
 		
 		return null;
 	}
-
+	
+	private static Language getLanguage(String language){
+		System.out.println(" ");
+		return Enum.valueOf(Language.class, language.toUpperCase());
+	}
 }

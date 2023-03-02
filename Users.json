@@ -16,7 +16,7 @@
         "password":"basketballismylifeee22!",
         "type": "Student",
         "overallGPA":4.0,
-        "favLanguages":["Python", "C#"]
+        "favLanguages":["Python", "C"]
     },{
         "id": "174a27fb-9632-44ad-a5cb-31f549e52731",
         "firstName":"Miles", 
@@ -36,6 +36,6 @@
         "password":"GreenGoblinDeezNuts12!",
         "type": "Student",
         "overallGPA":3.5,
-        "favLanguages":["C#", "Javascript"]
+        "favLanguages":["C", "Javascript"]
     }
 ]
