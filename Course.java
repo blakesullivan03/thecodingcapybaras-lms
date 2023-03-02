@@ -15,7 +15,9 @@ public class Course {
      * @param language
      */
     public Course(String title, Language language){
-         //creating new course
+        this.id = UUID.randomUUID();
+        this.title = title;
+        this.language = language;
     }
     
     /**
@@ -25,19 +27,21 @@ public class Course {
      * @param language
      */
     public Course(UUID id, String title, Language language){
-
+        this.id = id;
+        this.title = title;
+        this.language = language;
     }
     
     public UUID getID(){
-
+        return id;
     }
 
     public Language getLanguage(){
-
+        return language;
     }
 
     public String getTitle(){
-
+        return title;
     }
 
     public void enroll(Student student){
@@ -53,7 +57,7 @@ public class Course {
     }
 
 
-    public void editModuleTitle(Module old, Module new){
+    public void editModuleTitle(Module old, Module newTitle){
 
     }
 
@@ -62,7 +66,7 @@ public class Course {
     }
 
     public ArrayList<CourseProfile> getProfiles(){
-
+        return profiles;
     }
 
     public Module getMoudleByIndex(int index){

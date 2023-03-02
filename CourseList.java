@@ -22,7 +22,8 @@ public class CourseList {
     }
 
     public Course addCourse(String title, Language language){
-        Course.add();
+        Course.add(title, language);
+        return Course
     }
 
     public void deleteCourse(Course course){
