@@ -78,11 +78,6 @@ public class Course {
 
     public Module getModuleByIndex(int index){
         return modules.get(index);
-<<<<<<< HEAD
-=======
-
-        }
-        return null;
     }
 
     public String toString(){
