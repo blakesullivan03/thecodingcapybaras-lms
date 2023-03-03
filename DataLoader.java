@@ -65,7 +65,7 @@ public class DataLoader extends DataConstants{
 	}
 
 	private static ArrayList<Language> getLanguages(JSONArray jsonLangs){
-		ArrayList<Language> languages = new ArrayList();
+		ArrayList<Language> languages = new ArrayList<>();
 
 		for(int i=0; i < jsonLangs.size(); i++) {
 			String langString = (String)jsonLangs.get(i);
@@ -104,6 +104,7 @@ public class DataLoader extends DataConstants{
 				Language language = getLanguage( (String)personJSON.get(COURSE_LANGUAGE) );
 				UUID courseCreatorUUID = UUID.fromString((String)personJSON.get(COURSE_CREATOR_ID));
 				User courseCreatorID = (CourseCreator)UserList.getInstance().getUserByID(courseCreatorUUID);
+				Module 
 				course.add(new Course(courseID, title, language, courseCreatorID));
 			}
 			
@@ -119,5 +120,16 @@ public class DataLoader extends DataConstants{
 	private static Language getLanguage(String language){
 		System.out.println(" ");
 		return Enum.valueOf(Language.class, language.toUpperCase());
+	}
+
+	private static ArrayList<Module> getModules(JSONArray jsonLangs){
+		ArrayList<Module> languages = new ArrayList<>();
+
+		for(int i=0; i < jsonLangs.size(); i++) {
+			String langString = (String)jsonLangs.get(i);
+			languages.add(Language.valueOf(langString.toUpperCase()));
+		}
+
+		return languages;
 	}
 }
