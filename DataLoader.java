@@ -90,7 +90,11 @@ public class DataLoader extends DataConstants{
 	//before I start this
 	//Finish the UserList
     public static ArrayList<Course> getCourses(){
-		ArrayList<Course> course = new ArrayList<Course>();
+		ArrayList<Course> course = new ArrayList<>();
+		ArrayList<Module> modules = new ArrayList<>();
+		ArrayList<Topic> topics = new ArrayList<>();
+		ArrayList<Question> questions = new ArrayList<>();
+		ArrayList<Comment> comments = new ArrayList<>();
 		UserList user = UserList.getInstance();
 		try {
 			FileReader reader = new FileReader(COURSE_FILE_NAME);
@@ -104,8 +108,26 @@ public class DataLoader extends DataConstants{
 				Language language = getLanguage( (String)personJSON.get(COURSE_LANGUAGE) );
 				UUID courseCreatorUUID = UUID.fromString((String)personJSON.get(COURSE_CREATOR_ID));
 				User courseCreatorID = (CourseCreator)UserList.getInstance().getUserByID(courseCreatorUUID);
-				Module 
-				course.add(new Course(courseID, title, language, courseCreatorID));
+				String moduleTitle = (String)personJSON.get(MODULE_TITLE);
+				modules.add(new Module(moduleTitle)); 
+
+				String topicTitle = (String)personJSON.get(TOPIC_TITLE);
+				String lesson = (String)personJSON.get(TOPIC_LESSON);
+				topics.add(new Topic(topicTitle, lesson));
+
+				String question = (String)personJSON.get(QUESTION_STRING);
+				ArrayList<String> answers = getAnswers((JSONArray)personJSON.get(QUESTION_ANSWERS));
+				Integer correctAnswer = (Integer)personJSON.get(QUESTION_CORRECT_ANSWER);
+				questions.add(new Question(question, answers, correctAnswer));
+
+				UUID studentUUID = UUID.fromString((String)personJSON.get(COMMENT_ID));
+				User studentID = (CourseCreator)UserList.getInstance().getUserByID(studentUUID);
+				String text = (String)personJSON.get(COMMENT_TEXT);
+				ArrayList<Comment> replies = getReplies( (JSONArray) personJSON.get(COMMENT_REPLIES));
+
+				comments.add(new Comment(studentID, text, replies));
+
+				course.add(new Course(courseID, title, language, courseCreatorID, modules, topics, questions, comments));
 			}
 			
 			return course;
@@ -122,14 +144,26 @@ public class DataLoader extends DataConstants{
 		return Enum.valueOf(Language.class, language.toUpperCase());
 	}
 
-	private static ArrayList<Module> getModules(JSONArray jsonLangs){
-		ArrayList<Module> languages = new ArrayList<>();
+	private static ArrayList<String> getAnswers(JSONArray jsonLangs){
+		ArrayList<String> answers = new ArrayList<>();
 
 		for(int i=0; i < jsonLangs.size(); i++) {
-			String langString = (String)jsonLangs.get(i);
-			languages.add(Language.valueOf(langString.toUpperCase()));
+			String answerString = (String)jsonLangs.get(i);
+			answers.add(answerString);
 		}
 
-		return languages;
+		return answers;
 	}
+
+	private static ArrayList<Comment> getReplies(JSONArray jsonCommentArray){
+		ArrayList<Comment> replies = new ArrayList<>();
+
+		for(int i=0; i < jsonCommentArray.size(); i++) {
+			Comment replyString = (Comment)jsonCommentArray.get(i);
+			replies.add(replyString);
+		}
+
+		return replies;
+	}
+
 }

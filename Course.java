@@ -5,9 +5,12 @@ public class Course {
     private UUID id;
     private Language language;
     private ArrayList<Module> modules;
+    private Module module;
     private String title;
     private ArrayList<CourseProfile> profiles;
     private ArrayList<Comment> comments;
+    private ArrayList<Topic> topics;
+    private ArrayList<Question> questions;
     private User courseCreatorUUID;
 
     /**
@@ -15,11 +18,15 @@ public class Course {
      * @param title
      * @param language
      */
-    public Course(String title, Language language, User courseCreatorUUID){
+    public Course(String title, Language language, User courseCreatorUUID, ArrayList<Module> module, ArrayList<Topic> topic, ArrayList<Question> question, ArrayList<Comment> comment){
         this.id = UUID.randomUUID();
         this.title = title;
         this.language = language;
         this.courseCreatorUUID = courseCreatorUUID;
+        this.modules = module;
+        this.topics = topic;
+        this.questions = question;
+        this.comments = comment;
     }
     
     /**
@@ -28,11 +35,15 @@ public class Course {
      * @param title
      * @param language
      */
-    public Course(UUID id, String title, Language language, User courseCreatorUUID){
+    public Course(UUID id, String title, Language language, User courseCreatorUUID,   ArrayList<Module> module, ArrayList<Topic> topic, ArrayList<Question> question, ArrayList<Comment> comment){
         this.id = id;
         this.title = title;
         this.language = language;
         this.courseCreatorUUID = courseCreatorUUID;
+        this.modules = module;
+        this.topics = topic;
+        this.questions = question;
+        this.comments = comment;
     }
     
     public UUID getID(){

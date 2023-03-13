@@ -2,6 +2,11 @@ public class Topic {
     private String title;
     private String lesson;
 
+    public Topic(String title, String lesson){
+        this.title = title;
+        this.lesson = lesson;
+    }
+
     public String getTitle(){
         return title;
     }
@@ -16,5 +21,9 @@ public class Topic {
 
     public void setLesson(String lesson){
         this.lesson = lesson;
+    }
+
+    public String toString(){
+        return title + " " + lesson;
     }
 }

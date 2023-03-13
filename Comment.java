@@ -5,9 +5,10 @@ public class Comment {
     private User author;
     private ArrayList<Comment> replies;
 
-    public Comment(String comment, User author){
+    public Comment(User author, String comment, ArrayList<Comment> replies){
         this.comment = comment;
         this.author = author;
+        this.replies = replies;
     }
 
     public void edit(String edited){
@@ -19,8 +20,8 @@ public class Comment {
         return "|" + this.author + ": " + this.comment;
     }
 
-    public void reply(User author, String comment){
+   /**  public void reply(User author, String comment){
         replies.add(new Comment(comment, author));
-    }
+    }*/
       
 }

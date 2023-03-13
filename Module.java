@@ -14,6 +14,10 @@ public class Module {
         this.title = title;
     }
 
+    public static String getTitle(String title){
+        return title;
+    }
+
     public ArrayList<Topic> getTopics(){
         return topics;
     }
