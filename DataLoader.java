@@ -105,7 +105,7 @@ public class DataLoader extends DataConstants{
 				UUID courseCreatorUUID = UUID.fromString((String)personJSON.get(COURSE_CREATOR_ID));
 				User courseCreatorID = (CourseCreator)user.getUserByID(courseCreatorUUID);
 
-				ArrayList<Module> modules = getModules(personJSON);
+				ArrayList<Module> modules = getModules(courseJSON);
 
 				course.add(new Course(courseID, title, language, courseCreatorID, modules));
 			}
@@ -124,7 +124,7 @@ public class DataLoader extends DataConstants{
 		return Enum.valueOf(Language.class, language.toUpperCase());
 	}
 
-	private static ArrayList<Module> getModules(JSONObject courseJSON){
+	private static ArrayList<Module> getModules(JSONArray courseJSON){
 		
 		ArrayList<Module> modules = new ArrayList<>();
 		ArrayList<Topic> topics = new ArrayList<>();
