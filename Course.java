@@ -93,7 +93,7 @@ public class Course {
     }
 
     public String toString(){
-        return "Course: " + title + "\nLanguage: " + language + "\nModules: " + modules + "\nTopics: " + topics + "\nQuestions: " + questions + "\nComment: " + comments;
+        return "Course: " + title + "\nLanguage: " + language + "\nModules: " + modules + "\nComment: " + comments;
     }
 
 }

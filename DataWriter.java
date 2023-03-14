@@ -104,14 +104,14 @@ public class DataWriter extends DataConstants{
      * 
      */
     public static JSONObject getCourseJSON(Course course) {
-		JSONObject userDetails = new JSONObject();
-		userDetails.put(COURSE_ID, course.getID().toString());
-		userDetails.put(COURSE_TITLE, course.getTitle());
-        userDetails.put(COURSE_LANGUAGE, course.getLanguage());
+		JSONObject courseDetails = new JSONObject();
+		courseDetails.put(COURSE_ID, course.getID().toString());
+		courseDetails.put(COURSE_TITLE, course.getTitle());
+        courseDetails.put(COURSE_LANGUAGE, course.getLanguage());
 		//userDetails.put(COURSE_CREATOR_ID, course.getId());
 
         
-    return userDetails;
+    return courseDetails;
 	}
 
 }
