@@ -127,7 +127,6 @@ public class DataLoader extends DataConstants{
 	private static ArrayList<Module> getModules(JSONObject courseJSON){
 		
 		ArrayList<Module> modules = new ArrayList<>();
-		ArrayList<Question> questions = new ArrayList<>();
 		/**ArrayList<Comment> comments = new ArrayList<>();
 		UserList user = UserList.getInstance();*/
 		JSONArray modulesJSON = (JSONArray)courseJSON.get(MODULE_ARRAY);
@@ -139,10 +138,7 @@ public class DataLoader extends DataConstants{
 
 			ArrayList<Topic> topics = getTopics(moduleJSON);
 			
-			String question = (String)moduleJSON.get(QUESTION_STRING);
-			ArrayList<String> answers = getAnswers((JSONArray)moduleJSON.get(QUESTION_ANSWERS));
-			Integer correctAnswer = (Integer)moduleJSON.get(QUESTION_CORRECT_ANSWER);
-			questions.add(new Question(question, answers, correctAnswer));
+			ArrayList<Question> questions = getQuestions(moduleJSON);
 
 			/**UUID studentUUID = UUID.fromString( (String)personJSON.get(COMMENT_ID) );
 			User studentID = (Student)user.getUserByID(studentUUID);
@@ -174,22 +170,23 @@ public class DataLoader extends DataConstants{
 		return topics;
 	}
 
-	private static ArrayList<Topic> getQuiz(JSONObject courseJSON){
-		
-		ArrayList<Topic> topics = new ArrayList<>();
-		/**ArrayList<Comment> comments = new ArrayList<>();
-		UserList user = UserList.getInstance();*/
-		JSONArray topicsJSON = (JSONArray)courseJSON.get(TOPIC_ARRAY);
-			
-		for(int i=0; i < topicsJSON.size(); i++) {
-			JSONObject topicJSON = (JSONObject)topicsJSON.get(i);
+	private static ArrayList<Question> getQuestions(JSONObject courseJSON){
 
-			String topicTitle = (String)topicJSON.get(TOPIC_TITLE);
-			String lesson = (String)topicJSON.get(TOPIC_LESSON);
-			topics.add(new Topic(topicTitle, lesson));
+		ArrayList<Question> questions = new ArrayList<>();
+
+		JSONArray questionsJSON = (JSONArray)courseJSON.get(QUIZ_ARRAY);
+			
+		for(int i=0; i < questionsJSON.size(); i++) {
+			JSONObject questionJSON = (JSONObject)questionsJSON.get(i);
+
+			String question = (String)questionJSON.get(QUESTION_STRING);
+			ArrayList<String> answers = getAnswers((JSONArray)questionJSON.get(QUESTION_ANSWERS));
+			Long correctAnswer = (Long)questionJSON.get(QUESTION_CORRECT_ANSWER);
+
+			questions.add(new Question(question, answers, correctAnswer));
 		}
 		
-		return topics;
+		return questions;
 	}
 
 	private static ArrayList<String> getAnswers(JSONArray jsonLangs){

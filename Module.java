@@ -38,6 +38,6 @@ public class Module {
     }
 
     public String toString(){
-        return "Module Title - " + title + " Topics - " + topics + " Quiz - " + quiz;
+        return "Module Title - " + title + " Topics - " + topics + " Quiz - " + questions;
     }
 }
