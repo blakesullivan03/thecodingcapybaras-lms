@@ -152,8 +152,8 @@ public class DataLoader extends DataConstants{
 			String text = (String)personJSON.get(COMMENT_TEXT);
 			ArrayList<Comment> replies = getReplies( (JSONArray)personJSON.get(COMMENT_REPLIES) );
 			comments.add(new Comment(studentID, text, replies));*/
-			System.out.println("MODULE TITLE " + moduleTitle);
-			modules.add(new Module(moduleTitle));
+			
+			modules.add(new Module(moduleTitle, topics, questions));
 		}
 		
 		return modules;

@@ -4,10 +4,13 @@ public class Module {
     private String title;
     private ArrayList<Topic> topics;
     private Quiz quiz;
+    private ArrayList<Question> questions;
     private ArrayList<Comment> comments;
 
-    public Module(String title){
+    public Module(String title, ArrayList<Topic> topics, ArrayList<Question> questions){
         this.title = title;
+        this.topics = topics;
+        this.questions = questions;
     }
 
     public void editTitle(String title){
