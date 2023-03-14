@@ -50,7 +50,7 @@ public class UserList {
 
     public User getUser(String id){
         for(User user : users) {
-			if(user.getUserName().equals(id)) {
+			if(user.getUserName().equalsIgnoreCase(id)) {
 				return user;
 			}
 		}

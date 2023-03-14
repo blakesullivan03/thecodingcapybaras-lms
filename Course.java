@@ -5,7 +5,6 @@ public class Course {
     private UUID id;
     private Language language;
     private ArrayList<Module> modules;
-    private Module module;
     private String title;
     private ArrayList<CourseProfile> profiles;
     private ArrayList<Comment> comments;

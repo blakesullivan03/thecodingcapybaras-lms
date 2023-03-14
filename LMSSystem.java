@@ -16,7 +16,7 @@ public class LMSSystem{
     private ArrayList<Course> courses;
 
     public LMSSystem(){
-      users = users.getInstance();
+      this.users = users.getInstance();
     }
 
     public boolean logIn(String username, String password){

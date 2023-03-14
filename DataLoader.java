@@ -14,18 +14,16 @@ import org.json.simple.parser.JSONParser;;
  */
 public class DataLoader extends DataConstants{
 
-	/**public static void main(String[] args) {
+	public static void main(String[] args) {
 	ArrayList<User> students = getUsers();
 		for(User student : students){
 			System.out.println(student);
 		}
-		//get instance of userlist
-		//UserList.getInstance();
 	ArrayList<Course> courses = getCourses();
 		for(Course course : courses){
 			System.out.println(course);
 		}
-	}*/
+	}
 
     public static ArrayList<User> getUsers() {
 		ArrayList<User> users = new ArrayList<User>();
@@ -107,7 +105,7 @@ public class DataLoader extends DataConstants{
 				String title = (String)personJSON.get(COURSE_TITLE);
 				Language language = getLanguage( (String)personJSON.get(COURSE_LANGUAGE) );
 				UUID courseCreatorUUID = UUID.fromString((String)personJSON.get(COURSE_CREATOR_ID));
-				User courseCreatorID = (CourseCreator)UserList.getInstance().getUserByID(courseCreatorUUID);
+				User courseCreatorID = (CourseCreator)user.getUserByID(courseCreatorUUID);
 				String moduleTitle = (String)personJSON.get(MODULE_TITLE);
 				modules.add(new Module(moduleTitle)); 
 
@@ -120,11 +118,10 @@ public class DataLoader extends DataConstants{
 				Integer correctAnswer = (Integer)personJSON.get(QUESTION_CORRECT_ANSWER);
 				questions.add(new Question(question, answers, correctAnswer));
 
-				UUID studentUUID = UUID.fromString((String)personJSON.get(COMMENT_ID));
-				User studentID = (CourseCreator)UserList.getInstance().getUserByID(studentUUID);
+				UUID studentUUID = UUID.fromString( (String)personJSON.get(COMMENT_ID) );
+				User studentID = (Student)user.getUserByID(studentUUID);
 				String text = (String)personJSON.get(COMMENT_TEXT);
-				ArrayList<Comment> replies = getReplies( (JSONArray) personJSON.get(COMMENT_REPLIES));
-
+				ArrayList<Comment> replies = getReplies( (JSONArray)personJSON.get(COMMENT_REPLIES) );
 				comments.add(new Comment(studentID, text, replies));
 
 				course.add(new Course(courseID, title, language, courseCreatorID, modules, topics, questions, comments));
@@ -145,10 +142,10 @@ public class DataLoader extends DataConstants{
 	}
 
 	private static ArrayList<String> getAnswers(JSONArray jsonLangs){
-		ArrayList<String> answers = new ArrayList<>();
+		ArrayList<String> answers = new ArrayList<String>();
 
-		for(int i=0; i < jsonLangs.size(); i++) {
-			String answerString = (String)jsonLangs.get(i);
+		for(int i=0; i < answers.size(); i++) {
+			String answerString = (String)answers.get(i);
 			answers.add(answerString);
 		}
 

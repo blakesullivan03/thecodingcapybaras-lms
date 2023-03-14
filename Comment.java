@@ -6,8 +6,8 @@ public class Comment {
     private ArrayList<Comment> replies;
 
     public Comment(User author, String comment, ArrayList<Comment> replies){
-        this.comment = comment;
         this.author = author;
+        this.comment = comment;
         this.replies = replies;
     }
 
@@ -17,7 +17,7 @@ public class Comment {
 
     public String toString(){
         
-        return "|" + this.author + ": " + this.comment;
+        return "|" + author + ": " + comment;
     }
 
    /**  public void reply(User author, String comment){

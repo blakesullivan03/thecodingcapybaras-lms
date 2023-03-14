@@ -13,36 +13,36 @@
                               {"question": "Choose which print line uses the Correct Syntax?",
                               "answers": ["Print(HelloWord)", "Print(\"HelloWorld\")", "P(HelloWord)"],
                               "correct-ans":2}],
-                  "comments": [{"StudentId": "260c9289-a36a-4135-bf93-f21a118d0f61", 
-                                "Text": "Your mom lol",
+                  "comments": [{"studentID": "260c9289-a36a-4135-bf93-f21a118d0f61", 
+                                "text": "Your mom lol",
                                   "replies":[
                                   {
-                                    "studentId":"88e183f7-0a67-4983-b0e5-37c4ddf16b57",
+                                    "studentID":"88e183f7-0a67-4983-b0e5-37c4ddf16b57",
                                     "text": "Just focus on your code bruh",
                                     "replies":[]
                                   }
                                   ]}, 
-                              {"StudentId": "88e183f7-0a67-4983-b0e5-37c4ddf16b57",
-                                "Text": "1v1 me in rust kid", 
+                              {"studentID": "88e183f7-0a67-4983-b0e5-37c4ddf16b57",
+                                "text": "1v1 me in rust kid", 
                                   "replies": [
                                   {
-                                    "studentid": "260c9289-a36a-4135-bf93-f21a118d0f61",
+                                    "studentID": "260c9289-a36a-4135-bf93-f21a118d0f61",
                                     "text": "Bro I would literally go 30-0 on you don't try me",
                                     "replies": []
                                   }
                                   ]},
-                              [{"StudentId": "174a27fb-9632-44ad-a5cb-31f549e52731",
-                                "Text": "Your code is aight",
+                              [{"studentID": "174a27fb-9632-44ad-a5cb-31f549e52731",
+                                "text": "Your code is aight",
                                   "replies": [
                                   {
-                                      "studentid": "260c9289-a36a-4135-bf93-f21a118d0f61",
+                                    "studentID": "260c9289-a36a-4135-bf93-f21a118d0f61",
                                     "text": "Literally post your code you wont lol",
                                     "replies": []
                                   }
                                 ]
                               }]
                               ]
-                              }],
+                  }],
         "students":[
           {
             "id":"260c9289-a36a-4135-bf93-f21a118d0f61",
@@ -55,29 +55,29 @@
             "grades": [9,5,7]
           }
         ],
-        "comments": [{"StudentId": "260c9289-a36a-4135-bf93-f21a118d0f61", 
-                              "Text": "This code is slight",
+        "comments": [{"studentID": "260c9289-a36a-4135-bf93-f21a118d0f61", 
+                              "text": "This code is slight",
                              "replies":[
                               {
-                                "studentId":"88e183f7-0a67-4983-b0e5-37c4ddf16b57",
+                                "studentID":"88e183f7-0a67-4983-b0e5-37c4ddf16b57",
                                 "text": "No duh the title of the course is literally basics",
                                 "replies":[]
                               }
                              ]}, 
-                              {"StudentId": "88e183f7-0a67-4983-b0e5-37c4ddf16b57",
-                              "Text": "This is the class of all time", 
+                              {"studentID": "88e183f7-0a67-4983-b0e5-37c4ddf16b57",
+                              "text": "This is the class of all time", 
                               "replies": [
                                 {
-                                  "studentid": "260c9289-a36a-4135-bf93-f21a118d0f61",
+                                  "studentID": "260c9289-a36a-4135-bf93-f21a118d0f61",
                                   "text": "Facts",
                                   "replies": []
                                 }
                               ]},
-                              [{"StudentId": "174a27fb-9632-44ad-a5cb-31f549e52731",
-                                "Text": "What even encompasses a basic class",
+                              [{"studentID": "174a27fb-9632-44ad-a5cb-31f549e52731",
+                                "text": "What even encompasses a basic class",
                                 "replies": [
                                   {
-                                    "studentid": "260c9289-a36a-4135-bf93-f21a118d0f61",
+                                    "studentID": "260c9289-a36a-4135-bf93-f21a118d0f61",
                                     "text": "The knowledge you should already have but ik you dont lol.",
                                     "replies": []
                                   }
