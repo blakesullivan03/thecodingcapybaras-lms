@@ -90,9 +90,6 @@ public class DataLoader extends DataConstants{
 	//Finish the UserList
     public static ArrayList<Course> getCourses(){
 		ArrayList<Course> course = new ArrayList<Course>();
-		ArrayList<Topic> topics = new ArrayList<>();
-		ArrayList<Question> questions = new ArrayList<>();
-		ArrayList<Comment> comments = new ArrayList<>();
 		UserList user = UserList.getInstance();
 		try {
 			FileReader reader = new FileReader(COURSE_FILE_NAME);
@@ -108,7 +105,7 @@ public class DataLoader extends DataConstants{
 				UUID courseCreatorUUID = UUID.fromString((String)personJSON.get(COURSE_CREATOR_ID));
 				User courseCreatorID = (CourseCreator)user.getUserByID(courseCreatorUUID);
 
-				ArrayList<Module> modules = getModules();
+				ArrayList<Module> modules = getModules(personJSON);
 
 				course.add(new Course(courseID, title, language, courseCreatorID, modules));
 			}
@@ -127,51 +124,41 @@ public class DataLoader extends DataConstants{
 		return Enum.valueOf(Language.class, language.toUpperCase());
 	}
 
-	private static ArrayList<Module> getModules(){
+	private static ArrayList<Module> getModules(JSONObject courseJSON){
 		
 		ArrayList<Module> modules = new ArrayList<>();
-		/**ArrayList<Topic> topics = new ArrayList<>();
+		ArrayList<Topic> topics = new ArrayList<>();
 		ArrayList<Question> questions = new ArrayList<>();
-		ArrayList<Comment> comments = new ArrayList<>();
+		/**ArrayList<Comment> comments = new ArrayList<>();
 		UserList user = UserList.getInstance();*/
-		try {
-			FileReader reader = new FileReader(COURSE_FILE_NAME);
-			JSONParser parser = new JSONParser();
-			JSONArray courseJSON = (JSONArray)new JSONParser().parse(reader);
 			
-			for(int i=0; i < courseJSON.size(); i++) {
-				JSONObject personJSON = (JSONObject)courseJSON.get(i);
+		for(int i=0; i < courseJSON.size(); i++) {
+			JSONObject moduleJSON = (JSONObject)courseJSON.get(i);
 
-				String moduleTitle = (String)personJSON.get(MODULE_TITLE);
+			String moduleTitle = (String)moduleJSON.get(MODULE_TITLE);
 
-				/**String topicTitle = (String)personJSON.get(TOPIC_TITLE);
-				String lesson = (String)personJSON.get(TOPIC_LESSON);
-				topics.add(new Topic(topicTitle, lesson));
+			String topicTitle = (String)moduleJSON.get(TOPIC_TITLE);
+			String lesson = (String)moduleJSON.get(TOPIC_LESSON);
+			topics.add(new Topic(topicTitle, lesson));
 
-				String question = (String)personJSON.get(QUESTION_STRING);
-				ArrayList<String> answers = getAnswers((JSONArray)personJSON.get(QUESTION_ANSWERS));
-				Integer correctAnswer = (Integer)personJSON.get(QUESTION_CORRECT_ANSWER);
-				questions.add(new Question(question, answers, correctAnswer));
+			String question = (String)moduleJSON.get(QUESTION_STRING);
+			ArrayList<String> answers = getAnswers((JSONArray)moduleJSON.get(QUESTION_ANSWERS));
+			Integer correctAnswer = (Integer)moduleJSON.get(QUESTION_CORRECT_ANSWER);
+			questions.add(new Question(question, answers, correctAnswer));
 
-				UUID studentUUID = UUID.fromString( (String)personJSON.get(COMMENT_ID) );
-				User studentID = (Student)user.getUserByID(studentUUID);
-				String text = (String)personJSON.get(COMMENT_TEXT);
-				ArrayList<Comment> replies = getReplies( (JSONArray)personJSON.get(COMMENT_REPLIES) );
-				comments.add(new Comment(studentID, text, replies));*/
-
-				modules.add(new Module(moduleTitle));
-			}
-			
-			return modules;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+			/**UUID studentUUID = UUID.fromString( (String)personJSON.get(COMMENT_ID) );
+			User studentID = (Student)user.getUserByID(studentUUID);
+			String text = (String)personJSON.get(COMMENT_TEXT);
+			ArrayList<Comment> replies = getReplies( (JSONArray)personJSON.get(COMMENT_REPLIES) );
+			comments.add(new Comment(studentID, text, replies));*/
+			System.out.println("MODULE TITLE " + moduleTitle);
+			modules.add(new Module(moduleTitle));
 		}
 		
-		return null;
+		return modules;
 	}
 
-	/**private static ArrayList<String> getAnswers(JSONArray jsonLangs){
+	private static ArrayList<String> getAnswers(JSONArray jsonLangs){
 		ArrayList<String> answers = new ArrayList<String>();
 
 		for(int i=0; i < answers.size(); i++) {
@@ -183,7 +170,7 @@ public class DataLoader extends DataConstants{
 	}
 	
 
-	private static ArrayList<Comment> getReplies(JSONArray jsonCommentArray){
+	/**private static ArrayList<Comment> getReplies(JSONArray jsonCommentArray){
 		ArrayList<Comment> replies = new ArrayList<>();
 
 		for(int i=0; i < jsonCommentArray.size(); i++) {
