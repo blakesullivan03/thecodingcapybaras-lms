@@ -35,6 +35,6 @@ public class Module {
     }
 
     public String toString(){
-        return title + " " + quiz;
+        return "Module Title - " + title + " Topics - " + getTopics();
     }
 }

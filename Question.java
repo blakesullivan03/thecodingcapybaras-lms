@@ -26,4 +26,8 @@ public class Question {
             return false;
         }
     }
+
+    public String toString(){
+        return question + " " + answers + " " + correctAnswer;
+    }
 }

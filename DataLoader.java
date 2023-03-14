@@ -19,6 +19,7 @@ public class DataLoader extends DataConstants{
 		for(User student : students){
 			System.out.println(student);
 		}
+
 	ArrayList<Course> courses = getCourses();
 		for(Course course : courses){
 			System.out.println(course);
@@ -48,7 +49,6 @@ public class DataLoader extends DataConstants{
 					double overallGPA = (Double)personJSON.get(STUDENT_OVERALL_GPA);
                 	users.add(new Student(id, firstName, lastName, email, password, dob, overallGPA, favoriteLanguages));
 				} else {
-
 					users.add(new CourseCreator(id, firstName, lastName, email, password, dob));
 				}
 			}
@@ -88,8 +88,7 @@ public class DataLoader extends DataConstants{
 	//before I start this
 	//Finish the UserList
     public static ArrayList<Course> getCourses(){
-		ArrayList<Course> course = new ArrayList<>();
-		ArrayList<Module> modules = new ArrayList<>();
+		ArrayList<Course> course = new ArrayList<Course>();
 		ArrayList<Topic> topics = new ArrayList<>();
 		ArrayList<Question> questions = new ArrayList<>();
 		ArrayList<Comment> comments = new ArrayList<>();
@@ -101,30 +100,16 @@ public class DataLoader extends DataConstants{
 			
 			for(int i=0; i < courseJSON.size(); i++) {
 				JSONObject personJSON = (JSONObject)courseJSON.get(i);
+
 				UUID courseID = UUID.fromString( (String)personJSON.get(COURSE_ID) );
 				String title = (String)personJSON.get(COURSE_TITLE);
 				Language language = getLanguage( (String)personJSON.get(COURSE_LANGUAGE) );
 				UUID courseCreatorUUID = UUID.fromString((String)personJSON.get(COURSE_CREATOR_ID));
 				User courseCreatorID = (CourseCreator)user.getUserByID(courseCreatorUUID);
-				String moduleTitle = (String)personJSON.get(MODULE_TITLE);
-				modules.add(new Module(moduleTitle)); 
 
-				String topicTitle = (String)personJSON.get(TOPIC_TITLE);
-				String lesson = (String)personJSON.get(TOPIC_LESSON);
-				topics.add(new Topic(topicTitle, lesson));
+				ArrayList<Module> modules = getModules();
 
-				String question = (String)personJSON.get(QUESTION_STRING);
-				ArrayList<String> answers = getAnswers((JSONArray)personJSON.get(QUESTION_ANSWERS));
-				Integer correctAnswer = (Integer)personJSON.get(QUESTION_CORRECT_ANSWER);
-				questions.add(new Question(question, answers, correctAnswer));
-
-				UUID studentUUID = UUID.fromString( (String)personJSON.get(COMMENT_ID) );
-				User studentID = (Student)user.getUserByID(studentUUID);
-				String text = (String)personJSON.get(COMMENT_TEXT);
-				ArrayList<Comment> replies = getReplies( (JSONArray)personJSON.get(COMMENT_REPLIES) );
-				comments.add(new Comment(studentID, text, replies));
-
-				course.add(new Course(courseID, title, language, courseCreatorID, modules, topics, questions, comments));
+				course.add(new Course(courseID, title, language, courseCreatorID, modules));
 			}
 			
 			return course;
@@ -141,7 +126,51 @@ public class DataLoader extends DataConstants{
 		return Enum.valueOf(Language.class, language.toUpperCase());
 	}
 
-	private static ArrayList<String> getAnswers(JSONArray jsonLangs){
+	private static ArrayList<Module> getModules(){
+		
+		ArrayList<Module> modules = new ArrayList<>();
+		/**ArrayList<Topic> topics = new ArrayList<>();
+		ArrayList<Question> questions = new ArrayList<>();
+		ArrayList<Comment> comments = new ArrayList<>();
+		UserList user = UserList.getInstance();*/
+		try {
+			FileReader reader = new FileReader(COURSE_FILE_NAME);
+			JSONParser parser = new JSONParser();
+			JSONArray courseJSON = (JSONArray)new JSONParser().parse(reader);
+			
+			for(int i=0; i < courseJSON.size(); i++) {
+				JSONObject personJSON = (JSONObject)courseJSON.get(i);
+
+				String moduleTitle = (String)personJSON.get(MODULE_TITLE);
+
+				/**String topicTitle = (String)personJSON.get(TOPIC_TITLE);
+				String lesson = (String)personJSON.get(TOPIC_LESSON);
+				topics.add(new Topic(topicTitle, lesson));
+
+				String question = (String)personJSON.get(QUESTION_STRING);
+				ArrayList<String> answers = getAnswers((JSONArray)personJSON.get(QUESTION_ANSWERS));
+				Integer correctAnswer = (Integer)personJSON.get(QUESTION_CORRECT_ANSWER);
+				questions.add(new Question(question, answers, correctAnswer));
+
+				UUID studentUUID = UUID.fromString( (String)personJSON.get(COMMENT_ID) );
+				User studentID = (Student)user.getUserByID(studentUUID);
+				String text = (String)personJSON.get(COMMENT_TEXT);
+				ArrayList<Comment> replies = getReplies( (JSONArray)personJSON.get(COMMENT_REPLIES) );
+				comments.add(new Comment(studentID, text, replies));*/
+
+				modules.add(new Module(moduleTitle));
+			}
+			
+			return modules;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	/**private static ArrayList<String> getAnswers(JSONArray jsonLangs){
 		ArrayList<String> answers = new ArrayList<String>();
 
 		for(int i=0; i < answers.size(); i++) {
@@ -151,6 +180,7 @@ public class DataLoader extends DataConstants{
 
 		return answers;
 	}
+	
 
 	private static ArrayList<Comment> getReplies(JSONArray jsonCommentArray){
 		ArrayList<Comment> replies = new ArrayList<>();
@@ -161,6 +191,6 @@ public class DataLoader extends DataConstants{
 		}
 
 		return replies;
-	}
+	}*/
 
 }
