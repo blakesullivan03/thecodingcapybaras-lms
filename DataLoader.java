@@ -181,13 +181,18 @@ public class DataLoader extends DataConstants{
 		return questions;
 	}
 
-	private static ArrayList<Comment> getComments(JSONObject commentJSON){
+	private static ArrayList<Comment> getComments(JSONObject courseJSON){
+		
 		ArrayList<Comment> comments = new ArrayList<>();
+
 		UserList user = UserList.getInstance();
 
-		JSONArray commentsJSON = (JSONArray)commentJSON.get(COMMENT_ARRAY);
+		JSONArray commentsJSON = (JSONArray)courseJSON.get(COMMENT_ARRAY);
 
-		for(int i=0; i < commentJSON.size(); i++) {
+		for(int i=0; i < commentsJSON.size(); i++) {
+
+			JSONObject commentJSON = (JSONObject)commentsJSON.get(i);
+
 			UUID studentUUID = UUID.fromString( (String)commentJSON.get(COMMENT_ID) );
 			User studentID = (Student)user.getUserByID(studentUUID);
 			String text = (String)commentJSON.get(COMMENT_TEXT);
