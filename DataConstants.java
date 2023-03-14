@@ -24,6 +24,7 @@ public abstract class DataConstants {
     protected static final String QUESTION_STRING = "question";
     protected static final String QUESTION_ANSWERS = "answers";
     protected static final String QUESTION_CORRECT_ANSWER = "correct-ans";
+    protected static final String COMMENT_ARRAY = "comments";
     protected static final String COMMENT_ID = "studentID";
     protected static final String COMMENT_TEXT = "text";
     protected static final String COMMENT_REPLIES = "replies";

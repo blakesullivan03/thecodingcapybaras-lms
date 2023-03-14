@@ -7,10 +7,11 @@ public class Module {
     private ArrayList<Question> questions;
     private ArrayList<Comment> comments;
 
-    public Module(String title, ArrayList<Topic> topics, ArrayList<Question> questions){
+    public Module(String title, ArrayList<Topic> topics, ArrayList<Question> questions, ArrayList<Comment> comments){
         this.title = title;
         this.topics = topics;
         this.questions = questions;
+        this.comments = comments;
     }
 
     public void editTitle(String title){
@@ -38,6 +39,6 @@ public class Module {
     }
 
     public String toString(){
-        return "Module Title - " + title + " Topics - " + topics + " Quiz - " + questions;
+        return "Module Title - " + title + " Topics - " + topics + " Quiz - " + questions + "Comments - " + comments;
     }
 }

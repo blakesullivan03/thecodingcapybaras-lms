@@ -8,7 +8,7 @@ public class Question {
     public Question(String question, ArrayList<String> answers, Long correctAnswers){
         this.question = question;
         this.answers = answers;
-        this.correctAnswer = correctAnswer;
+        this.correctAnswer = correctAnswers;
     }
 
     public String getQuestion() {

@@ -127,8 +127,6 @@ public class DataLoader extends DataConstants{
 	private static ArrayList<Module> getModules(JSONObject courseJSON){
 		
 		ArrayList<Module> modules = new ArrayList<>();
-		/**ArrayList<Comment> comments = new ArrayList<>();
-		UserList user = UserList.getInstance();*/
 		JSONArray modulesJSON = (JSONArray)courseJSON.get(MODULE_ARRAY);
 			
 		for(int i=0; i < modulesJSON.size(); i++) {
@@ -140,13 +138,9 @@ public class DataLoader extends DataConstants{
 			
 			ArrayList<Question> questions = getQuestions(moduleJSON);
 
-			/**UUID studentUUID = UUID.fromString( (String)personJSON.get(COMMENT_ID) );
-			User studentID = (Student)user.getUserByID(studentUUID);
-			String text = (String)personJSON.get(COMMENT_TEXT);
-			ArrayList<Comment> replies = getReplies( (JSONArray)personJSON.get(COMMENT_REPLIES) );
-			comments.add(new Comment(studentID, text, replies));*/
+			ArrayList<Comment> comments = getComments(moduleJSON);
 
-			modules.add(new Module(moduleTitle, topics, questions));
+			modules.add(new Module(moduleTitle, topics, questions, comments));
 		}
 		
 		return modules;
@@ -155,8 +149,6 @@ public class DataLoader extends DataConstants{
 	private static ArrayList<Topic> getTopics(JSONObject courseJSON){
 		
 		ArrayList<Topic> topics = new ArrayList<>();
-		/**ArrayList<Comment> comments = new ArrayList<>();
-		UserList user = UserList.getInstance();*/
 		JSONArray topicsJSON = (JSONArray)courseJSON.get(TOPIC_ARRAY);
 			
 		for(int i=0; i < topicsJSON.size(); i++) {
@@ -189,6 +181,23 @@ public class DataLoader extends DataConstants{
 		return questions;
 	}
 
+	private static ArrayList<Comment> getComments(JSONObject commentJSON){
+		ArrayList<Comment> comments = new ArrayList<>();
+		UserList user = UserList.getInstance();
+
+		JSONArray commentsJSON = (JSONArray)commentJSON.get(COMMENT_ARRAY);
+
+		for(int i=0; i < commentJSON.size(); i++) {
+			UUID studentUUID = UUID.fromString( (String)commentJSON.get(COMMENT_ID) );
+			User studentID = (Student)user.getUserByID(studentUUID);
+			String text = (String)commentJSON.get(COMMENT_TEXT);
+			ArrayList<Comment> replies = getReplies( (JSONArray)commentJSON.get(COMMENT_REPLIES) );
+			comments.add(new Comment(studentID, text, replies));
+		}
+
+		return comments;
+	}
+
 	private static ArrayList<String> getAnswers(JSONArray jsonLangs){
 		ArrayList<String> answers = new ArrayList<String>();
 
@@ -199,9 +208,8 @@ public class DataLoader extends DataConstants{
 
 		return answers;
 	}
-	
 
-	/**private static ArrayList<Comment> getReplies(JSONArray jsonCommentArray){
+	private static ArrayList<Comment> getReplies(JSONArray jsonCommentArray){
 		ArrayList<Comment> replies = new ArrayList<>();
 
 		for(int i=0; i < jsonCommentArray.size(); i++) {
@@ -210,6 +218,5 @@ public class DataLoader extends DataConstants{
 		}
 
 		return replies;
-	}*/
-
+	}
 }
