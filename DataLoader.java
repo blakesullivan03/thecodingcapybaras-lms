@@ -127,7 +127,6 @@ public class DataLoader extends DataConstants{
 	private static ArrayList<Module> getModules(JSONObject courseJSON){
 		
 		ArrayList<Module> modules = new ArrayList<>();
-		ArrayList<Topic> topics = new ArrayList<>();
 		ArrayList<Question> questions = new ArrayList<>();
 		/**ArrayList<Comment> comments = new ArrayList<>();
 		UserList user = UserList.getInstance();*/
@@ -138,10 +137,8 @@ public class DataLoader extends DataConstants{
 
 			String moduleTitle = (String)moduleJSON.get(MODULE_TITLE);
 
-			String topicTitle = (String)moduleJSON.get(TOPIC_TITLE);
-			String lesson = (String)moduleJSON.get(TOPIC_LESSON);
-			topics.add(new Topic(topicTitle, lesson));
-
+			ArrayList<Topic> topics = getTopics(moduleJSON);
+			
 			String question = (String)moduleJSON.get(QUESTION_STRING);
 			ArrayList<String> answers = getAnswers((JSONArray)moduleJSON.get(QUESTION_ANSWERS));
 			Integer correctAnswer = (Integer)moduleJSON.get(QUESTION_CORRECT_ANSWER);
@@ -152,11 +149,47 @@ public class DataLoader extends DataConstants{
 			String text = (String)personJSON.get(COMMENT_TEXT);
 			ArrayList<Comment> replies = getReplies( (JSONArray)personJSON.get(COMMENT_REPLIES) );
 			comments.add(new Comment(studentID, text, replies));*/
-			
+
 			modules.add(new Module(moduleTitle, topics, questions));
 		}
 		
 		return modules;
+	}
+
+	private static ArrayList<Topic> getTopics(JSONObject courseJSON){
+		
+		ArrayList<Topic> topics = new ArrayList<>();
+		/**ArrayList<Comment> comments = new ArrayList<>();
+		UserList user = UserList.getInstance();*/
+		JSONArray topicsJSON = (JSONArray)courseJSON.get(TOPIC_ARRAY);
+			
+		for(int i=0; i < topicsJSON.size(); i++) {
+			JSONObject topicJSON = (JSONObject)topicsJSON.get(i);
+
+			String topicTitle = (String)topicJSON.get(TOPIC_TITLE);
+			String lesson = (String)topicJSON.get(TOPIC_LESSON);
+			topics.add(new Topic(topicTitle, lesson));
+		}
+		
+		return topics;
+	}
+
+	private static ArrayList<Topic> getQuiz(JSONObject courseJSON){
+		
+		ArrayList<Topic> topics = new ArrayList<>();
+		/**ArrayList<Comment> comments = new ArrayList<>();
+		UserList user = UserList.getInstance();*/
+		JSONArray topicsJSON = (JSONArray)courseJSON.get(TOPIC_ARRAY);
+			
+		for(int i=0; i < topicsJSON.size(); i++) {
+			JSONObject topicJSON = (JSONObject)topicsJSON.get(i);
+
+			String topicTitle = (String)topicJSON.get(TOPIC_TITLE);
+			String lesson = (String)topicJSON.get(TOPIC_LESSON);
+			topics.add(new Topic(topicTitle, lesson));
+		}
+		
+		return topics;
 	}
 
 	private static ArrayList<String> getAnswers(JSONArray jsonLangs){

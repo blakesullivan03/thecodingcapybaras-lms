@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Quiz {
     private ArrayList<Question> questions;
     private ArrayList<Integer> correctAnswers;
+    
 
     public Quiz(ArrayList<Question> questions){
 
