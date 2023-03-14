@@ -8,7 +8,7 @@ public class Comment {
     public Comment(User author, String comment) {
         this.author = author;
         this.comment = comment;
-        this.replies = new ArrayList<Comment>()
+        this.replies = new ArrayList<Comment>();
     }
 
     public Comment(User author, String comment, ArrayList<Comment> replies){
@@ -17,6 +17,14 @@ public class Comment {
         this.replies = replies;
     }
 
+    public String getText() {
+        return this.comment;
+    }
+
+    public User getAuthor() {
+        return this.author;
+    }
+    
     public void edit(String edited){
         this.comment = edited;
     } 

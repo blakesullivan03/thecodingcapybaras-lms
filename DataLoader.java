@@ -172,7 +172,7 @@ public class DataLoader extends DataConstants{
 			JSONObject questionJSON = (JSONObject)questionsJSON.get(i);
 
 			String question = (String)questionJSON.get(QUESTION_STRING);
-			ArrayList<String> answers = getAnswers((JSONArray)questionJSON.get(QUESTION_ANSWERS));
+			ArrayList<String> answers = (JSONArray)questionJSON.get(QUESTION_ANSWERS);
 			Long correctAnswer = (Long)questionJSON.get(QUESTION_CORRECT_ANSWER);
 
 			questions.add(new Question(question, answers, correctAnswer));
@@ -203,23 +203,18 @@ public class DataLoader extends DataConstants{
 		return comments;
 	}
 
-	private static ArrayList<String> getAnswers(JSONArray jsonLangs){
-		ArrayList<String> answers = new ArrayList<String>();
-
-		for(int i=0; i < answers.size(); i++) {
-			String answerString = (String)answers.get(i);
-			answers.add(answerString);
-		}
-
-		return answers;
-	}
-
 	private static ArrayList<Comment> getReplies(JSONArray jsonCommentArray){
 		ArrayList<Comment> replies = new ArrayList<>();
-
+		UserList users = UserList.getInstance();
 		for(int i=0; i < jsonCommentArray.size(); i++) {
-			Comment replyString = (Comment)jsonCommentArray.get(i);
-			replies.add(replyString);
+
+			JSONObject replyJSON = ((JSONObject)jsonCommentArray.get(i));
+			String replyString = (String) replyJSON.get(COMMENT_TEXT);
+			UUID studentUUID = UUID.fromString((String)replyJSON.get(COMMENT_ID));
+			User replyAuthor = users.getUserByID(studentUUID);
+
+			Comment reply = new Comment (replyAuthor, replyString);
+			replies.add(reply);
 		}
 
 		return replies;
