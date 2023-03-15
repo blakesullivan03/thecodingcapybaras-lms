@@ -67,21 +67,23 @@ public class Course {
 
     }
 
+    // May need to add a for loop later on but getting something in here
     public void addModule(Module module){
-
+        modules.add(module);
     }
 
+    // Same thing as add as well
     public void deleteModule(Module module){
-
+        modules.remove(module);
     }
 
 
     public void editModuleTitle(Module old, Module newTitle){
-
+        
     }
 
     public void leaveComment(String comment){
-
+        
     }
 
     public ArrayList<CourseProfile> getProfiles(){
