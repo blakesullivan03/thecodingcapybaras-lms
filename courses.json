@@ -31,7 +31,7 @@
                                     "replies": []
                                   }
                                   ]},
-                              [{"studentID": "174a27fb-9632-44ad-a5cb-31f549e52731",
+                              {"studentID": "174a27fb-9632-44ad-a5cb-31f549e52731",
                                 "text": "Your code is aight",
                                   "replies": [
                                   {
@@ -40,7 +40,7 @@
                                     "replies": []
                                   }
                                 ]
-                              }]
+                              }
                               ]
                   }],
         "students":[
@@ -73,7 +73,7 @@
                                   "replies": []
                                 }
                               ]},
-                              [{"studentID": "174a27fb-9632-44ad-a5cb-31f549e52731",
+                              {"studentID": "174a27fb-9632-44ad-a5cb-31f549e52731",
                                 "text": "What even encompasses a basic class",
                                 "replies": [
                                   {
@@ -82,7 +82,7 @@
                                     "replies": []
                                   }
                                 ]
-                              }]
+                              }
                       ]
     }
   ]
