@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 /**
  * User Interface for the System
  * @author Blake Turner
@@ -17,10 +18,11 @@ public class SystemUI{
     SystemUI(){
         scanner = new Scanner(System.in);
         system = new LMSSystem();
-        
     }
 
     public void run(){
+        UserList users = UserList.getInstance();
+
         System.out.println("Welcome to the LMS!");
 
         while(true){
@@ -105,28 +107,48 @@ public class SystemUI{
                 case(0):
                     //Insert (JavaScirpt) Course Lesson Home Screen Here
                     System.out.println("\nIntro to JavaScript");
-                    showModules();
+                    showCourses();
                 
                 case(1):
                     System.out.println("\nIntro to C");
-                    showModules();
-                
+                    showCourses();                
                 case(2):
                     System.out.println("\nIntro to Python");
                     //Call Course Instance of Python (Modules, Topics, ETC)
-                    showModules();
+                    displayQuiz();
             }
         }
 
     }
 
-    private static void showCourses(){
+    private void displayQuiz(){
+        CourseList courses = CourseList.getInstance();
+        ArrayList<Course> modules = courses.getCourses();
+
+        System.out.println("Module Quiz");
         
+        for(Course course : modules){
+            System.out.println("\n" + course.getModuleByIndex(0).getQuestion());
+        }
+    }
+
+    private void showCourses(){
+        CourseList courses = CourseList.getInstance();
+        ArrayList<Course> modules = courses.getCourses();
+
+        for(Course course : modules){
+            System.out.println("Modules:\n" + course.getModuleByIndex(0));
+        }
     } 
 
-    private void showModules(){
-        System.out.println(system.getModulesByLang());
-    }
+    /**private void showModules(){
+        CourseList courses = CourseList.getInstance();
+        ArrayList<Module> modules = courses.getCourses(null);
+
+        for(CourseList courses : modules){
+            System.out.println(modules.getTitle() + " ");
+        }
+    }*/
 
     private void showTopics(){
         

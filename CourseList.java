@@ -45,7 +45,7 @@ public class CourseList {
     }
 
     public ArrayList<Course> getCourse(Language language){
-        ArrayList<Course> courseLanguages = new ArrayList();
+        ArrayList<Course> courseLanguages = new ArrayList<>();
         for(Course course : courseLanguages){
             if(course.getLanguage().equals(language)){
                 courseLanguages.add(course);

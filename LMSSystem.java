@@ -98,8 +98,8 @@ public class LMSSystem{
     * Student View
     */
 
-   public static ArrayList<Course> getCourses(Language language){
-      ArrayList<Course> courseLanguages = new ArrayList();
+   public ArrayList<Course> getCourses(Language language){
+      ArrayList<Course> courseLanguages = new ArrayList<>();
         for(Course course : courseLanguages){
             if(course.getLanguage().equals(language)){
                 courseLanguages.add(course);
@@ -125,6 +125,16 @@ public class LMSSystem{
 
    public ArrayList<Module> getModules(){
       return modules;
+   }
+
+   public ArrayList<Module> getModulesByLang(Language language){
+      ArrayList<Module> modules = new ArrayList<>();
+        for(Module mod : modules){
+            if(mod.getLanguage().equals(language)){
+                modules.add(module);
+            }
+        }
+        return modules;
    }
 
    public Module getModuleByIndex(int index){

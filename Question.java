@@ -15,9 +15,6 @@ public class Question {
         return this.question;
 
     }
-    public ArrayList<String> getAnswers(){
-        return answers;
-    }
 
     public boolean isCorrect(int userAnswer){
         if(userAnswer == correctAnswer){
@@ -28,6 +25,6 @@ public class Question {
     }
 
     public String toString(){
-        return question + " " + answers + " " + correctAnswer;
+        return "\n" + "\n" + this.question + "\n" + "\n" + this.answers.toString() + "\n" + "\n";
     }
 }

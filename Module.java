@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Module {
     private String title;
+    private Language language;
     private ArrayList<Topic> topics;
     private Quiz quiz;
     private ArrayList<Question> questions;
@@ -22,8 +23,20 @@ public class Module {
         return title;
     }
 
+    public Language getLanguage(){
+        return language;
+    }
+
     public ArrayList<Topic> getTopics(){
         return topics;
+    }
+
+    public Question getQuestionByIndex(int index){
+        return questions.get(index); 
+    }
+
+    public ArrayList<Question> getQuestion(){
+        return questions;
     }
 
     public Topic getTopicByIndex(int index){
@@ -39,6 +52,6 @@ public class Module {
     }
 
     public String toString(){
-        return "Module Title - " + title + " Topics - " + topics + " Quiz - " + questions + "Comments - " + comments;
+        return "\t" + "1) " + title + "\n" + "Topics - " + topics + "\n";
     }
 }

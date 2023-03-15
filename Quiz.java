@@ -6,7 +6,7 @@ public class Quiz {
     
 
     public Quiz(ArrayList<Question> questions){
-
+        this.questions = questions;
     }
 
     public ArrayList<Question> getNextQuestion(){
@@ -34,7 +34,11 @@ public class Quiz {
 
     }
 
-    public ArrayList<Integer> getCorrectAnswers(){
+    /**public ArrayList<Integer> getCorrectAnswers(){
         
+    }*/
+
+    public String toString(){
+        return "Module Quiz" + "\n" + "\n" + questions;
     }
 }
