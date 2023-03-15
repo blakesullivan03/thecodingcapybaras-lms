@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class LMSSystem{
     private UserList users;
+    private CourseList courseList;
     private Module module;
     private ArrayList<Module> modules;
     private Comment comment;
@@ -16,7 +17,8 @@ public class LMSSystem{
     private ArrayList<Course> courses;
 
     public LMSSystem(){
-      this.users = users.getInstance();
+      users = UserList.getInstance();
+      courseList = CourseList.getInstance();
     }
 
     public boolean logIn(String username, String password){

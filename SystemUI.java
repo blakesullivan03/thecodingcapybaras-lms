@@ -6,19 +6,21 @@ import java.util.Scanner;
 public class SystemUI{
     private static String[] mainMenuStrings = {"Begin Course", "Resume Course", "Check Course Progress", "Logout"};
     private static String[] coursesStrings = {"Intro to JavaScript", "Intro to C", "Intro to Python"};
-    private static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner;
     private static LMSSystem system;
 
     public static void main(String[] args){
-        run();
+        SystemUI systemInterface = new SystemUI();
+        systemInterface.run();
     }
 
     SystemUI(){
-        //scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         system = new LMSSystem();
+        
     }
 
-    public static void run(){
+    public void run(){
         System.out.println("Welcome to the LMS!");
 
         while(true){
@@ -63,7 +65,7 @@ public class SystemUI{
         String password = scanner.nextLine();
     }
 
-    public static void showWelcomeScreen(){
+    public void showWelcomeScreen(){
         System.out.println("********Main Menu********");
         System.out.println("Please Choose one of the Following:");
         for(int i = 0; i < mainMenuStrings.length; i++){
@@ -72,7 +74,7 @@ public class SystemUI{
         System.out.println("\n");
     }
 
-    private static int getUserCommand(int numCommand){
+    private int getUserCommand(int numCommand){
 
         String input = scanner.nextLine();
 
@@ -85,7 +87,7 @@ public class SystemUI{
         return -1;
     }
 
-    private static void beginCourse(){
+    private void beginCourse(){
         System.out.println("Choose a New Course to Begin: ");
         for(int i = 0; i < coursesStrings.length; i++){
             System.out.println((i+1) + ". " + coursesStrings[i]);
@@ -103,9 +105,12 @@ public class SystemUI{
                 case(0):
                     //Insert (JavaScirpt) Course Lesson Home Screen Here
                     System.out.println("\nIntro to JavaScript");
+                    showModules();
+                
                 case(1):
                     System.out.println("\nIntro to C");
-
+                    showModules();
+                
                 case(2):
                     System.out.println("\nIntro to Python");
                     //Call Course Instance of Python (Modules, Topics, ETC)
@@ -115,19 +120,23 @@ public class SystemUI{
 
     }
 
-    private static void showModules(){
-        system.getModules();
+    private static void showCourses(){
+        
+    } 
+
+    private void showModules(){
+        System.out.println(system.getModulesByLang());
     }
 
-    private static void showTopics(){
+    private void showTopics(){
         
     }
 
-    private static void resumeCourse(){
+    private void resumeCourse(){
         System.out.println("Resume Course");
     }
 
-    private static void checkCourseProgress(){
+    private void checkCourseProgress(){
         System.out.println("Checking Course Progress");
     }
 }
