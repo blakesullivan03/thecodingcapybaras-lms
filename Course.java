@@ -31,12 +31,12 @@ public class Course {
      * @param title
      * @param language
      */
-    public Course(UUID id, String title, Language language, User courseCreatorUUID,   ArrayList<Module> module){
+    public Course(UUID id, String title, Language language, User courseCreatorUUID,   ArrayList<Module> modules){
         this.id = id;
         this.title = title;
         this.language = language;
         this.courseCreatorUUID = courseCreatorUUID;
-        this.modules = module;
+        this.modules = modules;
     }
     
     public UUID getID(){
@@ -67,12 +67,14 @@ public class Course {
 
     }
 
+    // May need to add a for loop later on but getting something in here
     public void addModule(Module module){
-
+        modules.add(module);
     }
 
+    // Same thing as add as well
     public void deleteModule(Module module){
-
+        modules.remove(module);
     }
 
 
