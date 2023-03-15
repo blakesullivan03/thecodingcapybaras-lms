@@ -21,11 +21,11 @@ public class UserList {
     }
 
     public void addUser(User user){
-
+        //users.add(user);
     }
     
     public void deleteUser(User user){
-
+        //users.remove(user);
     }
 
     public boolean haveUser(UUID id) {
