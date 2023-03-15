@@ -90,8 +90,13 @@ public class LMSSystem{
 
    }
 
-   public boolean createQuestion(String quesiotion, ArrayList<String> answers, int correctAnswer){
-
+   public boolean createQuestion(String question, ArrayList<String> answers, int correctAnswer){
+      /*if (currentQuiz == null){
+         return false;
+      }else{
+         Question newQuestion = new Question(question, answers, correctAnswer);
+         return currentQuiz.addQuestion(newQuestion);
+      }*/
    }
 
    /**
@@ -140,11 +145,10 @@ public class LMSSystem{
    }
 
    public Quiz getQuiz(){
- 
+      //return currentQuiz;
    }
 
    public Quiz takeQuiz(){
-
    }
 
    public boolean checkAnswers(ArrayList<Integer> userInput, Quiz quiz){
