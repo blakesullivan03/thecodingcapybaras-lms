@@ -17,12 +17,12 @@ public class Course {
      * @param title
      * @param language
      */
-    public Course(String title, Language language, User courseCreatorUUID, ArrayList<Module> module){
+    public Course(String title, Language language, User courseCreatorUUID, ArrayList<Module> modules){
         this.id = UUID.randomUUID();
         this.title = title;
         this.language = language;
         this.courseCreatorUUID = courseCreatorUUID;
-        this.modules = module;
+        this.modules = modules;
     }
     
     /**
@@ -79,11 +79,11 @@ public class Course {
 
 
     public void editModuleTitle(Module old, Module newTitle){
-
+        
     }
 
     public void leaveComment(String comment){
-
+        
     }
 
     public ArrayList<CourseProfile> getProfiles(){
