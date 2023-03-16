@@ -107,37 +107,92 @@ public class SystemUI{
                 case(0):
                     //Insert (JavaScirpt) Course Lesson Home Screen Here
                     System.out.println("\nIntro to JavaScript");
-                    showCourses();
+                    showCourse();
+                    break;
                 
                 case(1):
                     System.out.println("\nIntro to C");
-                    showCourses();                
+                    showCourse();
+                    break;                
                 case(2):
                     System.out.println("\nIntro to Python");
                     //Call Course Instance of Python (Modules, Topics, ETC)
-                    showCourses();
+                    showCourse();
+                    System.out.println("*****************************************");
+                    displayQuiz();
+                    break;
             }
         }
 
     }
 
+    private void resumeCourse(){
+        System.out.println("Resume Course");
+        for(int i = 0; i < coursesStrings.length; i++){
+            System.out.println((i+1) + ". " + coursesStrings[i]);
+        }
+
+        while(true){
+            int command = getUserCommand(coursesStrings.length);
+
+            if(command == -1){
+                System.out.println("Invalid Command");
+                continue;
+            }
+
+            switch(command){
+                case(0):
+                    //Insert (JavaScirpt) Course Lesson Home Screen Here
+                    System.out.println("\nIntro to JavaScript");
+                    showCourse();
+                    break;
+                
+                case(1):
+                    System.out.println("\nIntro to C");
+                    showCourse();
+                    break;                
+                case(2):
+                    System.out.println("\nIntro to Python");
+                    //Call Course Instance of Python (Modules, Topics, ETC)
+                    showCourse();
+                    break;
+            }
+        }
+    }
+
+
+    private void showCourse(){
+        CourseList courses = CourseList.getInstance();
+        ArrayList<Course> modules = courses.getCourses();
+
+        for(Course course : modules){
+            System.out.println(course.getModuleByIndex(0));
+        }
+    } 
+
     private void displayQuiz(){
         CourseList courses = CourseList.getInstance();
         ArrayList<Course> modules = courses.getCourses();
 
-        System.out.println("Module Quiz");
+        System.out.println("\n" + "Module Quiz");
 
         for(Course course : modules){
             System.out.println("\n" + course.getModuleByIndex(0).getQuestion());
         }
     }
-
-    private void showCourses(){
+    
+    private void checkCourseProgress(){
+        System.out.println("Checking Course Progress");
+        showCourseProgress();
+        
+    }
+    
+    private void showCourseProgress(){
         CourseList courses = CourseList.getInstance();
         ArrayList<Course> modules = courses.getCourses();
 
         for(Course course : modules){
-            System.out.println("Modules:\n" + course.getModuleByIndex(0));
+            System.out.println(course.getModuleByIndex(0).courseProgressToString());
         }
     } 
 
@@ -150,15 +205,6 @@ public class SystemUI{
         }
     }*/
 
-    private void showTopics(){
-        
-    }
-
-    private void resumeCourse(){
-        System.out.println("Resume Course");
-    }
-
-    private void checkCourseProgress(){
-        System.out.println("Checking Course Progress");
-    }
+    
+    
 }

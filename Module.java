@@ -54,9 +54,19 @@ public class Module {
 
     public String toString(){
         String result = "";
-        result += "\t" + "1) " + title;
+        result += "Module: " + title;
         for(Topic topic : topics){
-            result += "\n" + "Topics: " + topic;
+            result += "\n" + "Topic: " + topic.getTitle() + "\n" + "\n" + topic.getLesson();
+        }
+        return result;
+    }
+
+    public String courseProgressToString(){
+        //Input If Statements for Completion Status
+        String result = "";
+        result += "\n" + "\n" + "Modules: " + "\n" + "\t" + "1) " + title;
+        for(Topic topic : topics){
+            result += "\n" + "Topic: " + topic.getTitle() + "\n";
         }
         return result;
     }

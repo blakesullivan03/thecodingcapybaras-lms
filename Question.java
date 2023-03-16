@@ -12,8 +12,7 @@ public class Question {
     }
 
     public String getQuestion() {
-        return this.question;
-
+        return question;
     }
 
     public boolean isCorrect(int userAnswer){
@@ -25,6 +24,13 @@ public class Question {
     }
 
     public String toString(){
-        return "\n" + "\n" + this.question + "\n" + "\n" + this.answers.toString() + "\n" + "\n";
+
+        String result = "";
+        result += "\n" + "\n" + question;
+        for(String answerChoice : answers){
+            result +=  "\n" + "\n" + answerChoice;
+        }
+        return result;
+
     }
 }
