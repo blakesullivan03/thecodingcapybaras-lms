@@ -50,11 +50,11 @@ public class Module {
     public Quiz getQuiz(){
         return this.quiz;
     }
-    public void leaveComment(String comment){
-    
+    public void leaveComment(User author, String comment){
+        comments.add(new Comment(author, comment));
     }
-    public void leaveReply(String comment){
-    
+    public void leaveReply(Comment comment, User author, String reply){
+        comment.reply(author, reply);
     }
 
     public String toString(){
