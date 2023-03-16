@@ -36,7 +36,7 @@ public class CourseList {
             return false;
         }
 
-        courses.add(new Course(id, title, language, courseCreatorUUID));
+        courses.add(new Course(id, title, language, courseCreatorUUID, new ArrayList<Module>())); //TODO how to handle the module list?
         return true;
     }
 

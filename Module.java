@@ -50,7 +50,12 @@ public class Module {
     public Quiz getQuiz(){
         return quiz;
     }
-
+    public void leaveComment(User author, String comment){
+        comments.add(new Comment(author, comment));
+    }
+    public void leaveReply(Comment comment, User author, String reply){
+        comment.reply(author, reply);
+    }
 
     public String toString(){
         String result = "";
