@@ -45,9 +45,8 @@ public class Quiz {
     public String toString(){
 
         String result = "";
-        result += "\n" + "\n";
         for(Question question : questions){
-            result +=  "\n" + "\n" + question;
+            result += question;
         }
         return result;   
 

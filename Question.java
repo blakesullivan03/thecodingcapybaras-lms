@@ -15,7 +15,7 @@ public class Question {
         return question;
     }
 
-    public boolean isCorrect(int userAnswer){
+    public boolean isCorrect(Long userAnswer){
         if(userAnswer == correctAnswer){
             return true;
         } else {

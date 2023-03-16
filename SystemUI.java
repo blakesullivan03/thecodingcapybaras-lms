@@ -119,7 +119,7 @@ public class SystemUI{
                     //Call Course Instance of Python (Modules, Topics, ETC)
                     showCourse();
                     System.out.println("\n*************************************************************************************************");
-                    displayQuiz();
+                    system.getQuiz();
                     break;
             }
         }
@@ -167,17 +167,6 @@ public class SystemUI{
 
         for(Course course : modules){
             System.out.println(course.getModuleByIndex(0));
-        }
-    } 
-
-    private void displayQuiz(){
-        CourseList courses = CourseList.getInstance();
-        ArrayList<Course> modules = courses.getCourses();
-
-        System.out.println("\n" + "Module Quiz");
-
-        for(Course course : modules){
-            System.out.println("\n" + course.getModuleByIndex(0).getQuiz());
         }
     }
     

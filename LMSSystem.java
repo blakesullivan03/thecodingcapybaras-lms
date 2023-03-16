@@ -155,7 +155,18 @@ public class LMSSystem{
    }
 
    public Quiz getQuiz(){
-      //return currentQuiz;
+      
+      ArrayList<Course> modules = courseList.getCourses();
+      ArrayList<Question> questions;
+
+      System.out.println("\n" + "Module Quiz");
+
+      for(Course course : modules){
+          questions.add( course.getModuleByIndex(0).getQuiz().getQuestions() );
+          Quiz currentQuiz = new Quiz(questions);
+      }
+
+      return currentQuiz;
    }
 
    public Quiz takeQuiz(){
