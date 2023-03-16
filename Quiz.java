@@ -31,11 +31,11 @@ public class Quiz {
     }
 
     public void addQuestion(Question question){
-
+        questions.add(question);
     }
 
     public void deleteQuestion(Question question){
-
+        questions.remove(question);
     }
 
     /**public ArrayList<Integer> getCorrectAnswers(){
