@@ -138,9 +138,11 @@ public class DataLoader extends DataConstants{
 			
 			ArrayList<Question> questions = getQuestions(moduleJSON);
 
+			Quiz quiz = getQuiz(questions);
+
 			ArrayList<Comment> comments = getComments(moduleJSON);
 
-			modules.add(new Module(moduleTitle, topics, questions, comments));
+			modules.add(new Module(moduleTitle, topics, quiz, comments));
 		}
 		
 		return modules;
@@ -160,6 +162,10 @@ public class DataLoader extends DataConstants{
 		}
 		
 		return topics;
+	}
+
+	private static Quiz getQuiz(ArrayList<Question> questions){
+			return new Quiz(questions);
 	}
 
 	private static ArrayList<Question> getQuestions(JSONObject courseJSON){

@@ -8,10 +8,10 @@ public class Module {
     private ArrayList<Question> questions;
     private ArrayList<Comment> comments;
 
-    public Module(String title, ArrayList<Topic> topics, ArrayList<Question> questions, ArrayList<Comment> comments){
+    public Module(String title, ArrayList<Topic> topics, Quiz quiz, ArrayList<Comment> comments){
         this.title = title;
         this.topics = topics;
-        this.questions = questions;
+        this.quiz = quiz;
         this.comments = comments;
     }
 
@@ -35,7 +35,7 @@ public class Module {
         return questions.get(index); 
     }
 
-    public ArrayList<Question> getQuestion(){
+    public ArrayList<Question> getQuestions(){
         return questions;
     }
 
@@ -48,7 +48,7 @@ public class Module {
     }
 
     public Quiz getQuiz(){
-        return this.quiz;
+        return quiz;
     }
 
 

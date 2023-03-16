@@ -9,6 +9,10 @@ public class Quiz {
         this.questions = questions;
     }
 
+    public ArrayList<Question> getQuestions(){
+        return questions;
+    }
+
     public ArrayList<Question> getNextQuestion(){
         if(!hasMoreQuestions()){
             System.out.println("Finished!");
@@ -39,6 +43,13 @@ public class Quiz {
     }*/
 
     public String toString(){
-        return "Module Quiz" + "\n" + "\n" + questions;
+
+        String result = "";
+        result += "\n" + "\n";
+        for(Question question : questions){
+            result +=  "\n" + "\n" + question;
+        }
+        return result;   
+
     }
 }

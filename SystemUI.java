@@ -118,7 +118,7 @@ public class SystemUI{
                     System.out.println("\nIntro to Python");
                     //Call Course Instance of Python (Modules, Topics, ETC)
                     showCourse();
-                    System.out.println("*****************************************");
+                    System.out.println("\n*************************************************************************************************");
                     displayQuiz();
                     break;
             }
@@ -177,7 +177,7 @@ public class SystemUI{
         System.out.println("\n" + "Module Quiz");
 
         for(Course course : modules){
-            System.out.println("\n" + course.getModuleByIndex(0).getQuestion());
+            System.out.println("\n" + course.getModuleByIndex(0).getQuiz());
         }
     }
     
