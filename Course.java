@@ -83,7 +83,7 @@ public class Course {
     }
 
     public void leaveComment(String comment){
-        
+    
     }
 
     public ArrayList<CourseProfile> getProfiles(){
