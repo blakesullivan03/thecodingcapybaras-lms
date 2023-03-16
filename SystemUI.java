@@ -115,7 +115,7 @@ public class SystemUI{
                 case(2):
                     System.out.println("\nIntro to Python");
                     //Call Course Instance of Python (Modules, Topics, ETC)
-                    displayQuiz();
+                    showCourses();
             }
         }
 
@@ -126,7 +126,7 @@ public class SystemUI{
         ArrayList<Course> modules = courses.getCourses();
 
         System.out.println("Module Quiz");
-        
+
         for(Course course : modules){
             System.out.println("\n" + course.getModuleByIndex(0).getQuestion());
         }

@@ -51,7 +51,13 @@ public class Module {
         return this.quiz;
     }
 
+
     public String toString(){
-        return "\t" + "1) " + title + "\n" + "Topics - " + topics + "\n";
+        String result = "";
+        result += "\t" + "1) " + title;
+        for(Topic topic : topics){
+            result += "\n" + "Topics: " + topic;
+        }
+        return result;
     }
 }
