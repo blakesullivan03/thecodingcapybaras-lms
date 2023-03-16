@@ -36,7 +36,7 @@ public class CourseList {
             return false;
         }
 
-        courses.add(new Course(id, title, language, courseCreatorUUID));
+        courses.add(new Course(id, language, title, courseCreatorUUID));
         return true;
     }
 
