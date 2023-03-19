@@ -43,9 +43,9 @@ public class Course {
         return id;
     }
 
-    /**public UUID getCourseCreatorUUID(){
-        return User.getInstance().getUserById();
-    }*/
+    public User getCourseCreatorUUID(){
+        return UserList.getInstance().getUserByID(id);
+    }
 
     public Language getLanguage(){
         return language;
@@ -92,8 +92,16 @@ public class Course {
         return profiles;
     }
 
+    public ArrayList<Module> getModules(){
+        return modules;
+    }
+
     public Module getModuleByIndex(int index){
         return modules.get(index);
+    }
+
+    public void saveCourses(){
+        DataWriter.saveCourses();
     }
 
     public String toString(){

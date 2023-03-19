@@ -119,7 +119,7 @@ public class SystemUI{
                     //Call Course Instance of Python (Modules, Topics, ETC)
                     showCourse();
                     System.out.println("\n*************************************************************************************************");
-                    system.getQuiz();
+                    System.out.println(system.getQuiz());
                     break;
             }
         }

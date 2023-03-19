@@ -10,8 +10,8 @@ public class LMSSystem{
     private Student currentStudent;
     private CourseCreator currentCourseCreator;
     private Course currentCourse;
-    private Quiz currentQuiz;
     private Topic currentTopic;
+    private Quiz currentQuiz;
     private ArrayList<Topic> topics;
     private Question currentQuestion;
     private ArrayList<Course> courses;
@@ -156,17 +156,24 @@ public class LMSSystem{
 
    public Quiz getQuiz(){
       
-      ArrayList<Course> modules = courseList.getCourses();
+      ArrayList<Course> courses = courseList.getCourses();
+      ArrayList<Module> modules;
       ArrayList<Question> questions;
+      Quiz currentQuiz;
+
+      for(Course course : courses){
+         System.out.println(course.getModuleByIndex(0));
+     }
 
       System.out.println("\n" + "Module Quiz");
 
-      for(Course course : modules){
-          questions.add( course.getModuleByIndex(0).getQuiz().getQuestions() );
-          Quiz currentQuiz = new Quiz(questions);
+      for(Quiz quiz : modules){
+          //questions.add( course.getModuleByIndex(0).getQuiz().getQuestions() );
+          //System.out.println(course.getModuleByIndex(0).getQuiz());
+         currentQuiz = quiz.getQuiz();
       }
 
-      return currentQuiz;
+      return this.currentQuiz;
    }
 
    public Quiz takeQuiz(){
