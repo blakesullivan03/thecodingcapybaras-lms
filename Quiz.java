@@ -38,8 +38,12 @@ public class Quiz {
         questions.remove(question);
     }
 
-    /**public ArrayList<Integer> getCorrectAnswers(){
-        
+    /*public ArrayList<Integer> getCorrectAnswers(){
+        return correctAnswers;
+    }
+
+    public void setCorrectAnswer(int index, int answer) {
+        correctAnswers.set(index, answer);
     }*/
 
     public String toString(){

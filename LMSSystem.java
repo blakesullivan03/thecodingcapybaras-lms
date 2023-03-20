@@ -180,7 +180,16 @@ public class LMSSystem{
    }
 
    public boolean checkAnswers(ArrayList<Integer> userInput, Quiz quiz){
-
+      /*ArrayList<Integer> correctAnswer = quiz.getcorrectAnswer();
+      if (userInput.size() != correctAnswer.size()){
+         return false;
+      }
+      for (int i = 0; i < userInput.size(); i++){
+         if (!userInput.get(i)equals(correctAnswer.get(i))){
+            return false; 
+         }
+      }
+      return true;/**/
    }
 
    public void updateGrade(double grade){
