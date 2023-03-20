@@ -119,7 +119,17 @@ public class SystemUI{
                     System.out.println("\nIntro to Python");
                     //Call Course Instance of Python (Modules, Topics, ETC)
                     showCourse();
-                    takeQuiz();
+                    System.out.println("\n*************************************************************************************************");
+                    
+                    //System.out.println(system.getQuiz());
+                    Quiz currentQuiz = system.getQuiz();
+                    while(currentQuiz.hasMoreQuestions()) {
+                        Question currentQuestion = currentQuiz.getNextQuestion();
+                        System.out.println(currentQuestion.toString());
+                        int answer = getUserCommand(currentQuestion.numAnswers());
+                        currentQuiz.addUserAnswer(answer);
+                    }
+                    
                     break;
             }
         }
@@ -168,6 +178,8 @@ public class SystemUI{
         for(Course course : modules){
             System.out.println(course.getModuleByIndex(0));
         }
+        // This is literally taking all courses and printing the first module
+        // of each so I think it's going to have to change
     }
 
     /**
