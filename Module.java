@@ -1,4 +1,6 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class Module {
     private String title;
@@ -36,7 +38,12 @@ public class Module {
     }
 
     public ArrayList<Question> getQuestions(){
-        return quiz.getQuestions();
+        Stack<Question> questions = quiz.getQuestions();
+        ArrayList<Question> ret = new ArrayList<Question>();
+        while(!questions.empty()) {
+            ret.add(questions.pop());
+        }
+        return ret;
     }
 
     public Topic getTopicByIndex(int index){

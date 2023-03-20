@@ -33,4 +33,7 @@ public class Question {
         return result;
 
     }
+    public int numAnswers() {
+        return answers.size()+1;
+    }
 }
