@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class LMSSystem{
     private UserList users;
     private CourseList courseList;
-    private Module module;
+    private Module currentModule;
     private ArrayList<Module> modules;
     private Comment comment;
     private User currentUser;
@@ -125,25 +125,17 @@ public class LMSSystem{
 
    public Course getCourseByIndex(int index){
         //may just do by accessing the arraylist
-        return courses.get(index);
+        currentCourse = courses.get(index);
+        return currentCourse;
    }
 
    public ArrayList<Module> getModules(){
-      return modules;
-   }
-
-   public ArrayList<Module> getModulesByLang(Language language){
-      ArrayList<Module> modules = new ArrayList<>();
-        for(Module mod : modules){
-            if(mod.getLanguage().equals(language)){
-                modules.add(module);
-            }
-        }
-        return modules;
+      return currentCourse.getModules();
    }
 
    public Module getModuleByIndex(int index){
-      return modules.get(index);
+      currentModule = modules.get(index);
+      return currentModule;
    }
 
    public ArrayList<Topic> getTopics(){
@@ -155,36 +147,11 @@ public class LMSSystem{
    }
 
    public Quiz getQuiz(){
-      
-      ArrayList<Course> courses = courseList.getCourses();
-      ArrayList<Module> modules;
-      ArrayList<Question> questions;
-      Quiz currentQuiz;
-
-      for(Course course : courses){
-         System.out.println(course.getModuleByIndex(0));
-     }
-
-      System.out.println("\n" + "Module Quiz");
-
-      for(Quiz quiz : modules){
-          //questions.add( course.getModuleByIndex(0).getQuiz().getQuestions() );
-          //System.out.println(course.getModuleByIndex(0).getQuiz());
-         currentQuiz = quiz.getQuiz();
-      }
-
-      return this.currentQuiz;
-   }
-
-   public Quiz takeQuiz(){
-   }
-
-   public boolean checkAnswers(ArrayList<Integer> userInput, Quiz quiz){
-
+      return currentModule.getQuiz();
    }
 
    public void updateGrade(double grade){
-
+      //currentUser.setGrade(currentCourse, currentModule, grade);
    }
     
 }
