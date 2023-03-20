@@ -36,7 +36,7 @@ public class Module {
     }
 
     public ArrayList<Question> getQuestions(){
-        return questions;
+        return quiz.getQuestions();
     }
 
     public Topic getTopicByIndex(int index){
