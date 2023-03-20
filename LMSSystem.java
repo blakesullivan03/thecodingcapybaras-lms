@@ -13,8 +13,12 @@ public class LMSSystem{
     private Topic currentTopic;
     private Quiz currentQuiz;
     private ArrayList<Topic> topics;
+    private ArrayList<Question> questions;
     private Question currentQuestion;
     private ArrayList<Course> courses;
+    private ArrayList<String> answers;
+    private ArrayList<Long> array = new ArrayList<>();
+
 
     public LMSSystem(){
       users = UserList.getInstance();
@@ -167,6 +171,16 @@ public class LMSSystem{
    public Quiz getQuiz(){
       currentModule = getModuleByIndex(0);
       return currentModule.getQuiz();
+   }
+
+   public ArrayList<Long> answerChoiceArrayList(Long input){
+      array.add(input);
+      return array;
+   }
+
+   public boolean checkAnswers(Long userInput){
+      currentQuestion = getModuleByIndex(0).getQuestionByIndex(0);
+      return currentQuestion.isCorrect(userInput);
    }
 
    public void updateGrade(double grade){

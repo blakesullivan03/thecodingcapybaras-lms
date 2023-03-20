@@ -5,10 +5,10 @@ public class Question {
     private ArrayList<String> answers;
     private Long correctAnswer;
 
-    public Question(String question, ArrayList<String> answers, Long correctAnswers){
+    public Question(String question, ArrayList<String> answers, Long correctAnswer){
         this.question = question;
         this.answers = answers;
-        this.correctAnswer = correctAnswers;
+        this.correctAnswer = correctAnswer;
     }
 
     public String getQuestion() {

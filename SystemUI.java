@@ -59,13 +59,13 @@ public class SystemUI{
 
     }
 
-    public void showLogInScreen(){
+    /**public void showLogInScreen(){
         System.out.println("Please enter the following info. If you do not have an account, press enter.");
         System.out.println("E-Mail: ");
         String username = scanner.nextLine();
         System.out.println("Password: ");
         String password = scanner.nextLine();
-    }
+    }*/
 
     public void showWelcomeScreen(){
         System.out.println("********Main Menu********");
@@ -88,6 +88,7 @@ public class SystemUI{
 
         return -1;
     }
+    
 
     private void beginCourse(){
         System.out.println("Choose a New Course to Begin: ");
@@ -118,8 +119,7 @@ public class SystemUI{
                     System.out.println("\nIntro to Python");
                     //Call Course Instance of Python (Modules, Topics, ETC)
                     showCourse();
-                    System.out.println("\n*************************************************************************************************");
-                    System.out.println(system.getQuiz());
+                    takeQuiz();
                     break;
             }
         }
@@ -169,11 +169,50 @@ public class SystemUI{
             System.out.println(course.getModuleByIndex(0));
         }
     }
+
+    /**
+     * Quiz Functions
+     */
+
+    private void takeQuiz(){
+        System.out.println("\nAre you ready to take the Quiz?\n");
+
+        String input = scanner.nextLine();
+            
+        if(input.equalsIgnoreCase("Y")){
+            System.out.println("\n*************************************************************************************************\n");
+            displayQuiz();
+        }else{
+            System.out.println("\nContinue Studying");
+        }
+    }
+
+    private void displayQuiz(){
+        //Print a Single Question at a Time
+        System.out.println("Module Quiz");
+        for(int i = 0; i < 2; i++){
+            System.out.println(system.getQuiz().getQuestions().get(i));
+            //Get Answer Choice
+            System.out.println("\nAnswer:");
+            String answerChoice = scanner.next();
+            Integer answInteger = Integer.parseInt(answerChoice);
+            Long answLong = Long.valueOf(answInteger);
+            //Check Answers given Answer Choices
+            if(true == system.checkAnswers(answLong)){
+                System.out.println("Correct!");
+            }
+        }
+    }
+
+
+
+    /**
+     * Check Course Progress
+     */
     
     private void checkCourseProgress(){
         System.out.println("Checking Course Progress");
         showCourseProgress();
-        
     }
     
     private void showCourseProgress(){
