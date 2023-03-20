@@ -48,6 +48,7 @@ public class Module {
     }
 
     public Quiz getQuiz(){
+        questions = getQuestions();
         quiz = new Quiz(questions);
         return quiz;
     }

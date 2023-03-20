@@ -36,7 +36,7 @@ public class LMSSystem{
     
    /**
    * Course Creator View
-   */
+   
 
    public boolean createStudent(String firstName, String lastName, String email, String password){
       if(currentStudent == null){
@@ -55,15 +55,23 @@ public class LMSSystem{
       }
    }
      
-   public Quiz createQuiz(ArrayList<String> questions, ArrayList<String> answers){
+   public Quiz createQuiz(ArrayList<Question> questions, ArrayList<String> answers){
+      if(currentQuiz == null){
+         return null;
+      }else{
+         currentQuiz = new Quiz(questions);
+      }
+      return currentQuiz;
 
    }
 
-   public boolean createModule(String title){
-      if(module == null){
+   public boolean createModule(String title, ArrayList<Topic> topics, Quiz quiz, ArrayList<Comment> comments){
+      if(currentModule == null){
          return false;
       }else{
-         module.editTitle(title);
+         currentModule.editTitle(title);
+
+         currentModule = new Module(title, topics, quiz, comments);
          return true;
       }
 
@@ -96,8 +104,8 @@ public class LMSSystem{
       }else{
          Question newQuestion = new Question(question, answers, correctAnswer);
          return currentQuiz.addQuestion(newQuestion);
-      }*/
-   }
+      }
+   }*/
 
    /**
     * Student View
@@ -125,28 +133,39 @@ public class LMSSystem{
 
    public Course getCourseByIndex(int index){
         //may just do by accessing the arraylist
+        getCourseList();
         currentCourse = courses.get(index);
         return currentCourse;
    }
 
+   public ArrayList<Course> getCourseList(){
+      courses = courseList.getCourses();
+      return courses;
+   }
+
    public ArrayList<Module> getModules(){
-      return currentCourse.getModules();
+      getCourseList();
+      modules = currentCourse.getModules();
+      return modules;
    }
 
    public Module getModuleByIndex(int index){
-      currentModule = modules.get(index);
+      currentModule = getCourseByIndex(0).getModules().get(index);
       return currentModule;
    }
 
    public ArrayList<Topic> getTopics(){
+      getCourseList();
       return topics;
    }
+   
 
    public Topic getTopicByIndex(int index){
       return topics.get(index);
    }
 
    public Quiz getQuiz(){
+      currentModule = getModuleByIndex(0);
       return currentModule.getQuiz();
    }
 
