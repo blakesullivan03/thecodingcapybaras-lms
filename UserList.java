@@ -54,7 +54,6 @@ public class UserList {
 				return user;
 			}
 		}
-		
 		return null;
     }
 /*

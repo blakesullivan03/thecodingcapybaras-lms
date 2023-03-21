@@ -233,7 +233,15 @@ public class SystemUI{
             System.out.println(modules.getTitle() + " ");
         }
     }*/
+    // less complicated version
     private boolean isValidPassword() {
+        String numofChars = scanner.nextLine();
+        if (numofChars.length() >= 8) {
+            return true;
+        }
+            return false;
+    }
+    /*private boolean isValidPassword() {
         int numOfNumbers = 0;
         int numofChars = 0;
         int numOfSpecialChars = 0;
@@ -242,7 +250,7 @@ public class SystemUI{
             return true;
         }
             return false;
-    }
+    }*/
     
     
 }
