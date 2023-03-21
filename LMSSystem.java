@@ -28,12 +28,14 @@ public class LMSSystem{
     }
 
     public boolean logIn(String username, String password){
-      if(username != null & password != null){
-         return true;
-      }
-      else{
+      User user = UserList.getInstance().getUser(username, password);
+
+      if(user == null){
          return false;
       }
+
+      currentUser = user;
+      return true;
     }
 
     public void logOut(){
