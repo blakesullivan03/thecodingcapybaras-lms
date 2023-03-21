@@ -57,7 +57,7 @@ public class UserList {
 		
 		return null;
     }
-
+/*
     public Student getStudent(String userName){
         for(Student user : students) {
 			if(user.getUserName().equals(userName)) {
@@ -65,6 +65,15 @@ public class UserList {
 			}
 		}
 		
+		return null;
+    }
+*/
+    public User getUser(String email, String password) {
+        for(User user : users) {
+			if(user.getEmail().equals(email) && user.getPassword().equals(password)) {
+				return user;
+			}
+		}
 		return null;
     }
 
@@ -95,8 +104,5 @@ public class UserList {
 
     public void saveCourseCreators(){
         DataWriter.saveCourseCreator();
-    }
-    public User getUser(String username, String password) {
-        // compare to arraylist of users from json
     }
 }
