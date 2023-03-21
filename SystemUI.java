@@ -73,7 +73,7 @@ public class SystemUI{
     }
 
     public void showWelcomeScreen(){
-        System.out.println("********Main Menu********");
+        System.out.println("\n********Main Menu********");
         System.out.println("Please Choose one of the Following:");
         for(int i = 0; i < mainMenuStrings.length; i++){
             System.out.println((i+1) + ". " + mainMenuStrings[i]);
@@ -195,21 +195,6 @@ public class SystemUI{
     }
 
     private void displayQuiz(){
-        /**Print a Single Question at a Time
-        System.out.println("Module Quiz");
-        for(int i = 0; i < 2; i++){
-            System.out.println(system.getQuiz().getQuestions().get(i));
-            //Get Answer Choice
-            System.out.println("\nAnswer:");
-            String answerChoice = scanner.next();
-            Integer answInteger = Integer.parseInt(answerChoice);
-            Long answLong = Long.valueOf(answInteger);
-            //Check Answers given Answer Choices
-            if(true == system.checkAnswers(answLong)){
-                System.out.println("Correct!");
-            }
-        }*/
-
         Quiz currentQuiz = system.getQuiz();
         while(currentQuiz.hasMoreQuestions()) {
             Question currentQuestion = currentQuiz.getNextQuestion();
@@ -218,7 +203,6 @@ public class SystemUI{
             currentQuiz.addUserAnswer(answer);
         }
         System.out.println("\n" + system.getQuizGrade(currentQuiz) + " out of 100!");
-        //system.checkAnswers();        
     }
 
 
