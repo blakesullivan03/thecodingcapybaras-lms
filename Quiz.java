@@ -12,6 +12,8 @@ public class Quiz {
         questions = new Stack<Question>();
         for(Question question : inQuestions)
             this.questions.add(question);
+        this.correctAnswers = new ArrayList<Integer>();
+        addCorrectAnswers();
         this.userAnswers = new ArrayList<Integer>();
     }
 
@@ -56,10 +58,16 @@ public class Quiz {
         return userAnswers;
     }
     
-    /*public ArrayList<Integer> getCorrectAnswers(){
+    public ArrayList<Integer> getCorrectAnswers(){
         return correctAnswers;
     }
 
+    public void addCorrectAnswers(){
+        for(Question question : this.questions) {
+            this.correctAnswers.add(question.getCorrectAnswer().intValue());
+        }
+    }
+    /*
     public void setCorrectAnswer(int index, int answer) {
         correctAnswers.set(index, answer);
     }*/
