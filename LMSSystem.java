@@ -175,21 +175,18 @@ public class LMSSystem{
       return currentModule.getQuiz();
    }
 
-   public void checkAnswers(){
-      currentQuiz = getQuiz();
+   public double getQuizGrade(Quiz currentQuiz){
       userAnswers = currentQuiz.getUserAnswers();
+      ArrayList<Integer> correctAnswers = currentQuiz.getCorrectAnswers();
+      double result = 0;
       for(int i = 0; i < userAnswers.size(); i++){
-         correctAnswer = currentQuestion.getCorrectAnswer();
-         long correctAnswerLong = correctAnswer;
-         int correctAnswerInt = (int)correctAnswerLong;
+         correctAnswer = (long)correctAnswers.get(i);
+         int correctAnswerInt = correctAnswer.intValue();
          if(userAnswers.get(i) == correctAnswerInt){
-            System.out.println("Passed!");
-         }
-         else
-         {
-            System.out.println("Failed. Try Again.");         
+            result++;
          }
       }
+      return ( result / (double)userAnswers.size() ) * 100;
    }
 
    public void updateGrade(double grade){

@@ -212,8 +212,8 @@ public class SystemUI{
             int answer = getUserCommand(currentQuestion.numAnswers());
             currentQuiz.addUserAnswer(answer);
         }
-        System.out.println("\nDone!");
-        system.checkAnswers();        
+        System.out.println("\n" + system.getQuizGrade(currentQuiz) + " out of 100!");
+        //system.checkAnswers();        
     }
 
 
