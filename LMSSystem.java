@@ -2,9 +2,11 @@ import java.util.ArrayList;
 
 public class LMSSystem{
     private UserList users;
+    private ArrayList<Integer> userAnswers;
     private CourseList courseList;
     private Module currentModule;
     private ArrayList<Module> modules;
+    private Long correctAnswer;
     private Comment comment;
     private User currentUser;
     private Student currentStudent;
@@ -173,14 +175,21 @@ public class LMSSystem{
       return currentModule.getQuiz();
    }
 
-   public ArrayList<Long> answerChoiceArrayList(Long input){
-      array.add(input);
-      return array;
-   }
-
-   public boolean checkAnswers(Long userInput){
-      currentQuestion = getModuleByIndex(0).getQuestionByIndex(0);
-      return currentQuestion.isCorrect(userInput);
+   public void checkAnswers(){
+      currentQuiz = getQuiz();
+      userAnswers = currentQuiz.getUserAnswers();
+      for(int i = 0; i < userAnswers.size(); i++){
+         correctAnswer = currentQuestion.getCorrectAnswer();
+         long correctAnswerLong = correctAnswer;
+         int correctAnswerInt = (int)correctAnswerLong;
+         if(userAnswers.get(i) == correctAnswerInt){
+            System.out.println("Passed!");
+         }
+         else
+         {
+            System.out.println("Failed. Try Again.");         
+         }
+      }
    }
 
    public void updateGrade(double grade){

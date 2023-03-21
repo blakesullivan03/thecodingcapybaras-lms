@@ -119,17 +119,7 @@ public class SystemUI{
                     System.out.println("\nIntro to Python");
                     //Call Course Instance of Python (Modules, Topics, ETC)
                     showCourse();
-                    System.out.println("\n*************************************************************************************************");
-                    
-                    //System.out.println(system.getQuiz());
-                    Quiz currentQuiz = system.getQuiz();
-                    while(currentQuiz.hasMoreQuestions()) {
-                        Question currentQuestion = currentQuiz.getNextQuestion();
-                        System.out.println(currentQuestion.toString());
-                        int answer = getUserCommand(currentQuestion.numAnswers());
-                        currentQuiz.addUserAnswer(answer);
-                    }
-                    
+                    takeQuiz();
                     break;
             }
         }
@@ -187,7 +177,7 @@ public class SystemUI{
      */
 
     private void takeQuiz(){
-        System.out.println("\nAre you ready to take the Quiz?\n");
+        System.out.println("\nAre you ready to take the Quiz? Y/N\n");
 
         String input = scanner.nextLine();
             
@@ -200,7 +190,7 @@ public class SystemUI{
     }
 
     private void displayQuiz(){
-        //Print a Single Question at a Time
+        /**Print a Single Question at a Time
         System.out.println("Module Quiz");
         for(int i = 0; i < 2; i++){
             System.out.println(system.getQuiz().getQuestions().get(i));
@@ -213,7 +203,17 @@ public class SystemUI{
             if(true == system.checkAnswers(answLong)){
                 System.out.println("Correct!");
             }
+        }*/
+
+        Quiz currentQuiz = system.getQuiz();
+        while(currentQuiz.hasMoreQuestions()) {
+            Question currentQuestion = currentQuiz.getNextQuestion();
+            System.out.println(currentQuestion.toString() + "\n" + "\n" + "Answer");
+            int answer = getUserCommand(currentQuestion.numAnswers());
+            currentQuiz.addUserAnswer(answer);
         }
+        System.out.println("\nDone!");
+        system.checkAnswers();        
     }
 
 

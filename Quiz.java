@@ -51,6 +51,11 @@ public class Quiz {
     public void addUserAnswer(int userAnswer) {
         userAnswers.add(userAnswer);
     }
+
+    public ArrayList<Integer> getUserAnswers(){
+        return userAnswers;
+    }
+    
     /*public ArrayList<Integer> getCorrectAnswers(){
         return correctAnswers;
     }

@@ -15,6 +15,10 @@ public class Question {
         return question;
     }
 
+    public Long getCorrectAnswer(){
+        return correctAnswer;
+    }
+
     public boolean isCorrect(Long userAnswer){
         if(userAnswer == correctAnswer){
             return true;
@@ -24,11 +28,12 @@ public class Question {
     }
 
     public String toString(){
-
+        int i = 0;
         String result = "";
         result += "\n" + "\n" + question;
         for(String answerChoice : answers){
-            result +=  "\n" + "\n" + answerChoice;
+            result +=  "\n" + "\n" + (i+1) + ") " + answerChoice;
+            i++;
         }
         return result;
 
