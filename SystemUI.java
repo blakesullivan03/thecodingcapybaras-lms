@@ -59,13 +59,18 @@ public class SystemUI{
 
     }
 
-    /**public void showLogInScreen(){
+    public boolean login(){
         System.out.println("Please enter the following info. If you do not have an account, press enter.");
         System.out.println("E-Mail: ");
         String username = scanner.nextLine();
         System.out.println("Password: ");
         String password = scanner.nextLine();
-    }*/
+        while(!isValidPassword()) {
+            System.out.println("This is not a valid password please try again");
+        }
+            System.out.println("Thank you, now you are successfully logged in!");
+            return true;
+    }
 
     public void showWelcomeScreen(){
         System.out.println("\n********Main Menu********");
@@ -228,7 +233,16 @@ public class SystemUI{
             System.out.println(modules.getTitle() + " ");
         }
     }*/
-
+    private boolean isValidPassword() {
+        int numOfNumbers = 0;
+        int numofChars = 0;
+        int numOfSpecialChars = 0;
+        if (numOfNumbers >= 2 && (numofChars >= 8 && numofChars <= 15) && numOfSpecialChars >= 1) {
+            // only start w easy checks like 6 characters.
+            return true;
+        }
+            return false;
+    }
     
     
 }

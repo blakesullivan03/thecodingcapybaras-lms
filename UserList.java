@@ -96,5 +96,7 @@ public class UserList {
     public void saveCourseCreators(){
         DataWriter.saveCourseCreator();
     }
-
+    public User getUser(String username, String password) {
+        // compare to arraylist of users from json
+    }
 }
