@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class LMSSystem{
     private UserList users;
@@ -27,6 +29,10 @@ public class LMSSystem{
       courseList = CourseList.getInstance();
     }
 
+    /**
+     * Log In and Sign Up Functions
+     */
+
     public boolean logIn(String username, String password){
       User user = UserList.getInstance().getUser(username, password);
 
@@ -52,6 +58,15 @@ public class LMSSystem{
     public void logOut(){
 
     }
+
+    public Date getDateFromString(String data){
+		try {
+            return new SimpleDateFormat("MM/dd/yyyy").parse(data);
+        } catch (Exception e) {
+            System.out.println("here");
+            return new Date();
+        }
+	}
     
    /**
    * Course Creator View
@@ -204,6 +219,15 @@ public class LMSSystem{
 
    public void updateGrade(double grade){
       //currentUser.setGrade(currentCourse, currentModule, grade);
+   }
+
+   /**
+    * Clears the Console
+    */
+
+   public void zeroOut(){
+      System.out.print("\033[H\033[2J");
+      System.out.flush();
    }
     
 }

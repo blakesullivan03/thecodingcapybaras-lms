@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Date;
 /**
  * User Interface for the System
  * @author Blake Turner
@@ -26,6 +27,8 @@ public class SystemUI{
         System.out.println("Welcome to the LMS!");
 
         while(true){
+            login();
+
             showWelcomeScreen();
 
             int command = getUserCommand(mainMenuStrings.length);
@@ -44,14 +47,17 @@ public class SystemUI{
 
             switch(command){
                 case(0):
+                    system.zeroOut();
                     beginCourse();
                     break;
 
                 case(1):
+                    system.zeroOut();
                     resumeCourse();
                     break;
 
                 case(2):
+                    system.zeroOut();
                     checkCourseProgress();
                     break;
             }
@@ -60,37 +66,54 @@ public class SystemUI{
     }
 
     public boolean login(){
-        System.out.println("Please enter the following info. If you do not have an account, press enter(1).");
-        int option = scanner.nextInt();
-        if (option == 1) {
+        System.out.println("Log In.\nIf you do not have an account, press 1. Otherwise, press any number.");
+        
+        String input = scanner.nextLine();
+        int option = Integer.parseInt(input);
+        system.zeroOut();
+
+        if (option == 1){
             signup();
-        }
-        System.out.println("E-Mail: ");
-        String username = scanner.nextLine();
-        System.out.println("Password: ");
-        String password = scanner.nextLine();
-        while(!isValidPassword()) {
-            System.out.println("This is not a valid password please try again");
-        }
-            System.out.println("Thank you, now you are successfully logged in!");
             return true;
+        }else{
+            System.out.println("E-Mail: ");
+            String email = scanner.nextLine();
+            System.out.println("Password: ");
+            String password = scanner.nextLine();
+            if(!isValidPassword(password)) {
+                System.out.println("\nThis is not a valid password please try again");
+                return false;
+            }else{
+                system.zeroOut();
+                System.out.println("\nThank you, now you are successfully logged in!");
+                return true;
+            }
+        }
     }
 
     public boolean signup(){
-        System.out.println("Please enter the following info. If you have an account, press enter().");
-        int option = scanner.nextInt();
-        if (option == 2) {
-            login();
-        }
-        System.out.println("E-Mail: ");
-        String username = scanner.nextLine();
-        System.out.println("Password: ");
+        System.out.println("Please enter the Following Info");
+
+        System.out.println("First Name");
+        String firstName = scanner.nextLine();
+        System.out.println("Last Name");
+        String lastName = scanner.nextLine();
+        System.out.println("E-Mail");
+        String email = scanner.nextLine();
+        System.out.println("Password");
         String password = scanner.nextLine();
-        while(!isValidPassword()) {
-            System.out.println("This is not a valid password please try again");
-        }
-            System.out.println("Thank you, now you are successfully logged in!");
+        System.out.println("Date of Birth");
+        String dobString = scanner.nextLine();
+        Date DoB = system.getDateFromString(dobString);
+
+        if(!isValidPassword(password)) {
+            System.out.println("\nThis is not a valid password please try again");
+            return false;
+        }else{
+            system.zeroOut();
+            System.out.println("\nThank you, now you are successfully signed up and logged in!");
             return true;
+        }
     }
 
     public void showWelcomeScreen(){
@@ -145,7 +168,7 @@ public class SystemUI{
                     System.out.println("\nIntro to Python");
                     //Call Course Instance of Python (Modules, Topics, ETC)
                     showCourse();
-                    takeQuiz();
+                    displayQuiz();
                     break;
             }
         }
@@ -202,20 +225,21 @@ public class SystemUI{
      * Quiz Functions
      */
 
-    private void takeQuiz(){
+    private void displayQuiz(){
         System.out.println("\nAre you ready to take the Quiz? Y/N\n");
 
         String input = scanner.nextLine();
             
         if(input.equalsIgnoreCase("Y")){
             System.out.println("\n*************************************************************************************************\n");
-            displayQuiz();
+            System.out.println("\nModule Quiz");
+            takeQuiz();
         }else{
             System.out.println("\nContinue Studying");
         }
     }
 
-    private void displayQuiz(){
+    private void takeQuiz(){
         Quiz currentQuiz = system.getQuiz();
         while(currentQuiz.hasMoreQuestions()) {
             Question currentQuestion = currentQuiz.getNextQuestion();
@@ -224,6 +248,22 @@ public class SystemUI{
             currentQuiz.addUserAnswer(answer);
         }
         System.out.println("\n" + system.getQuizGrade(currentQuiz) + " out of 100!");
+        continueModules();
+    }
+
+    private void continueModules(){
+        System.out.println("\nWould you like to continue or return to the Home Screen? Y/N");
+
+        String input = scanner.nextLine();
+            
+        if(input.equalsIgnoreCase("Y")){
+            system.zeroOut();
+            System.out.println("\nModule");
+        }else{
+            system.zeroOut();
+            showWelcomeScreen();
+        }
+
     }
 
 
@@ -246,22 +286,15 @@ public class SystemUI{
         }
     } 
 
-    /**private void showModules(){
-        CourseList courses = CourseList.getInstance();
-        ArrayList<Module> modules = courses.getCourses(null);
-
-        for(CourseList courses : modules){
-            System.out.println(modules.getTitle() + " ");
-        }
-    }*/
-    // less complicated version
-    private boolean isValidPassword() {
-        String numofChars = scanner.nextLine();
-        if (numofChars.length() >= 8) {
+    //Less Complicated Version
+    private boolean isValidPassword(String password) {
+        if (password.length() >= 8) {
             return true;
-        }
+        }else{
             return false;
+        }
     }
+
     /*private boolean isValidPassword() {
         int numOfNumbers = 0;
         int numofChars = 0;
