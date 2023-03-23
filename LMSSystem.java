@@ -161,6 +161,11 @@ public class LMSSystem{
       return modules;
    }
 
+   public void setCurrentModule(Module module) {
+      currentModule = module;
+
+   }
+
    public Module getModuleByIndex(int index){
       currentModule = getCourseByIndex(0).getModules().get(index);
       return currentModule;
@@ -177,7 +182,6 @@ public class LMSSystem{
    }
 
    public Quiz getQuiz(){
-      currentModule = getModuleByIndex(0);
       return currentModule.getQuiz();
    }
 

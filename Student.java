@@ -41,8 +41,10 @@ public class Student extends User{
 
     }
     
-    public void addGrade(Course course, int moduleIndex, double grade){
+    public void addNewCourseGrade(double grade){
+        // this method is just going to update the average grade, individual course grades will be in courseprofile
         // Where are we storing each quiz grade? and where are we averaging all of them together for course grade?
+
     }
 
     public String toString(){
