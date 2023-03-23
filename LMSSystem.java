@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
+import java.util.concurrent.atomic.LongAccumulator;
 
 public class LMSSystem{
     private UserList users;
@@ -110,22 +111,12 @@ public class LMSSystem{
       return modules.add(new Module(title, topics, quiz, comments));
    }
 
-   public boolean createQuestion(String question, ArrayList<String> answers, int correctAnswer){
-      if(currentQuiz == null){
-         return false;;
-      }else{
-         Question newQuesition = new Question(question, answers, (long)correctAnswer);
-         return currentQuiz.addQuestion(newQuestion);
-      }
+   public boolean createQuestion(String question, ArrayList<String> answers, Long correctAnswer){
+      return questions.add(new Question(question, answers, null));
    }
-   
-   public Quiz createQuiz(ArrayList<Question> questions, ArrayList<String> answers){
-      Quiz quiz = new Quiz(questions);
-      for (String answer : answers) {
-         int correctAnswer = Integer.parseInt(answer);
-         quiz.addCorrectAnswer(correctAnswer);
-      }
-      return quiz;
+
+   public Quiz createQuiz(ArrayList<Question> questions){
+      return new Quiz(questions);
    }
 
    /**
