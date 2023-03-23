@@ -107,9 +107,7 @@ public class LMSSystem{
    }
    
    public boolean createModule(String title, ArrayList<Topic> topics, Quiz quiz, ArrayList<Comment> comments){
-      Module module = new Module(title, topics, quiz, comments);
-      module.language = language;
-      return module;
+      return modules.add(new Module(title, topics, quiz, comments));
    }
 
    public boolean createQuestion(String question, ArrayList<String> answers, int correctAnswer){
