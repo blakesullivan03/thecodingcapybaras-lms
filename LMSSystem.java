@@ -38,21 +38,21 @@ public class LMSSystem{
 
       if(user == null){
          return false;
-      }
+      } else {
       currentUser = user;
       return true;
+      }
     }
 
     public boolean signup(String username, String password){
-      User user = UserList.getInstance().getUser(username, password);
+      currentUser = UserList.getInstance().addUser();
 
-      // does not exist in json, so its true the account is signing up
-      //TODO figure out what to set currentUser to
-      if(user == null){
-         return true;
+      // the information you put in is null, like email, password, all that.
+      if(currentUser == null){
+         return false;
       }
-      // false bc they are not signing up, they have account.
-      return false;
+
+      return true;
     }
 
     public void logOut(){

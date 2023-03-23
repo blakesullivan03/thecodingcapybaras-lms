@@ -20,8 +20,13 @@ public class UserList {
 		return userList;
     }
 
-    public void addUser(User user){
+    public User addUser(User user){
+        if(haveUser){
+            return null;
+        }
+        //add user
         //users.add(user);
+        return null;
     }
     
     public void deleteUser(User user){
