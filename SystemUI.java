@@ -60,7 +60,28 @@ public class SystemUI{
     }
 
     public boolean login(){
-        System.out.println("Please enter the following info. If you do not have an account, press enter.");
+        System.out.println("Please enter the following info. If you do not have an account, press enter(1).");
+        int option = scanner.nextInt();
+        if (option == 1) {
+            signup();
+        }
+        System.out.println("E-Mail: ");
+        String username = scanner.nextLine();
+        System.out.println("Password: ");
+        String password = scanner.nextLine();
+        while(!isValidPassword()) {
+            System.out.println("This is not a valid password please try again");
+        }
+            System.out.println("Thank you, now you are successfully logged in!");
+            return true;
+    }
+
+    public boolean signup(){
+        System.out.println("Please enter the following info. If you have an account, press enter().");
+        int option = scanner.nextInt();
+        if (option == 2) {
+            login();
+        }
         System.out.println("E-Mail: ");
         String username = scanner.nextLine();
         System.out.println("Password: ");
