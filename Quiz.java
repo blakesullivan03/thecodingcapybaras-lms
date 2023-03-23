@@ -22,6 +22,8 @@ public class Quiz {
 
     }
 
+    //May need to change to loop back after all questions are done.
+    //Pretty sure would return null if we don't.
     public Question getNextQuestion(){
         if(!hasMoreQuestions()){
             System.out.println("Finished!");
