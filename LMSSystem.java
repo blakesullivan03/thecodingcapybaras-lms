@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.UUID;
 
 public class LMSSystem{
     private UserList users;
@@ -38,21 +39,21 @@ public class LMSSystem{
 
       if(user == null){
          return false;
-      }
+      } else {
       currentUser = user;
       return true;
+      }
     }
 
     public boolean signup(String username, String password){
-      User user = UserList.getInstance().getUser(username, password);
+      currentUser = UserList.getInstance().addUser(username, password);
 
-      // does not exist in json, so its true the account is signing up
-      //TODO figure out what to set currentUser to
-      if(user == null){
-         return true;
+      // the information you put in is null, like email, password, all that.
+      if(currentUser == null){
+         return false;
       }
-      // false bc they are not signing up, they have account.
-      return false;
+
+      return true;
     }
 
     public void logOut(){
@@ -69,77 +70,63 @@ public class LMSSystem{
 	}
     
    /**
-   * Course Creator View
+    * Course Creator View
+    */
    
 
-   public boolean createStudent(String firstName, String lastName, String email, String password){
-      if(currentStudent == null){
-         return false;
-      }else{
-         return true;
+   /**public boolean createStudent(String firstName, String lastName, String email, String password){
+      for(Student student : students){
+         if(student.getEmail().equals(email)){
+            return false;
+         }
       }
 
+      Student newStudent = new Student(UUID.randomUUID(), firstName, lastName, email, password, new date(), 0.0, new Arraylist <Language>());
+      students.add(newStudent);
+
+      return true;
    }
      
    public boolean createCourseCreator(String firstName, String lastName, String email, String password){
-      if(currentCourseCreator == null){
+      if(currentCourseCreator != null){
          return false;
       }else{
+         UUID id = UUID.randomUUID();
+         Date dob??
+         CourseCreator newCourseCreator = new CourseCreator(id, firstName, lastName, email, password);
+
+         currentCourseCreator = newCourseCreator;
+
          return true;
       }
+   }*/
+   
+   //Creates a New Course
+   public boolean createCourse(UUID id, String title, Language language, User courseCreatorUUID, ArrayList<Module> modules){
+      return courseList.addCourse(id, title, language, courseCreatorUUID, modules);
    }
-     
-   public Quiz createQuiz(ArrayList<Question> questions, ArrayList<String> answers){
-      if(currentQuiz == null){
-         return null;
-      }else{
-         currentQuiz = new Quiz(questions);
-      }
-      return currentQuiz;
-
-   }
-
+   
    public boolean createModule(String title, ArrayList<Topic> topics, Quiz quiz, ArrayList<Comment> comments){
-      if(currentModule == null){
-         return false;
-      }else{
-         currentModule.editTitle(title);
-
-         currentModule = new Module(title, topics, quiz, comments);
-         return true;
-      }
-
-   }
-
-   public boolean createTopic(String title, String lesson){
-      if(currentCourse == null){
-         return false;
-      }else{
-         currentTopic.setTitle(title);
-         currentTopic.setLesson(lesson);
-         return true;
-      }
-   }
-
-   public boolean createCourse(String title, Language language){
-      if(currentCourse == null){
-         return false;
-      }else{
-         currentCourse.setTitle(title);
-         currentCourse.setLanguage(language);
-         return true;
-      }
-
+      return modules.add(new Module(title, topics, quiz, comments));
    }
 
    public boolean createQuestion(String question, ArrayList<String> answers, int correctAnswer){
-      /*if (currentQuiz == null){
-         return false;
+      if(currentQuiz == null){
+         return false;;
       }else{
-         Question newQuestion = new Question(question, answers, correctAnswer);
+         Question newQuesition = new Question(question, answers, (long)correctAnswer);
          return currentQuiz.addQuestion(newQuestion);
       }
-   }*/
+   }
+   
+   public Quiz createQuiz(ArrayList<Question> questions, ArrayList<String> answers){
+      Quiz quiz = new Quiz(questions);
+      for (String answer : answers) {
+         int correctAnswer = Integer.parseInt(answer);
+         quiz.addCorrectAnswer(correctAnswer);
+      }
+      return quiz;
+   }
 
    /**
     * Student View
