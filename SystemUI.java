@@ -27,6 +27,7 @@ public class SystemUI{
         System.out.println("Welcome to the LMS!");
 
         while(true){
+
             login();
 
             showWelcomeScreen();
@@ -112,6 +113,8 @@ public class SystemUI{
         }else{
             system.zeroOut();
             System.out.println("\nThank you, now you are successfully signed up and logged in!");
+            system.setCurrentUser(new Student(firstName, lastName, email, password, DoB,
+                0.0, new ArrayList<Language>()));
             return true;
         }
     }
@@ -289,12 +292,9 @@ public class SystemUI{
     }
     
     private void showCourseProgress(){
-        CourseList courses = CourseList.getInstance();
-        ArrayList<Course> modules = courses.getCourses();
 
-        for(Course course : modules){
-            System.out.println(course.getModuleByIndex(0).courseProgressToString());
-        }
+        currentUser
+
     } 
 
     //Less Complicated Version

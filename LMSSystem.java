@@ -5,31 +5,48 @@ import java.util.UUID;
 import java.util.concurrent.atomic.LongAccumulator;
 
 public class LMSSystem{
-    private UserList users;
-    private ArrayList<Integer> userAnswers;
+   // TODO commented out some of the ones i think we should delete ~jonas
+    private UserList userList;
     private CourseList courseList;
-    private Module currentModule;
-    private ArrayList<Module> modules;
-    private Long correctAnswer;
-    private Comment comment;
-    private User currentUser;
-    private Student currentStudent;
-    private CourseCreator currentCourseCreator;
     private Course currentCourse;
+    private Module currentModule;
+    private User currentUser;
+    // private Student currentStudent;
+    // private CourseCreator currentCourseCreator;
     private Topic currentTopic;
-    private Quiz currentQuiz;
+    // private Quiz currentQuiz;
+    // private Question currentQuestion;
+    private Comment comment;
+    private ArrayList<User> users;
+    private ArrayList<Course> courses;
+    private ArrayList<Module> modules;
     private ArrayList<Topic> topics;
     private ArrayList<Question> questions;
-    private Question currentQuestion;
-    private ArrayList<Course> courses;
     private ArrayList<String> answers;
-    private ArrayList<Long> array = new ArrayList<>();
+    // private ArrayList<Long> array = new ArrayList<>();
 
 
     public LMSSystem(){
-      users = UserList.getInstance();
+      userList = UserList.getInstance();
       courseList = CourseList.getInstance();
     }
+    // Accessors and mutators 
+    public ArrayList<User> getUserList() {
+      users = userList.getUsers();
+      return users;
+    }
+
+   public ArrayList<Course> getCourseList() {
+      courses = courseList.getCourses();
+      return courses;
+   }
+
+   public User getCurrentUser() {
+      return currentUser;
+   }
+   public void setCurrentUser(User user) {
+      currentUser = user;
+   }
 
     /**
      * Log In and Sign Up Functions
@@ -150,11 +167,6 @@ public class LMSSystem{
         return currentCourse;
    }
 
-   public ArrayList<Course> getCourseList(){
-      courses = courseList.getCourses();
-      return courses;
-   }
-
    public ArrayList<Module> getModules(){
       getCourseList();
       modules = currentCourse.getModules();
@@ -186,13 +198,13 @@ public class LMSSystem{
    }
 
    public double getQuizGrade(Quiz currentQuiz){
-      userAnswers = currentQuiz.getUserAnswers();
+      ArrayList<Integer> userAnswers = currentQuiz.getUserAnswers();
       ArrayList<Integer> correctAnswers = currentQuiz.getCorrectAnswers();
       double result = 0;
+      int correctAnswer;
       for(int i = 0; i < userAnswers.size(); i++){
-         correctAnswer = (long)correctAnswers.get(i);
-         int correctAnswerInt = correctAnswer.intValue();
-         if(userAnswers.get(i) == correctAnswerInt){
+         correctAnswer = correctAnswers.get(i);
+         if(userAnswers.get(i) == correctAnswer){
             result++;
          }
       }

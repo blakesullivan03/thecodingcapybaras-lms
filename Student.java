@@ -21,7 +21,7 @@ public class Student extends User{
     }
     
     public void enroll(Course course){
-        courses.put(course, new CourseProfile(course, new ArrayList<Double>(), this)); 
+        courses.put(course, new CourseProfile(course, this)); 
         // TODO probably better to make a new CourseProfile first and pass that in, not sure.
 
     }
