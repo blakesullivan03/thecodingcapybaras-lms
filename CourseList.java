@@ -31,12 +31,12 @@ public class CourseList {
 		return false;
 	}
 
-    public boolean addCourse(UUID id, String title, Language language, User courseCreatorUUID){
+    public boolean addCourse(UUID id, String title, Language language, User courseCreatorUUID, ArrayList<Module> modules){
         if(haveCourse(id)){
             return false;
         }
 
-        courses.add(new Course(id, title, language, courseCreatorUUID, new ArrayList<Module>())); //TODO how to handle the module list?
+        courses.add(new Course(id, title, language, courseCreatorUUID, modules));
         return true;
     }
 
