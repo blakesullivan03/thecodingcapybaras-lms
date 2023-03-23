@@ -47,74 +47,63 @@ public class LMSSystem{
    
 
    public boolean createStudent(String firstName, String lastName, String email, String password){
-      if(currentStudent == null){
-         return false;
-      }else{
-         return true;
+      for(Student student : students){
+         if(student.getEmail().equals(email)){
+            return false;
+         }
       }
 
+      Student newStudent = new Student(UUID.randomUUID(), firstName, lastName, email, password, new date(), 0.0, new Arraylist <Language>());
+      students.add(newStudent);
+
+      return true;
    }
      
    public boolean createCourseCreator(String firstName, String lastName, String email, String password){
-      if(currentCourseCreator == null){
+      if(currentCourseCreator != null){
          return false;
       }else{
+         UUID id = UUID.randomUUID();
+         Date dob??
+         CourseCreator newCourseCreator = new CourseCreator(id, firstName, lastName, email, password);
+
+         currentCourseCreator = newCourseCreator;
+
          return true;
       }
    }
-     
+   
    public Quiz createQuiz(ArrayList<Question> questions, ArrayList<String> answers){
-      if(currentQuiz == null){
-         return null;
-      }else{
-         currentQuiz = new Quiz(questions);
+      Quiz quiz = new Quiz(questions);
+      for (String answer : answers) {
+         int correctAnswer = Integer.parseInt(answer);
+         quiz.addCorrectAnswer(correctAnswer);
       }
-      return currentQuiz;
-
+      return quiz;
    }
 
    public boolean createModule(String title, ArrayList<Topic> topics, Quiz quiz, ArrayList<Comment> comments){
-      if(currentModule == null){
-         return false;
-      }else{
-         currentModule.editTitle(title);
-
-         currentModule = new Module(title, topics, quiz, comments);
-         return true;
-      }
-
+      Module module = new Module(title, topics, quiz, comments);
+      module.language = language;
+      return module;
    }
 
    public boolean createTopic(String title, String lesson){
-      if(currentCourse == null){
-         return false;
-      }else{
-         currentTopic.setTitle(title);
-         currentTopic.setLesson(lesson);
-         return true;
-      }
-   }
-
-   public boolean createCourse(String title, Language language){
-      if(currentCourse == null){
-         return false;
-      }else{
-         currentCourse.setTitle(title);
-         currentCourse.setLanguage(language);
-         return true;
-      }
+      Would we need an add topic method for this?
 
    }
-
+   public boolean createCourse(String title, Language language, User courseCreatorUUID, ArrayList<Module> modules){
+      Course newCourse = new Course(title, language, courseCreatorUUID, modules);
+      DataWriter.saveCourse(newCourse);
+      return true;
+}
    public boolean createQuestion(String question, ArrayList<String> answers, int correctAnswer){
-      /*if (currentQuiz == null){
-         return false;
+      if(currentQuiz == null){
+         return false;;
       }else{
-         Question newQuestion = new Question(question, answers, correctAnswer);
+         Question newQuesition = new Question(question, answers, (long)correctAnswer);
          return currentQuiz.addQuestion(newQuestion);
       }
-   }*/
-
    /**
     * Student View
     */

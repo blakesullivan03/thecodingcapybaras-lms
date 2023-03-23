@@ -4,7 +4,8 @@ import java.util.Date;
 
 public class CourseCreator extends User{
     private ArrayList<Course> courseArrayList;
-
+    // private ArrayList<Course> courseArrayList = new ArrayList<>();
+    // pretty sure without this it will output Nullpointerexception.
     public CourseCreator(UUID id, String firstName, String lastName, String email, String password, Date DoB){
         super(id, firstName, lastName, email,password, DoB);
 
