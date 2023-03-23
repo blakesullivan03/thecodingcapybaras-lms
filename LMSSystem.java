@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class LMSSystem{
     private UserList users;
@@ -27,20 +29,44 @@ public class LMSSystem{
       courseList = CourseList.getInstance();
     }
 
+    /**
+     * Log In and Sign Up Functions
+     */
+
     public boolean logIn(String username, String password){
       User user = UserList.getInstance().getUser(username, password);
 
       if(user == null){
          return false;
       }
-
       currentUser = user;
       return true;
+    }
+
+    public boolean signup(String username, String password){
+      User user = UserList.getInstance().getUser(username, password);
+
+      // does not exist in json, so its true the account is signing up
+      //TODO figure out what to set currentUser to
+      if(user == null){
+         return true;
+      }
+      // false bc they are not signing up, they have account.
+      return false;
     }
 
     public void logOut(){
 
     }
+
+    public Date getDateFromString(String data){
+		try {
+            return new SimpleDateFormat("MM/dd/yyyy").parse(data);
+        } catch (Exception e) {
+            System.out.println("here");
+            return new Date();
+        }
+	}
     
    /**
    * Course Creator View
@@ -182,6 +208,15 @@ public class LMSSystem{
 
    public void updateGrade(double grade){
       //currentUser.setGrade(currentCourse, currentModule, grade);
+   }
+
+   /**
+    * Clears the Console
+    */
+
+   public void zeroOut(){
+      System.out.print("\033[H\033[2J");
+      System.out.flush();
    }
     
 }
