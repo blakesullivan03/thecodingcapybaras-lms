@@ -9,6 +9,11 @@ public class Student extends User{
     private double overallGPA;
     private ArrayList<Language> favoriteLanguages;
 
+    public Student(String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages){
+        super(firstName, lastName, email, password, DoB);
+        this.overallGPA = overallGPA;
+        this.favoriteLanguages = favoriteLanguages;
+    }
     public Student(UUID id, String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages){
         super(id,firstName, lastName, email, password, DoB);
         this.overallGPA = overallGPA;

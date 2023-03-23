@@ -294,6 +294,7 @@ public class SystemUI{
             return false;
         }
     }
+// get date and convert to string, private method
 
     /*private boolean isValidPassword() {
         int numOfNumbers = 0;

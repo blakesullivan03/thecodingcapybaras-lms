@@ -10,7 +10,7 @@ public abstract class User {
     protected String password;
     protected Date DoB;
 
-    public User(String firstName, String lastName, String email,String password, Date DoB) { // loading from json
+    public User(String firstName, String lastName, String email, String password, Date DoB) { // loading from json
             this.id = UUID.randomUUID();
             this.firstName = firstName;
             this.lastName = lastName;

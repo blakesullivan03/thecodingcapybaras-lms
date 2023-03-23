@@ -20,20 +20,44 @@ public class UserList {
 		return userList;
     }
 
-    public User addUser(User user){
-        if(haveUser){
+    //overload 
+    public User addStudent(String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages){
+        if(haveUser(email)){
             return null;
         }
         //add user
-        //users.add(user);
-        return null;
+        // depending on type, add student or add course creator
+        Student newStudent = new Student(firstName, lastName, email, password, DoB, overallGPA, favoriteLanguages);
+        users.add(newStudent);
+        return newStudent;
+    }
+
+    public User addCourseCreator(String firstName, String lastName, String email, String password, Date DoB){
+        if(haveUser(email)){
+            return null;
+        }
+        //add user
+        // depending on type, add student or add course creator
+        CourseCreator newCourseCreator = new CourseCreator(firstName, lastName, email, password, DoB);
+        users.add(newCourseCreator);
+        return newCourseCreator;
     }
     
     public void deleteUser(User user){
         //users.remove(user);
     }
 
-    public boolean haveUser(UUID id) {
+    // can have the same name, same password, same DOB, but not the same email
+    public boolean haveUser(String email) {
+		for(User user : users) {
+			if(user.getEmail().equals(email)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+   /*  public boolean haveUser(UUID id) {
 		for(User user : users) {
 			if(user.getId().equals(id)) {
 				return true;
@@ -42,7 +66,7 @@ public class UserList {
 		
 		return false;
 	}
-
+*/
     //Loop throught user list
     public User getUserByID(UUID id){
         for(User user : users) {
@@ -88,20 +112,9 @@ public class UserList {
     public ArrayList<Student> getStudents(){
         return students;
     }
-
     public ArrayList<CourseCreator> getCourseCreators(){
         return courseCreators;
     }
-
-    public boolean createStudent(UUID id, String firstName, String lastName, String email, String password, Date dob,double overallGPA, ArrayList<Language> favoriteLanguages ){
-        if(haveUser(id)){
-            return false;
-        }
-
-        users.add(new Student(id,firstName, lastName, email, password, dob, overallGPA, favoriteLanguages));
-        return true;
-    }
-
     public void saveStudents(){
         DataWriter.saveStudents();
     }

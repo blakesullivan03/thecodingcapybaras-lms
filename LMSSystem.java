@@ -45,7 +45,7 @@ public class LMSSystem{
     }
 
     public boolean signup(String username, String password){
-      currentUser = UserList.getInstance().addUser();
+      currentUser = UserList.getInstance().addUser(username, password);
 
       // the information you put in is null, like email, password, all that.
       if(currentUser == null){
