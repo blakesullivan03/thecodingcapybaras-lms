@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.UUID;
+import java.util.concurrent.atomic.LongAccumulator;
 
 public class LMSSystem{
     private UserList users;
@@ -69,10 +71,11 @@ public class LMSSystem{
 	}
     
    /**
-   * Course Creator View
+    * Course Creator View
+    */
    
 
-   public boolean createStudent(String firstName, String lastName, String email, String password){
+   /**public boolean createStudent(String firstName, String lastName, String email, String password){
       for(Student student : students){
          if(student.getEmail().equals(email)){
             return false;
@@ -97,39 +100,25 @@ public class LMSSystem{
 
          return true;
       }
+   }*/
+   
+   //Creates a New Course
+   public boolean createCourse(UUID id, String title, Language language, User courseCreatorUUID, ArrayList<Module> modules){
+      return courseList.addCourse(id, title, language, courseCreatorUUID, modules);
    }
    
-   public Quiz createQuiz(ArrayList<Question> questions, ArrayList<String> answers){
-      Quiz quiz = new Quiz(questions);
-      for (String answer : answers) {
-         int correctAnswer = Integer.parseInt(answer);
-         quiz.addCorrectAnswer(correctAnswer);
-      }
-      return quiz;
-   }
-
    public boolean createModule(String title, ArrayList<Topic> topics, Quiz quiz, ArrayList<Comment> comments){
-      Module module = new Module(title, topics, quiz, comments);
-      module.language = language;
-      return module;
+      return modules.add(new Module(title, topics, quiz, comments));
    }
 
-   public boolean createTopic(String title, String lesson){
-      Would we need an add topic method for this?
-
+   public boolean createQuestion(String question, ArrayList<String> answers, Long correctAnswer){
+      return questions.add(new Question(question, answers, null));
    }
-   public boolean createCourse(String title, Language language, User courseCreatorUUID, ArrayList<Module> modules){
-      Course newCourse = new Course(title, language, courseCreatorUUID, modules);
-      DataWriter.saveCourse(newCourse);
-      return true;
-}
-   public boolean createQuestion(String question, ArrayList<String> answers, int correctAnswer){
-      if(currentQuiz == null){
-         return false;;
-      }else{
-         Question newQuesition = new Question(question, answers, (long)correctAnswer);
-         return currentQuiz.addQuestion(newQuestion);
-      }
+
+   public Quiz createQuiz(ArrayList<Question> questions){
+      return new Quiz(questions);
+   }
+
    /**
     * Student View
     */
@@ -172,6 +161,11 @@ public class LMSSystem{
       return modules;
    }
 
+   public void setCurrentModule(Module module) {
+      currentModule = module;
+
+   }
+
    public Module getModuleByIndex(int index){
       currentModule = getCourseByIndex(0).getModules().get(index);
       return currentModule;
@@ -188,7 +182,6 @@ public class LMSSystem{
    }
 
    public Quiz getQuiz(){
-      currentModule = getModuleByIndex(0);
       return currentModule.getQuiz();
    }
 

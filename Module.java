@@ -20,7 +20,7 @@ public class Module {
         this.title = title;
     }
 
-    public static String getTitle(String title){
+    public String getTitle(){
         return title;
     }
 

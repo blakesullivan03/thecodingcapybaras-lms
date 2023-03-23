@@ -154,20 +154,22 @@ public class SystemUI{
             }
 
             switch(command){
+                // all courseindex set to 0 bc we only have one,
+                // eventually they'll have to be changed somehow
                 case(0):
                     //Insert (JavaScirpt) Course Lesson Home Screen Here
                     System.out.println("\nIntro to JavaScript");
-                    showCourse();
+                    showCourseHome(0);
                     break;
                 
                 case(1):
                     System.out.println("\nIntro to C");
-                    showCourse();
+                    showCourseHome(0);
                     break;                
                 case(2):
                     System.out.println("\nIntro to Python");
                     //Call Course Instance of Python (Modules, Topics, ETC)
-                    showCourse();
+                    showCourseHome(0);
                     displayQuiz();
                     break;
             }
@@ -190,37 +192,46 @@ public class SystemUI{
             }
 
             switch(command){
+                // all courseIndex set to 0 right now bc we only have on course,
+                // they will need to be changed to something like indexOf(course)
                 case(0):
                     //Insert (JavaScirpt) Course Lesson Home Screen Here
                     System.out.println("\nIntro to JavaScript");
-                    showCourse();
+                    showCourseHome(0);
                     break;
                 
                 case(1):
                     System.out.println("\nIntro to C");
-                    showCourse();
+                    showCourseHome(0);
                     break;                
                 case(2):
                     System.out.println("\nIntro to Python");
                     //Call Course Instance of Python (Modules, Topics, ETC)
-                    showCourse();
+                    showCourseHome(0);
                     break;
             }
         }
     }
 
-
-    private void showCourse(){
+    private void showCourseHome(int courseIndex){
         CourseList courses = CourseList.getInstance();
-        ArrayList<Course> modules = courses.getCourses();
-
-        for(Course course : modules){
-            System.out.println(course.getModuleByIndex(0));
+        Course currentCourse = courses.getCourseByIndex(courseIndex);
+        ArrayList<Module> modules = currentCourse.getModules();
+        int i = 1;
+        for (Module module : modules) {
+            System.out.println(i + ". " + module.getTitle());
+            ++i;
         }
-        // This is literally taking all courses and printing the first module
-        // of each so I think it's going to have to change
-    }
 
+        System.out.print("\n Select module: ");
+        int moduleSelection = getUserCommand(modules.size());
+        system.setCurrentModule(currentCourse.getModuleByIndex(moduleSelection));
+        showModule(currentCourse.getModuleByIndex(moduleSelection));
+    }
+    private void showModule(Module currentModule) {
+        System.out.println(currentModule.toString());
+        displayQuiz();
+    }
     /**
      * Quiz Functions
      */
