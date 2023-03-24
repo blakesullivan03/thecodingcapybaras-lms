@@ -63,17 +63,18 @@ public class LMSSystem{
       }
     }
 
-    public boolean signup(String username, String password){
-      currentUser = UserList.getInstance().addUser(username, password);
-
-      // the information you put in is null, like email, password, all that.
-      if(currentUser == null){
-         return false;
-      }
-
-      return true;
+    public boolean signupStudent(String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages){
+      // do you need to put addStudent and addCourseCreator instead.
+      currentUser = UserList.getInstance().addStudent(firstName, lastName, email, password, DoB, overallGPA, favoriteLanguages);
+      return currentUser != null;
     }
 
+    public boolean signupCourseCreator(String firstName, String lastName, String email, String password, Date DoB){
+      // do you need to put addStudent and addCourseCreator instead.
+      currentUser = UserList.getInstance().addCourseCreator(firstName, lastName, email, password, DoB);
+      return currentUser != null;
+      // the information you put in is null, like email, password, all that.
+    }
     public void logOut(){
 
     }
