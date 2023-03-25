@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.ArrayList;
 import java.util.Date;
 /**
@@ -293,30 +295,26 @@ public class SystemUI{
     
     private void showCourseProgress(){
 
-        currentUser
+       // currentUser
 
     } 
 
-    //Less Complicated Version
-    private boolean isValidPassword(String password) {
-        if (password.length() >= 8) {
-            return true;
-        }else{
-            return false;
-        }
-    }
-// get date and convert to string, private method
+    // Credit to stackoverflow https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character
+    private static boolean isValidPassword(String password) { 
+        if(password.length()>=8 && password.length()<=20)
+        {
+            Pattern character = Pattern.compile("[a-zA-z]");
+            Pattern num = Pattern.compile("[0-9]");
+            Pattern specialChar = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
 
-    /*private boolean isValidPassword() {
-        int numOfNumbers = 0;
-        int numofChars = 0;
-        int numOfSpecialChars = 0;
-        if (numOfNumbers >= 2 && (numofChars >= 8 && numofChars <= 15) && numOfSpecialChars >= 1) {
-            // only start w easy checks like 6 characters.
-            return true;
-        }
+            Matcher hasCharacter = character.matcher(password);
+            Matcher hasNum = num.matcher(password);
+            Matcher hasSpecialChar = specialChar.matcher(password);
+
+            return hasCharacter.find() && hasNum.find() && hasSpecialChar.find();
+
+        }else
             return false;
-    }*/
-    
-    
+    }
+// get date and convert to string, private method  
 }
