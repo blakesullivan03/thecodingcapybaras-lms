@@ -83,16 +83,16 @@ public class SystemUI{
             String email = scanner.nextLine();
             System.out.println("Password: ");
             String password = scanner.nextLine();
-            if(!isValidPassword(password)) {
+            // needs to be a while so it can actually loop, not just an if
+            while(!isValidPassword(password)) {
                 System.out.println("\nThis is not a valid password please try again");
                 return false;
-            }else{
+            }
                 system.zeroOut();
                 System.out.println("\nThank you, now you are successfully logged in!");
                 return true;
             }
         }
-    }
 
     public boolean signup(){
         System.out.println("Please enter the Following Info");
