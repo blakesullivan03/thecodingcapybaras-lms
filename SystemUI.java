@@ -83,7 +83,7 @@ public class SystemUI{
             String email = scanner.nextLine();
             System.out.println("Password: ");
             String password = scanner.nextLine();
-            while (!DataLoader.USER_EMAIL.equals(email) && DataLoader.USER_PASSWORD.equals(password)) {
+            while (!DataLoader.USER_EMAIL.equals(email) && !DataLoader.USER_PASSWORD.equals(password)) {
                 System.out.println("You do not have an account please sign up");
                 signup();
             }
