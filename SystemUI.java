@@ -83,6 +83,11 @@ public class SystemUI{
             String email = scanner.nextLine();
             System.out.println("Password: ");
             String password = scanner.nextLine();
+            while (!DataLoader.USER_EMAIL.equals(email) && DataLoader.USER_PASSWORD.equals(password)) {
+                System.out.println("You do not have an account please sign up");
+                signup();
+            }
+            System.out.println("\nThank you, now you are successfully logged in!");
             // needs to be a while so it can actually loop, not just an if
             while(!isValidPassword(password)) {
                 System.out.println("\nThis is not a valid password please try again");
@@ -103,6 +108,10 @@ public class SystemUI{
         String lastName = scanner.nextLine();
         System.out.println("E-Mail");
         String email = scanner.nextLine();
+        while(DataLoader.USER_EMAIL.equals(email)) {
+            System.out.println("You already have an account please log in now");
+            login();
+        }
         System.out.println("Password");
         String password = scanner.nextLine();
         System.out.println("Date of Birth");
