@@ -81,18 +81,23 @@ public class SystemUI{
         }else{
             System.out.println("E-Mail: ");
             String email = scanner.nextLine();
-            System.out.println("Password: ");
-            String password = scanner.nextLine();
-            while (!DataLoader.USER_EMAIL.equals(email) && !DataLoader.USER_PASSWORD.equals(password)) {
+            // not right either but i am going to work, so ill figure it out later
+            if (DataLoader.getUsers().contains(email)) {
+                System.out.println("Password: ");
+                String password = scanner.nextLine();
+                // This is wrong bc USER_PASSWORD is just the data constant, have to figure out what to change it to.
+                while(!DataLoader.USER_PASSWORD.equals(password)) {
+                    System.out.println("That is not your password, please try again");
+                }
+            }else {
                 System.out.println("You do not have an account please sign up");
                 signup();
             }
-            System.out.println("\nThank you, now you are successfully logged in!");
             // needs to be a while so it can actually loop, not just an if
-            while(!isValidPassword(password)) {
+           /* * while(!isValidPassword(password)) {
                 System.out.println("\nThis is not a valid password please try again");
                 return false;
-            }
+            }*/
                 system.zeroOut();
                 System.out.println("\nThank you, now you are successfully logged in!");
                 return true;
@@ -126,6 +131,7 @@ public class SystemUI{
             System.out.println("\nThank you, now you are successfully signed up and logged in!");
             system.setCurrentUser(new Student(firstName, lastName, email, password, DoB,
                 0.0, new ArrayList<Language>()));
+                DataWriter.saveStudents();
             return true;
         }
     }
@@ -310,7 +316,7 @@ public class SystemUI{
 
     // Credit to stackoverflow https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character
     private static boolean isValidPassword(String password) { 
-        if(password.length()>=8 && password.length()<=20)
+        if(password.length()>=8 && password.length()<=25)
         {
             Pattern character = Pattern.compile("[a-zA-z]");
             Pattern num = Pattern.compile("[0-9]");
