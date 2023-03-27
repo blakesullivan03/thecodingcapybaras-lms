@@ -48,9 +48,9 @@ public class DataLoader extends DataConstants{
 				if(type.equalsIgnoreCase("student")){
 					ArrayList<Language> favoriteLanguages = getLanguages((JSONArray)personJSON.get(STUDENT_FAV_LANGUAGES));
 					double overallGPA = (Double)personJSON.get(STUDENT_OVERALL_GPA);
-                	users.add(new Student(id, firstName, lastName, email, password, dob, overallGPA, favoriteLanguages));
+                	users.add(new Student(id, firstName, lastName, email, password, dob, overallGPA, favoriteLanguages, type));
 				} else {
-					users.add(new CourseCreator(id, firstName, lastName, email, password, dob));
+					users.add(new CourseCreator(id, firstName, lastName, email, password, dob, type));
 				}
 			}
 			
@@ -91,7 +91,7 @@ public class DataLoader extends DataConstants{
 		ArrayList<Course> course = new ArrayList<Course>();
 		UserList user = UserList.getInstance();
 		//Hash Map of Students and Grades
-		HashMap<Student, ArrayList<Double>> courseHashMap = new HashMap<>();
+		HashMap<User, ArrayList<Double>> courseHashMap = new HashMap<>();
 		//When Course is Made go find Student and Update
 		try {
 			FileReader reader = new FileReader(COURSE_FILE_NAME);
@@ -108,20 +108,21 @@ public class DataLoader extends DataConstants{
 				User courseCreatorID = (CourseCreator)user.getUserByID(courseCreatorUUID);
 
 				ArrayList<Module> modules = getModules(personJSON);
+				
 
 				course.add(new Course(courseID, title, language, courseCreatorID, modules));
 
 				//Course Made
 
-				//Find Student
-				UUID studentUUID = UUID.fromString((String)personJSON.get(USER_ID));
-				Student studentID = (Student)user.getUserByID(studentUUID);
+				/**Find Student
+				UUID studentUUID = UUID.fromString((String)personJSON.get(STUDENT_ID));
+				User studentID = (Student)user.getUserByID(studentUUID);
 
 				//Update Grade
 				Quiz currentQuiz = modules.get(i).getQuiz();
 				ArrayList<Double> moduleGrade = Quiz.getQuizGrade(currentQuiz);
 
-				courseHashMap.put(studentID, moduleGrade);
+				courseHashMap.put(studentID, moduleGrade);*/
 			}
 			
 			return course;
@@ -142,6 +143,7 @@ public class DataLoader extends DataConstants{
 		
 		ArrayList<Module> modules = new ArrayList<>();
 		JSONArray modulesJSON = (JSONArray)courseJSON.get(MODULE_ARRAY);
+		JSONArray commentJSON = (JSONArray)courseJSON.get(COMMENT_ARRAY);
 			
 		for(int i=0; i < modulesJSON.size(); i++) {
 			JSONObject moduleJSON = (JSONObject)modulesJSON.get(i);
@@ -154,7 +156,7 @@ public class DataLoader extends DataConstants{
 
 			Quiz quiz = getQuiz(questions);
 
-			ArrayList<Comment> comments = getComments(modulesJSON);
+			ArrayList<Comment> comments = getComments(commentJSON);
 
 			modules.add(new Module(moduleTitle, topics, quiz, comments));
 		}

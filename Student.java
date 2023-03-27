@@ -9,20 +9,20 @@ public class Student extends User{
     private double overallGPA;
     private ArrayList<Language> favoriteLanguages;
 
-    public Student(String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages){
-        super(firstName, lastName, email, password, DoB);
+    public Student(String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages, String type){
+        super(firstName, lastName, email, password, DoB, type);
         this.overallGPA = overallGPA;
         this.favoriteLanguages = favoriteLanguages;
         this.courses = new HashMap<Course, CourseProfile>();
     }
-    public Student(UUID id, String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages){
-        super(id,firstName, lastName, email, password, DoB);
+    public Student(UUID id, String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages, String type){
+        super(id,firstName, lastName, email, password, DoB, type);
         this.overallGPA = overallGPA;
         this.favoriteLanguages = favoriteLanguages;
         this.courses = new HashMap<Course, CourseProfile>();
     }
     
-    public void enroll(Course course, Student student, double grade){
+    public void enroll(Course course, Student student, ArrayList<Double> grade){
         courses.put(course, new CourseProfile(course, student, grade)); 
     }
 
@@ -52,8 +52,11 @@ public class Student extends User{
         // Where are we storing each quiz grade? and where are we averaging all of them together for course grade?
 
     }
-    public void addQuizGrade(Course course, double grade) {
-        courses.get(course).enterGrade(grade);
+
+    public void addQuizGrade(Course courseName, Student currentStudent, ArrayList<Double> grade) {
+        //courses.get(course).enterGrade(grade);
+        CourseProfile courseProf = new CourseProfile(courseName, currentStudent, grade);
+        courses.put(courseName, courseProf);
     }
 
     public String toString(){

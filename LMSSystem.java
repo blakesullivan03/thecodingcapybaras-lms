@@ -30,7 +30,8 @@ public class LMSSystem{
       userList = UserList.getInstance();
       courseList = CourseList.getInstance();
     }
-    // Accessors and mutators 
+    
+    // Accessors and Mutators 
     public ArrayList<User> getUserList() {
       users = userList.getUsers();
       return users;
@@ -53,32 +54,34 @@ public class LMSSystem{
       return currentCourseCreator;
    }
 
-   public void setCurrentUser(User user) {
-      currentUser = user;
-   }
+   public void setUser(String email, String password) {
+      User user = UserList.getInstance().getUser(email, password);
 
-   public void setCurrentUser(Student user) {
-      currentUser = user;
-      currentStudent = user;
-   }
+      String accountType = UserList.getInstance().getUserType(email, password);
+      System.out.print(accountType);
 
-   public void setCurrentUser(CourseCreator user) {
-      currentUser = user;
-      currentCourseCreator = user;
-   }
+      if(accountType.equalsIgnoreCase("student")){
+            currentStudent = new Student(accountType, accountType, email, password, null, 0, null, accountType);
+      } else {
+            currentCourseCreator = new CourseCreator(accountType, accountType, email, password, null, accountType);
+      }
+   } 
+   
+
     /**
      * Log In and Sign Up Functions
      */
 
-    public boolean logIn(String username, String password){
-      User user = UserList.getInstance().getUser(username, password);
+    public boolean logIn(String email, String password){
+      
+      User user = UserList.getInstance().getUser(email, password);
 
-      if(user == null){
-         return false;
-      } else {
-      currentUser = user;
-      return true;
-      }
+         if(user == null){
+            return false;
+         }else{
+            currentUser = user;
+            return true;
+         }
     }
 
     public boolean checkEmail(String email){
@@ -101,15 +104,15 @@ public class LMSSystem{
       return false;
    }
 
-    public boolean signupStudent(String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages){
+    public boolean signupStudent(String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages, String type){
       // do you need to put addStudent and addCourseCreator instead.
-      currentUser = UserList.getInstance().addStudent(firstName, lastName, email, password, DoB, overallGPA, favoriteLanguages);
+      currentUser = UserList.getInstance().addStudent(firstName, lastName, email, password, DoB, overallGPA, favoriteLanguages, type);
       return currentUser != null;
     }
 
-    public boolean signupCourseCreator(String firstName, String lastName, String email, String password, Date DoB){
+    public boolean signupCourseCreator(String firstName, String lastName, String email, String password, Date DoB, String type){
       // do you need to put addStudent and addCourseCreator instead.
-      currentUser = UserList.getInstance().addCourseCreator(firstName, lastName, email, password, DoB);
+      currentUser = UserList.getInstance().addCourseCreator(firstName, lastName, email, password, DoB, type);
       return currentUser != null;
       // the information you put in is null, like email, password, all that.
     }
@@ -236,9 +239,10 @@ public class LMSSystem{
       return currentModule.getQuiz();
    }
 
-   public double getQuizGrade(Quiz currentQuiz){
+   public ArrayList<Double> getQuizGrade(Quiz currentQuiz){
       ArrayList<Integer> userAnswers = currentQuiz.getUserAnswers();
       ArrayList<Integer> correctAnswers = currentQuiz.getCorrectAnswers();
+      ArrayList<Double> moduleGrades = new ArrayList<>();
       double result = 0;
       int correctAnswer;
       for(int i = 0; i < userAnswers.size(); i++){
@@ -247,26 +251,12 @@ public class LMSSystem{
             result++;
          }
       }
-      return ( result / (double)userAnswers.size() ) * 100;
+      moduleGrades.add((result/(double)userAnswers.size()) * 100);
+      return moduleGrades;
    }
 
-   public void addGrade(double grade){
-      currentStudent.addQuizGrade(currentCourse, grade);;
-
-   public String showCourseProgress(){
-      DataLoader.getCourses();
-
-      String result = "";
-        result += "\n" +  "Your Courses" + "\n" + "Modules: " + "\n" + "\t" + "1) " + currentModule.getTitle() + " Grades: " + courseHashMap;
-        for(Topic topic : topics){
-            result += "\n" + "Topic: " + "\n" + "\t" + "1) " + topic.getTitle();
-        }
-        return result;
-   }
-
-   
-   public void updateGrade(double grade){
-      //currentUser.setGrade(currentCourse, currentModule, grade);
+   public void addGrade(ArrayList<Double> grade){
+      currentStudent.addQuizGrade(currentCourse, currentStudent, grade);
    }
 
    /**
@@ -277,5 +267,51 @@ public class LMSSystem{
       System.out.print("\033[H\033[2J");
       System.out.flush();
    }
+
+   /**
+    * System UI Stuff
     
+    
+   public void showCourseHome(int courseIndex){
+      CourseList courses = CourseList.getInstance();
+      Course currentCourse = courses.getCourseByIndex(courseIndex);
+      Student currentStudent = getCurrentStudent();
+      Quiz currentQuiz = modules.get(courseIndex).getQuiz();
+      ArrayList<Double> grades = getQuizGrade(currentQuiz);
+      currentStudent.enroll(currentCourse, currentStudent, grades);
+      ArrayList<Module> modules = currentCourse.getModules();
+      int i = 1;
+      for (Module module : modules) {
+          System.out.println(i + ". " + module.getTitle());
+          ++i;
+      }
+
+      System.out.print("\n Select Module: ");
+      int moduleSelection = getUserCommand(modules.size());
+      system.setCurrentModule(currentCourse.getModuleByIndex(moduleSelection));
+      showModule(currentCourse.getModuleByIndex(moduleSelection));
+  }
+  */
+
+  public void enrollStudent(int courseIndex){
+   ArrayList<Course> courses = getCourseList();
+   Course currentCourse = courses.get(courseIndex);
+   Student currentStudent = getCurrentStudent();
+
+   ArrayList<Module> modules = currentCourse.getModules();
+   Quiz currentQuiz = modules.get(courseIndex).getQuiz();
+   ArrayList<Double> grades = getQuizGrade(currentQuiz);
+
+   currentStudent.enroll(currentCourse, currentStudent, grades);
+   
+   int i = 1;
+   for (Module module : modules) {
+       System.out.println(i + ". " + module.getTitle());
+       ++i;
+   }
+
+
+  }
+
+
 }

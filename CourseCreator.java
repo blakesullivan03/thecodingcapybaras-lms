@@ -6,11 +6,11 @@ public class CourseCreator extends User{
     private ArrayList<Course> courseArrayList;
     // private ArrayList<Course> courseArrayList = new ArrayList<>();
     // pretty sure without this it will output Nullpointerexception.
-    public CourseCreator(String firstName, String lastName, String email, String password, Date DoB){
-        super(firstName, lastName, email,password, DoB);
+    public CourseCreator(String firstName, String lastName, String email, String password, Date DoB, String type){
+        super(firstName, lastName, email,password, DoB, type);
     }
-    public CourseCreator(UUID id, String firstName, String lastName, String email, String password, Date DoB){
-        super(id, firstName, lastName, email,password, DoB);
+    public CourseCreator(UUID id, String firstName, String lastName, String email, String password, Date DoB, String type){
+        super(id, firstName, lastName, email,password, DoB, type);
 
     }
 

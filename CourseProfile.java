@@ -31,11 +31,13 @@ public class CourseProfile {
     }
 
     public void enterGrade(double grade){
+        
         moduleGrades.add(grade);
         
         courseGrade = courseGrade + ((grade-courseGrade)/moduleGrades.size()); // avg(new) = avg(old) + ((val - avg(old))/size(new))
 
     }
+
     public String toString() {
         ArrayList<Module> modules = course.getModules();
         String ret =  "Course: " + course;

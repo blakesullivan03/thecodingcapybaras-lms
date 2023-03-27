@@ -82,12 +82,10 @@ public class SystemUI{
         } else {
             System.out.println("E-Mail: ");
             String email = scanner.nextLine();
-           // if(system.checkEmail(email)){
-                System.out.println("Password: ");
-                String password = scanner.nextLine();
-                // I think this needs to be while (!system.checkPassword(password))
-                // check for both and say not valid log in w in while loop, and give an option to get out
-                while(!(system.checkEmail(email) && system.checkPassword(password))) {
+            System.out.println("Password: ");
+            String password = scanner.nextLine();
+            // check for both and say not valid log in w in while loop, and give an option to get out
+            while(!(system.checkEmail(email) && system.checkPassword(password))){
                     System.out.println("This is not a valid log in please try again.");
                     System.out.println("If you want to try again press 1, if not press any other number");
                     option = scanner.nextInt();
@@ -97,26 +95,11 @@ public class SystemUI{
                     }
                     System.out.println("Goodbye, thank you!");
                     System.exit(0);
-                }
-                System.out.println("You are now succesfully logged in, thank you!");
-                return true;
-               /*  if(system.checkPassword(password)){
-                    System.out.println("That is not your password, please try again");
-                    system.zeroOut();
-                    System.out.println("\nThank you, now you are successfully logged in!");
-                    return true;
-                }
-                else
-                {
-                    System.out.println("That is not your password, please try again");
-                    return false;
-                }
-
-            }else{
-                System.out.println("You do not have an account please sign up");
-                signup();
-                return false;
-            }*/
+            }
+            //Once Logged In Needs to Set Current User
+            system.setUser(email, password);
+            System.out.println("You are now succesfully logged in, thank you!");
+            return true;
     }
 }
 
@@ -138,6 +121,9 @@ public class SystemUI{
         System.out.println("Date of Birth");
         String dobString = scanner.nextLine();
         Date DoB = system.getDateFromString(dobString);
+        System.out.println("Account Type");
+        String type = scanner.nextLine();
+        
 
         // I think this needs to be a while loop.
         while(!isValidPassword(password)) {
@@ -146,7 +132,7 @@ public class SystemUI{
         }
             system.zeroOut();
             System.out.println("\nThank you, now you are successfully signed up and logged in!");
-            system.setCurrentUser(new Student(firstName, lastName, email, password, DoB, 0.0, new ArrayList<Language>()));
+            //currentStudent = (new Student(firstName, lastName, email, password, DoB, 0.0, new ArrayList<Language>(), type));
             DataWriter.saveStudents();
             return true;
     }
@@ -205,7 +191,6 @@ public class SystemUI{
                     System.out.println("\nIntro to Python");
                     //Call Course Instance of Python (Modules, Topics, ETC)
                     showCourseHome(0);
-                    displayQuiz();
                     break;
             }
         }
@@ -249,26 +234,37 @@ public class SystemUI{
     }
 
     private void showCourseHome(int courseIndex){
-        CourseList courses = CourseList.getInstance();
-        Course currentCourse = courses.getCourseByIndex(courseIndex);
+        CourseList courseList = CourseList.getInstance();
+        ArrayList<Course> courses = courseList.getCourses();
+
+        Course currentCourse = courses.get(courseIndex);
+
         Student currentStudent = system.getCurrentStudent();
-        currentStudent.enroll(currentCourse);
+
         ArrayList<Module> modules = currentCourse.getModules();
+        Quiz currentQuiz = modules.get(courseIndex).getQuiz();
+        ArrayList<Double> grades = system.getQuizGrade(currentQuiz);
+        
+        currentStudent.enroll(currentCourse, currentStudent, grades);
+
+        
         int i = 1;
         for (Module module : modules) {
             System.out.println(i + ". " + module.getTitle());
-            ++i;
+            i++;
         }
 
-        System.out.print("\n Select module: ");
+        System.out.print("\n Select Module: ");
         int moduleSelection = getUserCommand(modules.size());
         system.setCurrentModule(currentCourse.getModuleByIndex(moduleSelection));
         showModule(currentCourse.getModuleByIndex(moduleSelection));
     }
+
     private void showModule(Module currentModule) {
         System.out.println(currentModule.toString());
         displayQuiz();
     }
+
     /**
      * Quiz Functions
      */
@@ -276,42 +272,42 @@ public class SystemUI{
     private void displayQuiz(){
         System.out.println("\nAre you ready to take the Quiz? Y/N\n");
 
-        String input = scanner.nextLine();
-            
-        if(input.equalsIgnoreCase("Y")){
+        String ready = scanner.nextLine();
+
+        if(ready.equalsIgnoreCase("Y")){
             System.out.println("\n*************************************************************************************************\n");
             System.out.println("\nModule Quiz");
             takeQuiz();
-        }else{
+        }else if(ready.equalsIgnoreCase("N")){
             System.out.println("\nContinue Studying");
         }
     }
 
     private void takeQuiz(){
         Quiz currentQuiz = system.getQuiz();
-        while(currentQuiz.hasMoreQuestions()) {
-            Question currentQuestion = currentQuiz.getNextQuestion();
-            System.out.println(currentQuestion.toString() + "\n" + "\n" + "Answer");
-            int answer = getUserCommand(currentQuestion.numAnswers());
-            currentQuiz.addUserAnswer(answer);
-        }
-        double quizGrade = system.getQuizGrade(currentQuiz);
-        System.out.println("\n" + quizGrade + " out of 100!");
-        system.addGrade(quizGrade);
-        continueModules();
+            while(currentQuiz.hasMoreQuestions()) {
+                Question currentQuestion = currentQuiz.getNextQuestion();
+                System.out.println(currentQuestion.toString() + "\n" + "\n" + "Answer");
+                int answer = getUserCommand(currentQuestion.numAnswers());
+                currentQuiz.addUserAnswer(answer);
+            }
+            ArrayList<Double> quizGrade = system.getQuizGrade(currentQuiz);
+            system.addGrade(quizGrade);
+            System.out.println("\n" + quizGrade.toString() + " out of 100!");  
+            continueModules();
     }
 
     private void continueModules(){
         System.out.println("\nWould you like to return to the Home Screen? Y/N");
 
-        String input = scanner.nextLine();
+        String decision = scanner.nextLine();
             
-        if(input.equalsIgnoreCase("Y")){
+        if(decision.equalsIgnoreCase("Y")){
             system.zeroOut();
             showWelcomeScreen();
         }else{
             system.zeroOut();
-            System.out.println("\nModule");
+            System.out.println("Continue Studying");
         }
 
     }
@@ -333,8 +329,9 @@ public class SystemUI{
             System.out.println("You have no courses");
             return;
         }
+
         for (Course course : currentUserCourses.keySet()) {
-            System.out.println(currentUserCourses.get(course).toString());
+            System.out.println((currentUserCourses).toString());
         }
     } 
 

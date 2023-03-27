@@ -8,24 +8,27 @@ public abstract class User {
     protected String email;
     protected String username;
     protected String password;
+    protected String type;
     protected Date DoB;
 
-    public User(String firstName, String lastName, String email, String password, Date DoB) { // loading from json
+    public User(String firstName, String lastName, String email, String password, Date DoB, String type) { // loading from json
             this.id = UUID.randomUUID();
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
             this.password = password;
             this.DoB = DoB;
+            this.type = type;
     }
     
-    public User(UUID id, String firstName, String lastName, String email,String password, Date DoB) { // not loading from json
+    public User(UUID id, String firstName, String lastName, String email,String password, Date DoB, String type) { // not loading from json
             this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
             this.password = password;
             this.DoB = DoB;
+            this.type = type;
     }
 
     public UUID getId(){
@@ -64,10 +67,13 @@ public abstract class User {
 	public String getEmail(){
 		return email;
 	}
-	
-	public void setPhoneNumber(String email){
-		this.email = email;
-	}
 
+    public String getAccountType(){
+        return type;
+    }
+
+    public void setAccountType(String type){
+        this.type = type;
+    }
 
 }

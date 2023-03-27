@@ -15,30 +15,29 @@ public class UserList {
     public static UserList getInstance(){
         if(userList == null) {
 			userList = new UserList();
-		}
-		
+        }
 		return userList;
     }
 
     //overload 
-    public User addStudent(String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages){
+    public User addStudent(String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages, String type){
         if(haveUser(email)){
             return null;
         }
         //add user
         // depending on type, add student or add course creator
-        Student newStudent = new Student(firstName, lastName, email, password, DoB, overallGPA, favoriteLanguages);
+        Student newStudent = new Student(firstName, lastName, email, password, DoB, overallGPA, favoriteLanguages, type);
         users.add(newStudent);
         return newStudent;
     }
 
-    public User addCourseCreator(String firstName, String lastName, String email, String password, Date DoB){
+    public User addCourseCreator(String firstName, String lastName, String email, String password, Date DoB, String type){
         if(haveUser(email)){
             return null;
         }
         //add user
         // depending on type, add student or add course creator
-        CourseCreator newCourseCreator = new CourseCreator(firstName, lastName, email, password, DoB);
+        CourseCreator newCourseCreator = new CourseCreator(firstName, lastName, email, password, DoB, type);
         users.add(newCourseCreator);
         return newCourseCreator;
     }
@@ -85,21 +84,20 @@ public class UserList {
 		}
 		return null;
     }
-/*
-    public Student getStudent(String userName){
-        for(Student user : students) {
-			if(user.getUserName().equals(userName)) {
+
+    public User getUser(String email, String password) {
+        for(User user : users) {
+			if(user.getEmail().equalsIgnoreCase(email) && user.getPassword().equals(password)) {
 				return user;
 			}
 		}
-		
 		return null;
     }
-*/
-    public User getUser(String email, String password) {
+
+    public String getUserType(String email, String password) {
         for(User user : users) {
-			if(user.getEmail().equals(email) && user.getPassword().equals(password)) {
-				return user;
+			if(user.getEmail().equalsIgnoreCase(email) && user.getPassword().equals(password)) {
+				return user.getAccountType();
 			}
 		}
 		return null;
