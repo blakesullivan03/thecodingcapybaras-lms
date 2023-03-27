@@ -30,10 +30,22 @@ public class CourseProfile {
         return this.course;
     }
 
-    public void enterGrade(double grade){ // do we need moduleIndex?
+    public void enterGrade(double grade){
         moduleGrades.add(grade);
         
         courseGrade = courseGrade + ((grade-courseGrade)/moduleGrades.size()); // avg(new) = avg(old) + ((val - avg(old))/size(new))
 
+    }
+    public String toString() {
+        ArrayList<Module> modules = course.getModules();
+        String ret =  "Course: " + course;
+        for(int i = 0; i < modules.size(); ++i) {
+            ret += "\nModule: " + modules.get(i).getTitle() + " Grade: ";
+            if(moduleGrades.size() < i)
+                ret += moduleGrades.get(i);
+            else
+                ret += "incomplete";
+        }
+        return ret;
     }
 }

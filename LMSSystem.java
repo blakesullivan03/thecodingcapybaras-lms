@@ -11,8 +11,8 @@ public class LMSSystem{
     private Course currentCourse;
     private Module currentModule;
     private User currentUser;
-    // private Student currentStudent;
-    // private CourseCreator currentCourseCreator;
+    private Student currentStudent;
+    private CourseCreator currentCourseCreator;
     private Topic currentTopic;
     // private Quiz currentQuiz;
     // private Question currentQuestion;
@@ -44,10 +44,28 @@ public class LMSSystem{
    public User getCurrentUser() {
       return currentUser;
    }
+
+   public Student getCurrentStudent() {
+      return currentStudent;
+   }
+
+   public CourseCreator getCurrentCreator() {
+      return currentCourseCreator;
+   }
+
    public void setCurrentUser(User user) {
       currentUser = user;
    }
 
+   public void setCurrentUser(Student user) {
+      currentUser = user;
+      currentStudent = user;
+   }
+
+   public void setCurrentUser(CourseCreator user) {
+      currentUser = user;
+      currentCourseCreator = user;
+   }
     /**
      * Log In and Sign Up Functions
      */
@@ -231,6 +249,9 @@ public class LMSSystem{
       }
       return ( result / (double)userAnswers.size() ) * 100;
    }
+
+   public void addGrade(double grade){
+      currentStudent.addQuizGrade(currentCourse, grade);;
 
    public String showCourseProgress(){
       DataLoader.getCourses();

@@ -3,6 +3,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 /**
  * User Interface for the System
  * @author Blake Turner
@@ -81,11 +82,25 @@ public class SystemUI{
         } else {
             System.out.println("E-Mail: ");
             String email = scanner.nextLine();
-            if(system.checkEmail(email)){
+           // if(system.checkEmail(email)){
                 System.out.println("Password: ");
                 String password = scanner.nextLine();
                 // I think this needs to be while (!system.checkPassword(password))
-                if(system.checkPassword(password)){
+                // check for both and say not valid log in w in while loop, and give an option to get out
+                while(!(system.checkEmail(email) && system.checkPassword(password))) {
+                    System.out.println("This is not a valid log in please try again.");
+                    System.out.println("If you want to try again press 1, if not press any other number");
+                    option = scanner.nextInt();
+                    scanner.nextLine();
+                    if(option == 1) {
+                        login();
+                    }
+                    System.out.println("Goodbye, thank you!");
+                    System.exit(0);
+                }
+                System.out.println("You are now succesfully logged in, thank you!");
+                return true;
+               /*  if(system.checkPassword(password)){
                     System.out.println("That is not your password, please try again");
                     system.zeroOut();
                     System.out.println("\nThank you, now you are successfully logged in!");
@@ -101,9 +116,9 @@ public class SystemUI{
                 System.out.println("You do not have an account please sign up");
                 signup();
                 return false;
-            }
-        }
+            }*/
     }
+}
 
     public boolean signup(){
         System.out.println("Please enter the Following Info");
@@ -125,16 +140,15 @@ public class SystemUI{
         Date DoB = system.getDateFromString(dobString);
 
         // I think this needs to be a while loop.
-        if(!isValidPassword(password)) {
+        while(!isValidPassword(password)) {
             System.out.println("\nThis is not a valid password please try again");
             return false;
-        }else{
+        }
             system.zeroOut();
             System.out.println("\nThank you, now you are successfully signed up and logged in!");
             system.setCurrentUser(new Student(firstName, lastName, email, password, DoB, 0.0, new ArrayList<Language>()));
             DataWriter.saveStudents();
             return true;
-        }
     }
 
     public void showWelcomeScreen(){
@@ -237,6 +251,8 @@ public class SystemUI{
     private void showCourseHome(int courseIndex){
         CourseList courses = CourseList.getInstance();
         Course currentCourse = courses.getCourseByIndex(courseIndex);
+        Student currentStudent = system.getCurrentStudent();
+        currentStudent.enroll(currentCourse);
         ArrayList<Module> modules = currentCourse.getModules();
         int i = 1;
         for (Module module : modules) {
@@ -279,7 +295,9 @@ public class SystemUI{
             int answer = getUserCommand(currentQuestion.numAnswers());
             currentQuiz.addUserAnswer(answer);
         }
-        System.out.println("\n" + system.getQuizGrade(currentQuiz) + " out of 100!");
+        double quizGrade = system.getQuizGrade(currentQuiz);
+        System.out.println("\n" + quizGrade + " out of 100!");
+        system.addGrade(quizGrade);
         continueModules();
     }
 
@@ -304,9 +322,21 @@ public class SystemUI{
     
     private void checkCourseProgress(){
         System.out.println("Checking Course Progress");
-        system.showCourseProgress();
+        showCourseProgress();
     }
+    
+    private void showCourseProgress(){
+        Student currentUser = system.getCurrentStudent();
+        HashMap<Course, CourseProfile> currentUserCourses = currentUser.getCourses();
 
+        if(currentUserCourses.isEmpty()){
+            System.out.println("You have no courses");
+            return;
+        }
+        for (Course course : currentUserCourses.keySet()) {
+            System.out.println(currentUserCourses.get(course).toString());
+        }
+    } 
 
     // Credit to stackoverflow https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character
     private static boolean isValidPassword(String password) { 

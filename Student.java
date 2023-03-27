@@ -13,15 +13,21 @@ public class Student extends User{
         super(firstName, lastName, email, password, DoB);
         this.overallGPA = overallGPA;
         this.favoriteLanguages = favoriteLanguages;
+        this.courses = new HashMap<Course, CourseProfile>();
     }
     public Student(UUID id, String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages){
         super(id,firstName, lastName, email, password, DoB);
         this.overallGPA = overallGPA;
         this.favoriteLanguages = favoriteLanguages;
+        this.courses = new HashMap<Course, CourseProfile>();
     }
     
     public void enroll(Course course, Student student, double grade){
         courses.put(course, new CourseProfile(course, student, grade)); 
+    }
+
+    public HashMap<Course, CourseProfile> getCourses() {
+        return courses;
     }
 
     public double getGPA(){
@@ -35,9 +41,6 @@ public class Student extends User{
     }
 
     public boolean removeFavoriteLanguage(Language language){
-        // TODO not sure if returning a bool is right,
-        // but i think we need a way to tell if it actually removed something 
-        // or did nothing (the language wasnt there to begin with).
         if (!favoriteLanguages.contains(language)) return false;
         favoriteLanguages.remove(language);
         return true;
@@ -48,6 +51,9 @@ public class Student extends User{
         // this method is just going to update the average grade, individual course grades will be in courseprofile
         // Where are we storing each quiz grade? and where are we averaging all of them together for course grade?
 
+    }
+    public void addQuizGrade(Course course, double grade) {
+        courses.get(course).enterGrade(grade);
     }
 
     public String toString(){
