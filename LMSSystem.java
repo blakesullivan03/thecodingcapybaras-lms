@@ -81,6 +81,26 @@ public class LMSSystem{
       }
     }
 
+    public boolean checkEmail(String email){
+      users = getUserList();
+      for(User user : users){
+         if(email.equalsIgnoreCase(user.getEmail())){
+            return true;
+         }
+      }
+      return false;
+    }
+
+    public boolean checkPassword(String password){
+      users = getUserList();
+      for(User user : users){
+         if(password.equalsIgnoreCase(user.getPassword())){
+            return true;
+         }
+      }
+      return false;
+   }
+
     public boolean signupStudent(String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages){
       // do you need to put addStudent and addCourseCreator instead.
       currentUser = UserList.getInstance().addStudent(firstName, lastName, email, password, DoB, overallGPA, favoriteLanguages);

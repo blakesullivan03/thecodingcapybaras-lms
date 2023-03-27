@@ -79,31 +79,31 @@ public class SystemUI{
         if (option == 1){
             signup();
             return true;
-        }else{
+        } else {
             System.out.println("E-Mail: ");
             String email = scanner.nextLine();
-            // not right either but i am going to work, so ill figure it out later
-            if (DataLoader.getUsers().contains(email)) {
+            if(system.checkEmail(email)){
                 System.out.println("Password: ");
                 String password = scanner.nextLine();
-                // This is wrong bc USER_PASSWORD is just the data constant, have to figure out what to change it to.
-                while(!DataLoader.USER_PASSWORD.equals(password)) {
+                if(system.checkPassword(password)){
                     System.out.println("That is not your password, please try again");
+                    system.zeroOut();
+                    System.out.println("\nThank you, now you are successfully logged in!");
+                    return true;
                 }
-            }else {
+                else
+                {
+                    System.out.println("That is not your password, please try again");
+                    return false;
+                }
+
+            }else{
                 System.out.println("You do not have an account please sign up");
                 signup();
-            }
-            // needs to be a while so it can actually loop, not just an if
-           /* * while(!isValidPassword(password)) {
-                System.out.println("\nThis is not a valid password please try again");
                 return false;
-            }*/
-                system.zeroOut();
-                System.out.println("\nThank you, now you are successfully logged in!");
-                return true;
             }
         }
+    }
 
     public boolean signup(){
         System.out.println("Please enter the Following Info");
@@ -114,7 +114,7 @@ public class SystemUI{
         String lastName = scanner.nextLine();
         System.out.println("E-Mail");
         String email = scanner.nextLine();
-        while(DataLoader.USER_EMAIL.equals(email)) {
+        while(DataLoader.USER_EMAIL.equalsIgnoreCase(email)) {
             System.out.println("You already have an account please log in now");
             login();
         }
@@ -284,16 +284,16 @@ public class SystemUI{
     }
 
     private void continueModules(){
-        System.out.println("\nWould you like to continue or return to the Home Screen? Y/N");
+        System.out.println("\nWould you like to return to the Home Screen? Y/N");
 
         String input = scanner.nextLine();
             
         if(input.equalsIgnoreCase("Y")){
             system.zeroOut();
-            System.out.println("\nModule");
+            showWelcomeScreen();
         }else{
             system.zeroOut();
-            showWelcomeScreen();
+            System.out.println("\nModule");
         }
 
     }
