@@ -21,9 +21,11 @@ public class Student extends User{
     }
     
     public void enroll(Course course){
-        courses.put(course, new CourseProfile(course, this)); 
-        // TODO probably better to make a new CourseProfile first and pass that in, not sure.
+        courses.put(course, new CourseProfile(course, this));
+    }
 
+    public HashMap<Course, CourseProfile> getCourses() {
+        return courses;
     }
 
     public double getGPA(){
@@ -37,9 +39,6 @@ public class Student extends User{
     }
 
     public boolean removeFavoriteLanguage(Language language){
-        // TODO not sure if returning a bool is right,
-        // but i think we need a way to tell if it actually removed something 
-        // or did nothing (the language wasnt there to begin with).
         if (!favoriteLanguages.contains(language)) return false;
         favoriteLanguages.remove(language);
         return true;

@@ -3,6 +3,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 /**
  * User Interface for the System
  * @author Blake Turner
@@ -309,9 +310,12 @@ public class SystemUI{
     }
     
     private void showCourseProgress(){
+        Student currentUser = system.getCurrentStudent();
+        HashMap<Course, CourseProfile> currentUserCourses = currentUser.getCourses();
 
-       // currentUser
-
+        for (Course course : currentUserCourses.keySet()) {
+            System.out.println(currentUserCourses.get(course).toString());
+        }
     } 
 
     // Credit to stackoverflow https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character
