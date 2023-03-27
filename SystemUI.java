@@ -113,7 +113,7 @@ public class SystemUI{
         String lastName = scanner.nextLine();
         System.out.println("E-Mail");
         String email = scanner.nextLine();
-        while(DataLoader.USER_EMAIL.equalsIgnoreCase(email)) {
+        while(system.checkEmail(email)) {
             System.out.println("You already have an account please log in now");
             login();
         }
@@ -129,9 +129,8 @@ public class SystemUI{
         }else{
             system.zeroOut();
             System.out.println("\nThank you, now you are successfully signed up and logged in!");
-            system.setCurrentUser(new Student(firstName, lastName, email, password, DoB,
-                0.0, new ArrayList<Language>()));
-                DataWriter.saveStudents();
+            system.setCurrentUser(new Student(firstName, lastName, email, password, DoB, 0.0, new ArrayList<Language>()));
+            DataWriter.saveStudents();
             return true;
         }
     }
@@ -296,8 +295,6 @@ public class SystemUI{
         }
 
     }
-
-
 
     /**
      * Check Course Progress
