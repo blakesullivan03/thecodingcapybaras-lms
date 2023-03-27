@@ -84,6 +84,7 @@ public class SystemUI{
             if(system.checkEmail(email)){
                 System.out.println("Password: ");
                 String password = scanner.nextLine();
+                // I think this needs to be while (!system.checkPassword(password))
                 if(system.checkPassword(password)){
                     System.out.println("That is not your password, please try again");
                     system.zeroOut();
@@ -123,6 +124,7 @@ public class SystemUI{
         String dobString = scanner.nextLine();
         Date DoB = system.getDateFromString(dobString);
 
+        // I think this needs to be a while loop.
         if(!isValidPassword(password)) {
             System.out.println("\nThis is not a valid password please try again");
             return false;
