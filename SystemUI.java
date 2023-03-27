@@ -139,16 +139,15 @@ public class SystemUI{
         Date DoB = system.getDateFromString(dobString);
 
         // I think this needs to be a while loop.
-        if(!isValidPassword(password)) {
+        while(!isValidPassword(password)) {
             System.out.println("\nThis is not a valid password please try again");
             return false;
-        }else{
+        }
             system.zeroOut();
             System.out.println("\nThank you, now you are successfully signed up and logged in!");
             system.setCurrentUser(new Student(firstName, lastName, email, password, DoB, 0.0, new ArrayList<Language>()));
             DataWriter.saveStudents();
             return true;
-        }
     }
 
     public void showWelcomeScreen(){
