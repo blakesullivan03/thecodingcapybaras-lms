@@ -78,12 +78,9 @@ public class SystemUI{
         if (option == 1){
             signup();
             return true;
-        }
-        else
-        {
+        } else {
             System.out.println("E-Mail: ");
             String email = scanner.nextLine();
-
             if(system.checkEmail(email)){
                 System.out.println("Password: ");
                 String password = scanner.nextLine();
@@ -93,12 +90,19 @@ public class SystemUI{
                     System.out.println("\nThank you, now you are successfully logged in!");
                     return true;
                 }
+                else
+                {
+                    System.out.println("That is not your password, please try again");
+                    return false;
+                }
+
             }else{
                 System.out.println("You do not have an account please sign up");
                 signup();
+                return false;
             }
         }
-        }
+    }
 
     public boolean signup(){
         System.out.println("Please enter the Following Info");
