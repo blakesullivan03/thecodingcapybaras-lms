@@ -91,6 +91,8 @@ public class DataLoader extends DataConstants{
     public static ArrayList<Course> getCourses(){
 		ArrayList<Course> course = new ArrayList<Course>();
 		UserList user = UserList.getInstance();
+		//Hash Map of Students and Grades
+		//When Course is Made go find Student and Update
 		try {
 			FileReader reader = new FileReader(COURSE_FILE_NAME);
 			JSONParser parser = new JSONParser();
@@ -187,11 +189,10 @@ public class DataLoader extends DataConstants{
 		return questions;
 	}
 
-	private static ArrayList<Comment> getComments(JSONObject courseJSON){
+	private static ArrayList<Comment> getComments(JSONArray commentsJSON){
 		UserList user = UserList.getInstance();
 
 		ArrayList<Comment> comments = new ArrayList<>();
-		JSONArray commentsJSON = (JSONArray)courseJSON.get(COMMENT_ARRAY);
 
 		for(int i=0; i < commentsJSON.size(); i++) {
 			JSONObject commentJSON = (JSONObject)commentsJSON.get(i);
@@ -199,27 +200,10 @@ public class DataLoader extends DataConstants{
 			UUID studentUUID = UUID.fromString( (String)commentJSON.get(COMMENT_ID) );
 			User studentID = (Student)user.getUserByID(studentUUID);
 			String text = (String)commentJSON.get(COMMENT_TEXT);
-			ArrayList<Comment> replies = getReplies( (JSONArray)commentJSON.get(COMMENT_REPLIES) );
+			ArrayList<Comment> replies = getComments( (JSONArray)commentJSON.get(COMMENT_REPLIES) );
 			comments.add(new Comment(studentID, text, replies));
 		}
 
 		return comments;
-	}
-
-	private static ArrayList<Comment> getReplies(JSONArray jsonCommentArray){
-		ArrayList<Comment> replies = new ArrayList<>();
-		UserList users = UserList.getInstance();
-		for(int i=0; i < jsonCommentArray.size(); i++) {
-
-			JSONObject replyJSON = ((JSONObject)jsonCommentArray.get(i));
-			String replyString = (String) replyJSON.get(COMMENT_TEXT);
-			UUID studentUUID = UUID.fromString((String)replyJSON.get(COMMENT_ID));
-			User replyAuthor = users.getUserByID(studentUUID);
-
-			Comment reply = new Comment (replyAuthor, replyString);
-			replies.add(reply);
-		}
-
-		return replies;
 	}
 }

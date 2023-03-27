@@ -6,7 +6,7 @@
       "courseCreatorID": "d022ea4a-1f9b-4203-ad9f-48d57ef8802f",
       "modules":[{"moduleTitle": "Basics",
                   "topics": [{"topicTitle":"Basics",
-                              "lesson": "Printing in python is super simple!\n \n print(\"Hello World\")\n \n The above live of code is all you need to have a file print output to the console.\n No need for a class declaration, main function, or even a semi-colon. "}],
+                              "lesson": "Printing in python is super simple!\n \nprint(\"Hello World\")\n \nThe above live of code is all you need to have a file print output to the console.\nNo need for a class declaration, main function, or even a semi-colon. "}],
                   "quiz": [{"question":"Is a semicolon required to print?",
                                 "answers": ["Yes", "No"],
                                 "correct-ans": 1},

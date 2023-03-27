@@ -145,9 +145,8 @@ public class SystemUI{
         }else{
             system.zeroOut();
             System.out.println("\nThank you, now you are successfully signed up and logged in!");
-            system.setCurrentUser(new Student(firstName, lastName, email, password, DoB,
-                0.0, new ArrayList<Language>()));
-                DataWriter.saveStudents();
+            system.setCurrentUser(new Student(firstName, lastName, email, password, DoB, 0.0, new ArrayList<Language>()));
+            DataWriter.saveStudents();
             return true;
         }
     }
@@ -312,8 +311,6 @@ public class SystemUI{
         }
 
     }
-
-
 
     /**
      * Check Course Progress
