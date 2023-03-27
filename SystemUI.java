@@ -283,16 +283,16 @@ public class SystemUI{
     }
 
     private void continueModules(){
-        System.out.println("\nWould you like to continue or return to the Home Screen? Y/N");
+        System.out.println("\nWould you like to return to the Home Screen? Y/N");
 
         String input = scanner.nextLine();
             
         if(input.equalsIgnoreCase("Y")){
             system.zeroOut();
-            System.out.println("\nModule");
+            showWelcomeScreen();
         }else{
             system.zeroOut();
-            showWelcomeScreen();
+            System.out.println("\nModule");
         }
 
     }
