@@ -250,8 +250,8 @@ public class LMSSystem{
       return ( result / (double)userAnswers.size() ) * 100;
    }
 
-   public void updateGrade(double grade){
-      //currentUser.setGrade(currentCourse, currentModule, grade);
+   public void addGrade(double grade){
+      currentStudent.addQuizGrade(currentCourse, grade);;
    }
 
    /**

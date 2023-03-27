@@ -13,11 +13,13 @@ public class Student extends User{
         super(firstName, lastName, email, password, DoB);
         this.overallGPA = overallGPA;
         this.favoriteLanguages = favoriteLanguages;
+        this.courses = new HashMap<Course, CourseProfile>();
     }
     public Student(UUID id, String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages){
         super(id,firstName, lastName, email, password, DoB);
         this.overallGPA = overallGPA;
         this.favoriteLanguages = favoriteLanguages;
+        this.courses = new HashMap<Course, CourseProfile>();
     }
     
     public void enroll(Course course){
@@ -49,6 +51,9 @@ public class Student extends User{
         // this method is just going to update the average grade, individual course grades will be in courseprofile
         // Where are we storing each quiz grade? and where are we averaging all of them together for course grade?
 
+    }
+    public void addQuizGrade(Course course, double grade) {
+        courses.get(course).enterGrade(grade);
     }
 
     public String toString(){

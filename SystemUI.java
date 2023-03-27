@@ -237,6 +237,8 @@ public class SystemUI{
     private void showCourseHome(int courseIndex){
         CourseList courses = CourseList.getInstance();
         Course currentCourse = courses.getCourseByIndex(courseIndex);
+        Student currentStudent = system.getCurrentStudent();
+        currentStudent.enroll(currentCourse);
         ArrayList<Module> modules = currentCourse.getModules();
         int i = 1;
         for (Module module : modules) {
@@ -279,7 +281,9 @@ public class SystemUI{
             int answer = getUserCommand(currentQuestion.numAnswers());
             currentQuiz.addUserAnswer(answer);
         }
-        System.out.println("\n" + system.getQuizGrade(currentQuiz) + " out of 100!");
+        double quizGrade = system.getQuizGrade(currentQuiz);
+        System.out.println("\n" + quizGrade + " out of 100!");
+        system.addGrade(quizGrade);
         continueModules();
     }
 
@@ -305,7 +309,7 @@ public class SystemUI{
      */
     
     private void checkCourseProgress(){
-        System.out.println("Checking Course Progress");
+        System.out.println("Checking Course Progress...");
         showCourseProgress();
     }
     
@@ -313,6 +317,10 @@ public class SystemUI{
         Student currentUser = system.getCurrentStudent();
         HashMap<Course, CourseProfile> currentUserCourses = currentUser.getCourses();
 
+        if(currentUserCourses.isEmpty()){
+            System.out.println("You have no courses");
+            return;
+        }
         for (Course course : currentUserCourses.keySet()) {
             System.out.println(currentUserCourses.get(course).toString());
         }
