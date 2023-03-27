@@ -304,14 +304,9 @@ public class SystemUI{
     
     private void checkCourseProgress(){
         System.out.println("Checking Course Progress");
-        showCourseProgress();
+        system.showCourseProgress();
     }
-    
-    private void showCourseProgress(){
 
-       // currentUser
-
-    } 
 
     // Credit to stackoverflow https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character
     private static boolean isValidPassword(String password) { 

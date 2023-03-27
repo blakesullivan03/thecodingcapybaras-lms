@@ -232,6 +232,18 @@ public class LMSSystem{
       return ( result / (double)userAnswers.size() ) * 100;
    }
 
+   public String showCourseProgress(){
+      DataLoader.getCourses();
+
+      String result = "";
+        result += "\n" +  "Your Courses" + "\n" + "Modules: " + "\n" + "\t" + "1) " + currentModule.getTitle() + " Grades: " + courseHashMap;
+        for(Topic topic : topics){
+            result += "\n" + "Topic: " + "\n" + "\t" + "1) " + topic.getTitle();
+        }
+        return result;
+   }
+
+   
    public void updateGrade(double grade){
       //currentUser.setGrade(currentCourse, currentModule, grade);
    }

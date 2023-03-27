@@ -8,13 +8,14 @@ public class CourseProfile {
 
     public CourseProfile(Course course, Student student) {
         this.course = course;
+        this.student = student;
         this.moduleGrades = new ArrayList<Double>();
-        this.student = student;
     }
-    public CourseProfile(Course course, ArrayList<Double> moduleGrades, Student student) { 
+
+    public CourseProfile(Course course, Student student,  ArrayList<Double> moduleGrades) { 
         this.course = course;
-        this.moduleGrades = moduleGrades;
         this.student = student;
+        this.moduleGrades = moduleGrades;
     }
 
     public double getGrade(){

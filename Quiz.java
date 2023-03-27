@@ -44,6 +44,22 @@ public class Quiz {
         }*/
     }
 
+    public static ArrayList<Double> getQuizGrade(Quiz currentQuiz){
+        ArrayList<Integer> userAnswers = currentQuiz.getUserAnswers();
+        ArrayList<Integer> correctAnswers = currentQuiz.getCorrectAnswers();
+        ArrayList<Double> moduleGrades = new ArrayList<>();
+        double result = 0;
+        int correctAnswer;
+        for(int i = 0; i < userAnswers.size(); i++){
+           correctAnswer = correctAnswers.get(i);
+           if(userAnswers.get(i) == correctAnswer){
+              result++;
+           }
+        }
+        moduleGrades.add((result/(double)userAnswers.size()) * 100);
+        return moduleGrades;
+     }
+
     public void addQuestion(Question question){
         questions.add(question);
     }

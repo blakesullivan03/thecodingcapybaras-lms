@@ -20,10 +20,8 @@ public class Student extends User{
         this.favoriteLanguages = favoriteLanguages;
     }
     
-    public void enroll(Course course){
-        courses.put(course, new CourseProfile(course, this)); 
-        // TODO probably better to make a new CourseProfile first and pass that in, not sure.
-
+    public void enroll(Course course, Student student, double grade){
+        courses.put(course, new CourseProfile(course, student, grade)); 
     }
 
     public double getGPA(){

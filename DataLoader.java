@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
+import java.util.HashMap;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -86,12 +87,11 @@ public class DataLoader extends DataConstants{
 
 //********************************************************************************************************************************************************** */
 	
-	//before I start this
-	//Finish the UserList
     public static ArrayList<Course> getCourses(){
 		ArrayList<Course> course = new ArrayList<Course>();
 		UserList user = UserList.getInstance();
 		//Hash Map of Students and Grades
+		HashMap<Student, ArrayList<Double>> courseHashMap = new HashMap<>();
 		//When Course is Made go find Student and Update
 		try {
 			FileReader reader = new FileReader(COURSE_FILE_NAME);
@@ -110,6 +110,18 @@ public class DataLoader extends DataConstants{
 				ArrayList<Module> modules = getModules(personJSON);
 
 				course.add(new Course(courseID, title, language, courseCreatorID, modules));
+
+				//Course Made
+
+				//Find Student
+				UUID studentUUID = UUID.fromString((String)personJSON.get(USER_ID));
+				Student studentID = (Student)user.getUserByID(studentUUID);
+
+				//Update Grade
+				Quiz currentQuiz = modules.get(i).getQuiz();
+				ArrayList<Double> moduleGrade = Quiz.getQuizGrade(currentQuiz);
+
+				courseHashMap.put(studentID, moduleGrade);
 			}
 			
 			return course;
@@ -142,7 +154,7 @@ public class DataLoader extends DataConstants{
 
 			Quiz quiz = getQuiz(questions);
 
-			ArrayList<Comment> comments = getComments(moduleJSON);
+			ArrayList<Comment> comments = getComments(modulesJSON);
 
 			modules.add(new Module(moduleTitle, topics, quiz, comments));
 		}
