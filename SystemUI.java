@@ -82,10 +82,25 @@ public class SystemUI{
         } else {
             System.out.println("E-Mail: ");
             String email = scanner.nextLine();
-            if(system.checkEmail(email)){
+           // if(system.checkEmail(email)){
                 System.out.println("Password: ");
                 String password = scanner.nextLine();
-                if(system.checkPassword(password)){
+                // I think this needs to be while (!system.checkPassword(password))
+                // check for both and say not valid log in w in while loop, and give an option to get out
+                while(!(system.checkEmail(email) && system.checkPassword(password))) {
+                    System.out.println("This is not a valid log in please try again.");
+                    System.out.println("If you want to try again press 1, if not press any other number");
+                    option = scanner.nextInt();
+                    scanner.nextLine();
+                    if(option == 1) {
+                        login();
+                    }
+                    System.out.println("Goodbye, thank you!");
+                    System.exit(0);
+                }
+                System.out.println("You are now succesfully logged in, thank you!");
+                return true;
+               /*  if(system.checkPassword(password)){
                     System.out.println("That is not your password, please try again");
                     system.zeroOut();
                     System.out.println("\nThank you, now you are successfully logged in!");
@@ -101,9 +116,9 @@ public class SystemUI{
                 System.out.println("You do not have an account please sign up");
                 signup();
                 return false;
-            }
-        }
+            }*/
     }
+}
 
     public boolean signup(){
         System.out.println("Please enter the Following Info");
@@ -114,7 +129,7 @@ public class SystemUI{
         String lastName = scanner.nextLine();
         System.out.println("E-Mail");
         String email = scanner.nextLine();
-        while(DataLoader.USER_EMAIL.equalsIgnoreCase(email)) {
+        while(system.checkEmail(email)) {
             System.out.println("You already have an account please log in now");
             login();
         }
@@ -124,17 +139,16 @@ public class SystemUI{
         String dobString = scanner.nextLine();
         Date DoB = system.getDateFromString(dobString);
 
-        if(!isValidPassword(password)) {
+        // I think this needs to be a while loop.
+        while(!isValidPassword(password)) {
             System.out.println("\nThis is not a valid password please try again");
             return false;
-        }else{
+        }
             system.zeroOut();
             System.out.println("\nThank you, now you are successfully signed up and logged in!");
-            system.setCurrentUser(new Student(firstName, lastName, email, password, DoB,
-                0.0, new ArrayList<Language>()));
-                DataWriter.saveStudents();
+            system.setCurrentUser(new Student(firstName, lastName, email, password, DoB, 0.0, new ArrayList<Language>()));
+            DataWriter.saveStudents();
             return true;
-        }
     }
 
     public void showWelcomeScreen(){
@@ -301,8 +315,6 @@ public class SystemUI{
         }
 
     }
-
-
 
     /**
      * Check Course Progress
