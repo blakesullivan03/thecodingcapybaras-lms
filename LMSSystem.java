@@ -293,7 +293,7 @@ public class LMSSystem{
   }
   */
 
-  public void enrollStudent(int courseIndex){
+  /*public void enrollStudent(int courseIndex){
    ArrayList<Course> courses = getCourseList();
    Course currentCourse = courses.get(courseIndex);
    Student currentStudent = getCurrentStudent();
@@ -311,7 +311,7 @@ public class LMSSystem{
    }
 
 
-  }
+  }*/
 
 
 }

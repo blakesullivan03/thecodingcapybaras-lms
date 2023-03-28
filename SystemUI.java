@@ -35,36 +35,7 @@ public class SystemUI{
 
             showWelcomeScreen();
 
-            int command = getUserCommand(mainMenuStrings.length);
-
-            if(command == -1){
-                System.out.println("Invalid Command");
-                continue;
-            }
-
-            /**
-             * Logout Instance
-             */
-            if(command == mainMenuStrings.length-1){
-                break;
-            }
-
-            switch(command){
-                case(0):
-                    system.zeroOut();
-                    beginCourse();
-                    break;
-
-                case(1):
-                    system.zeroOut();
-                    resumeCourse();
-                    break;
-
-                case(2):
-                    system.zeroOut();
-                    checkCourseProgress();
-                    break;
-            }
+            showMainMenu();
         }
 
     }
@@ -145,6 +116,41 @@ public class SystemUI{
         }
         System.out.println("\n");
     }
+
+    private void showMainMenu(){
+        while(true){
+            int command = getUserCommand(mainMenuStrings.length);
+
+            if(command == -1){
+                System.out.println("Invalid Command");
+                continue;
+            }
+
+            /**
+             * Logout Instance
+             */
+            if(command == mainMenuStrings.length-1){
+                break;
+            }
+
+            switch(command){
+                case(0):
+                    system.zeroOut();
+                    beginCourse();
+                    break;
+
+                case(1):
+                    system.zeroOut();
+                    resumeCourse();
+                    break;
+
+                case(2):
+                    system.zeroOut();
+                    checkCourseProgress();
+                    break;
+            }
+        }
+}
 
     private int getUserCommand(int numCommand){
 
@@ -242,11 +248,12 @@ public class SystemUI{
         Student currentStudent = system.getCurrentStudent();
 
         ArrayList<Module> modules = currentCourse.getModules();
-        Quiz currentQuiz = modules.get(courseIndex).getQuiz();
-        ArrayList<Double> grades = system.getQuizGrade(currentQuiz);
-        
-        currentStudent.enroll(currentCourse, currentStudent, grades);
 
+        //Quiz currentQuiz = modules.get(0).getQuiz();
+        //ArrayList<Double> grades = system.getQuizGrade(currentQuiz);
+        
+        if(!currentStudent.getCourses().containsKey(currentCourse))
+            currentStudent.enroll(currentCourse, currentStudent);
         
         int i = 1;
         for (Module module : modules) {
@@ -261,7 +268,7 @@ public class SystemUI{
     }
 
     private void showModule(Module currentModule) {
-        System.out.println(currentModule.toString());
+        System.out.println(currentModule);
         displayQuiz();
     }
 
@@ -305,6 +312,7 @@ public class SystemUI{
         if(decision.equalsIgnoreCase("Y")){
             system.zeroOut();
             showWelcomeScreen();
+            showMainMenu();
         }else{
             system.zeroOut();
             System.out.println("Continue Studying");
@@ -328,11 +336,12 @@ public class SystemUI{
         if(currentUserCourses.isEmpty()){
             System.out.println("You have no courses");
             return;
-        }
-
-        for (Course course : currentUserCourses.keySet()) {
-            System.out.println(currentUserCourses.get(course).toString());
-        }
+        }else{
+            for(Course course : currentUserCourses.keySet()) {
+            //System.out.println(course.getTitle());
+            System.out.println(course.getTitle() + currentUserCourses.get(course));
+            }
+        }   
     } 
 
     // Credit to stackoverflow https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character
