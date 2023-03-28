@@ -5,6 +5,7 @@ public class CourseProfile {
     private ArrayList<Double> moduleGrades;
     private double courseGrade;
     private Student student;
+    private ArrayList<Module> modules;
 
     public CourseProfile(Course course, Student student) {
         this.course = course;
@@ -12,7 +13,7 @@ public class CourseProfile {
         this.moduleGrades = new ArrayList<Double>();
     }
 
-    public CourseProfile(Course course, Student student,  ArrayList<Double> moduleGrades) { 
+    public CourseProfile(Course course, Student student,  ArrayList<Double> moduleGrades) { // from json
         this.course = course;
         this.student = student;
         this.moduleGrades = moduleGrades;
@@ -39,7 +40,8 @@ public class CourseProfile {
     }
 
     public String toString() {
-        ArrayList<Module> modules = course.getModules();
+        //System.out.println(getCourse());
+        modules = course.getModules();
         String ret =  "Course: " + course;
         for(int i = 0; i < modules.size(); ++i) {
             ret += "\nModule: " + modules.get(i).getTitle() + " Grade: ";

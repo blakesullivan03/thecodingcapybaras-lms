@@ -22,11 +22,16 @@ public class Student extends User{
         this.courses = new HashMap<Course, CourseProfile>();
     }
     
-    public void enroll(Course course, Student student, ArrayList<Double> grade){
-        courses.put(course, new CourseProfile(course, student, grade)); 
+    public void enroll(Course course){
+        //System.out.println(course.getTitle() + "1");
+        CourseProfile courseProfile =  new CourseProfile(course, this);
+        courses.put(course, courseProfile)
     }
 
     public HashMap<Course, CourseProfile> getCourses() {
+        //debug println
+        //for (Course c : courses.keySet())
+            //System.out.println(c.getTitle());
         return courses;
     }
 
