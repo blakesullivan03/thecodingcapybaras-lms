@@ -13,7 +13,11 @@ public class LMSSystem{
     private User currentUser;
     private Student currentStudent;
     private CourseCreator currentCourseCreator;
+    public Quiz currentQuiz;
+    public String email;
+    public String password;
     private Topic currentTopic;
+    private CourseProfile courseProfile;
     // private Quiz currentQuiz;
     // private Question currentQuestion;
     private Comment comment;
@@ -64,13 +68,22 @@ public class LMSSystem{
       User user = UserList.getInstance().getUser(email, password);
 
       String accountType = UserList.getInstance().getUserType(email, password);
-      System.out.print(accountType);
 
       if(accountType.equalsIgnoreCase("student")){
             currentStudent = new Student(accountType, accountType, email, password, null, 0, null, accountType);
       } else {
             currentCourseCreator = new CourseCreator(accountType, accountType, email, password, null, accountType);
       }
+
+   }
+
+   public String returnAccountType(String email, String password){
+      User user = UserList.getInstance().getUser(email, password);
+
+      String accountType = UserList.getInstance().getUserType(email, password);
+
+      return accountType;
+   
    }
    
    public void setCurrentCourse(){
@@ -250,6 +263,17 @@ public class LMSSystem{
       return currentModule.getQuiz();
    }
 
+   public void addQuizGrade(Quiz currentQuiz){
+         Course currentCourse = getCurrentCourse();
+         Student currentStudent = getCurrentStudent();
+         Double quizGrade = getQuizGrade(currentQuiz);
+         ArrayList<Double> moduleGrades = new ArrayList<>();
+         moduleGrades.add(quizGrade);
+         System.out.println(moduleGrades);
+         addGrade(currentCourse, currentStudent, moduleGrades);
+         System.out.println("\n" + quizGrade + " out of 100!");  
+   }
+
    public double getQuizGrade(Quiz currentQuiz){
       ArrayList<Integer> userAnswers = currentQuiz.getUserAnswers();
       ArrayList<Integer> correctAnswers = currentQuiz.getCorrectAnswers();
@@ -264,7 +288,9 @@ public class LMSSystem{
       return ((result/(double)userAnswers.size()) * 100);
    }
 
-   public void addGrade(ArrayList<Double> moduleGrades){
+   public void addGrade(Course currentCourse, Student currentStudent, ArrayList<Double> moduleGrades){
+      currentCourse = getCurrentCourse();
+      currentStudent = getCurrentStudent();
       currentStudent.addQuizGrade(currentCourse, currentStudent, moduleGrades);
    }
 
@@ -276,51 +302,6 @@ public class LMSSystem{
       System.out.print("\033[H\033[2J");
       System.out.flush();
    }
-
-   /**
-    * System UI Stuff
-    
-    
-   public void showCourseHome(int courseIndex){
-      CourseList courses = CourseList.getInstance();
-      Course currentCourse = courses.getCourseByIndex(courseIndex);
-      Student currentStudent = getCurrentStudent();
-      Quiz currentQuiz = modules.get(courseIndex).getQuiz();
-      ArrayList<Double> grades = getQuizGrade(currentQuiz);
-      currentStudent.enroll(currentCourse, currentStudent, grades);
-      ArrayList<Module> modules = currentCourse.getModules();
-      int i = 1;
-      for (Module module : modules) {
-          System.out.println(i + ". " + module.getTitle());
-          ++i;
-      }
-
-      System.out.print("\n Select Module: ");
-      int moduleSelection = getUserCommand(modules.size());
-      system.setCurrentModule(currentCourse.getModuleByIndex(moduleSelection));
-      showModule(currentCourse.getModuleByIndex(moduleSelection));
-  }
-  */
-
-  /*public void enrollStudent(int courseIndex){
-   ArrayList<Course> courses = getCourseList();
-   Course currentCourse = courses.get(courseIndex);
-   Student currentStudent = getCurrentStudent();
-
-   ArrayList<Module> modules = currentCourse.getModules();
-   Quiz currentQuiz = modules.get(courseIndex).getQuiz();
-   ArrayList<Double> grades = getQuizGrade(currentQuiz);
-
-   currentStudent.enroll(currentCourse, currentStudent, grades);
-   
-   int i = 1;
-   for (Module module : modules) {
-       System.out.println(i + ". " + module.getTitle());
-       ++i;
-   }
-
-
-  }*/
 
 
 }

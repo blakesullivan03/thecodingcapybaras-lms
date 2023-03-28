@@ -23,6 +23,10 @@ public class CourseProfile {
         return this.courseGrade;
     }
 
+    public ArrayList<Double> getGrades(){
+        return this.moduleGrades;
+    }
+
     public Student getStudent(){
         return this.student;
     }
@@ -45,7 +49,7 @@ public class CourseProfile {
         for(int i = 0; i < modules.size(); ++i) {
             ret += "\n\tModule: " + modules.get(i).getTitle() + "\n\t\tGrade: ";
             if(moduleGrades.size() > i)
-                ret += moduleGrades.get(i) + "/100";
+                ret += moduleGrades.get(i) + "/100.0";
             else
                 ret += "incomplete";
         }

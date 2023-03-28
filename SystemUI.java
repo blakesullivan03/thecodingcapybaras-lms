@@ -8,8 +8,9 @@ import java.util.HashMap;
  * User Interface for the System
  * @author Blake Turner
  */
-public class SystemUI{
+public class SystemUI {
     private static String[] mainMenuStrings = {"Begin Course", "Resume Course", "Check Course Progress", "Logout"};
+    private static String[] courseCreatorStrings = {"Create Course", "Edit Course", "Logout"};
     private static String[] coursesStrings = {"Intro to JavaScript", "Intro to C", "Intro to Python"};
     private static Scanner scanner;
     private static LMSSystem system;
@@ -33,9 +34,6 @@ public class SystemUI{
 
             login();
 
-            showWelcomeScreen();
-
-            showMainMenu();
         }
 
     }
@@ -69,7 +67,14 @@ public class SystemUI{
             }
             //Once Logged In Needs to Set Current User
             system.setUser(email, password);
-            System.out.println("You are now succesfully logged in, thank you!");
+            system.zeroOut();
+            if(system.returnAccountType(email, password).equalsIgnoreCase("student")){
+                showStudentWelcomeScreen();
+                showStudentMainMenu();
+            }else{
+                showTeacherWelcomeScreen();
+                showCourseCreatorMainMenu();
+            }
             return true;
     }
 }
@@ -108,7 +113,7 @@ public class SystemUI{
             return true;
     }
 
-    public void showWelcomeScreen(){
+    public void showStudentWelcomeScreen(){
         System.out.println("\n********Main Menu********");
         System.out.println("Please Choose one of the Following:");
         for(int i = 0; i < mainMenuStrings.length; i++){
@@ -117,7 +122,16 @@ public class SystemUI{
         System.out.println("\n");
     }
 
-    private void showMainMenu(){
+    public void showTeacherWelcomeScreen(){
+        System.out.println("\n********Main Menu********");
+        System.out.println("Please Choose one of the Following:");
+        for(int i = 0; i < courseCreatorStrings.length; i++){
+            System.out.println((i+1) + ". " + courseCreatorStrings[i]);
+        }
+        System.out.println("\n");
+    }
+
+    private void showStudentMainMenu(){
         while(true){
             int command = getUserCommand(mainMenuStrings.length);
 
@@ -130,7 +144,9 @@ public class SystemUI{
              * Logout Instance
              */
             if(command == mainMenuStrings.length-1){
-                break;
+                system.zeroOut();
+                System.out.println("Sucesfully Logged Out");
+                System.exit(0);
             }
 
             switch(command){
@@ -150,6 +166,40 @@ public class SystemUI{
                     break;
             }
         }
+}
+
+private void showCourseCreatorMainMenu(){
+    while(true){
+        int command = getUserCommand(mainMenuStrings.length);
+
+        if(command == -1){
+            System.out.println("Invalid Command");
+            continue;
+        }
+
+        /**
+         * Logout Instance
+         */
+        if(command == courseCreatorStrings.length-1){
+            system.zeroOut();
+            System.out.println("Sucesfully Logged Out");
+            System.exit(0);
+        }
+
+        switch(command){
+            case(0):
+                system.zeroOut();
+                //TODO Call Method from LMS
+                //system.createCourse();
+                break;
+
+            case(1):
+                system.zeroOut();
+                //TODO Call Method from LMS
+                //system.editCourse();
+                break;
+        }
+    }
 }
 
     private int getUserCommand(int numCommand){
@@ -298,26 +348,22 @@ public class SystemUI{
                 int answer = getUserCommand(currentQuestion.numAnswers());
                 currentQuiz.addUserAnswer(answer);
             }
-            Double quizGrade = system.getQuizGrade(currentQuiz);
-            ArrayList<Double> moduleGrades = new ArrayList<>();
-            moduleGrades.add(quizGrade);
-            system.addGrade(moduleGrades);
-            System.out.println("\n" + quizGrade + " out of 100!");  
-            continueModules();
+            system.addQuizGrade(currentQuiz);
+            returnToHomeScreen();
     }
 
-    private void continueModules(){
+    private void returnToHomeScreen(){
         System.out.println("\nWould you like to return to the Home Screen? Y/N");
 
         String decision = scanner.nextLine();
             
         if(decision.equalsIgnoreCase("Y")){
             system.zeroOut();
-            showWelcomeScreen();
-            showMainMenu();
+            showStudentWelcomeScreen();
+            showStudentMainMenu();
         }else{
             system.zeroOut();
-            System.out.println("Continue Studying");
+            System.out.println("Continue");
         }
 
     }
@@ -330,30 +376,22 @@ public class SystemUI{
         system.zeroOut();
         System.out.println("Checking Course Progress");
         showCourseProgress();
+        returnToHomeScreen();
     }
     
     private void showCourseProgress(){
+        HashMap<Course, CourseProfile> currentUserCourses;
         Student currentUser = system.getCurrentStudent();
-        HashMap<Course, CourseProfile> currentUserCourses = new HashMap<Course, CourseProfile>();
-        
-        Course course = system.getCurrentCourse();
-        ArrayList<Double> moduleGrades = new ArrayList<>();
-
-        double quizGrade = system.getQuizGrade(currentQuiz);
-        moduleGrades.add(0, quizGrade);
-
-        CourseProfile courseProfile = new CourseProfile(course, currentUser, moduleGrades);
-
-        currentUserCourses.put(course, courseProfile);
+        currentUserCourses = currentUser.getCourses();
 
         if(currentUserCourses.isEmpty()){
             System.out.println("You have no courses");
             return;
         }else{
             for(Course courseKey : currentUserCourses.keySet()) {
-                //System.out.println(currentUserCourses.get(courseProfile));
                 System.out.println(currentUserCourses.get(courseKey));
             }
+
         }   
     } 
 
@@ -374,5 +412,5 @@ public class SystemUI{
         }else
             return false;
     }
-// get date and convert to string, private method  
 }
+// get date and convert to string, private method  
