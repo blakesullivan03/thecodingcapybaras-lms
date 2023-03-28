@@ -252,7 +252,7 @@ public class SystemUI{
         //Quiz currentQuiz = modules.get(0).getQuiz();
         //ArrayList<Double> grades = system.getQuizGrade(currentQuiz);
         
-        if(!currentStudent.getCourses().containsKey(currentCourse))
+        if(currentStudent.getCourses().containsKey(currentCourse))
             currentStudent.enroll(currentCourse, currentStudent);
         
         int i = 1;
@@ -298,9 +298,11 @@ public class SystemUI{
                 int answer = getUserCommand(currentQuestion.numAnswers());
                 currentQuiz.addUserAnswer(answer);
             }
-            ArrayList<Double> quizGrade = system.getQuizGrade(currentQuiz);
-            system.addGrade(quizGrade);
-            System.out.println("\n" + quizGrade.toString() + " out of 100!");  
+            Double quizGrade = system.getQuizGrade(currentQuiz);
+            ArrayList<Double> moduleGrades = new ArrayList<>();
+            moduleGrades.add(quizGrade);
+            system.addGrade(moduleGrades);
+            System.out.println("\n" + quizGrade + " out of 100!");  
             continueModules();
     }
 
@@ -325,21 +327,32 @@ public class SystemUI{
      */
     
     private void checkCourseProgress(){
+        system.zeroOut();
         System.out.println("Checking Course Progress");
         showCourseProgress();
     }
     
     private void showCourseProgress(){
         Student currentUser = system.getCurrentStudent();
-        HashMap<Course, CourseProfile> currentUserCourses = currentUser.getCourses();
+        HashMap<Course, CourseProfile> currentUserCourses = new HashMap<Course, CourseProfile>();
+        
+        Course course = system.getCurrentCourse();
+        ArrayList<Double> moduleGrades = new ArrayList<>();
+
+        double quizGrade = system.getQuizGrade(currentQuiz);
+        moduleGrades.add(0, quizGrade);
+
+        CourseProfile courseProfile = new CourseProfile(course, currentUser, moduleGrades);
+
+        currentUserCourses.put(course, courseProfile);
 
         if(currentUserCourses.isEmpty()){
             System.out.println("You have no courses");
             return;
         }else{
-            for(Course course : currentUserCourses.keySet()) {
-            //System.out.println(course.getTitle());
-            System.out.println(course.getTitle() + currentUserCourses.get(course));
+            for(Course courseKey : currentUserCourses.keySet()) {
+                //System.out.println(currentUserCourses.get(courseProfile));
+                System.out.println(currentUserCourses.get(courseKey));
             }
         }   
     } 

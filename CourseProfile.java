@@ -40,13 +40,12 @@ public class CourseProfile {
     }
 
     public String toString() {
-        //System.out.println(getCourse());
         modules = course.getModules();
-        String ret =  "Course: " + course;
+        String ret =  "Course: " + course.getTitle();
         for(int i = 0; i < modules.size(); ++i) {
-            ret += "\nModule: " + modules.get(i).getTitle() + " Grade: ";
-            if(moduleGrades.size() < i)
-                ret += moduleGrades.get(i);
+            ret += "\n\tModule: " + modules.get(i).getTitle() + "\n\t\tGrade: ";
+            if(moduleGrades.size() > i)
+                ret += moduleGrades.get(i) + "/100";
             else
                 ret += "incomplete";
         }

@@ -23,6 +23,7 @@ public class LMSSystem{
     private ArrayList<Topic> topics;
     private ArrayList<Question> questions;
     private ArrayList<String> answers;
+    private ArrayList<Double> moduleGrades;
     // private ArrayList<Long> array = new ArrayList<>();
 
 
@@ -32,6 +33,7 @@ public class LMSSystem{
     }
     
     // Accessors and Mutators 
+
     public ArrayList<User> getUserList() {
       users = userList.getUsers();
       return users;
@@ -50,6 +52,10 @@ public class LMSSystem{
       return currentStudent;
    }
 
+   public Course getCurrentCourse(){
+      return getCourseByIndex(0);
+   }
+
    public CourseCreator getCurrentCreator() {
       return currentCourseCreator;
    }
@@ -65,7 +71,12 @@ public class LMSSystem{
       } else {
             currentCourseCreator = new CourseCreator(accountType, accountType, email, password, null, accountType);
       }
-   } 
+   }
+   
+   public void setCurrentCourse(){
+      Course course = CourseList.getInstance().getCourseByIndex(0);
+      this.currentCourse = course;
+   }
    
 
     /**
@@ -239,10 +250,9 @@ public class LMSSystem{
       return currentModule.getQuiz();
    }
 
-   public ArrayList<Double> getQuizGrade(Quiz currentQuiz){
+   public double getQuizGrade(Quiz currentQuiz){
       ArrayList<Integer> userAnswers = currentQuiz.getUserAnswers();
       ArrayList<Integer> correctAnswers = currentQuiz.getCorrectAnswers();
-      ArrayList<Double> moduleGrades = new ArrayList<>();
       double result = 0;
       int correctAnswer;
       for(int i = 0; i < userAnswers.size(); i++){
@@ -251,12 +261,11 @@ public class LMSSystem{
             result++;
          }
       }
-      moduleGrades.add((result/(double)userAnswers.size()) * 100);
-      return moduleGrades;
+      return ((result/(double)userAnswers.size()) * 100);
    }
 
-   public void addGrade(ArrayList<Double> grade){
-      currentStudent.addQuizGrade(currentCourse, currentStudent, grade);
+   public void addGrade(ArrayList<Double> moduleGrades){
+      currentStudent.addQuizGrade(currentCourse, currentStudent, moduleGrades);
    }
 
    /**
