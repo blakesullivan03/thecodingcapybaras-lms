@@ -25,7 +25,7 @@ public class Student extends User{
     public void enroll(Course course){
         //System.out.println(course.getTitle() + "1");
         CourseProfile courseProfile =  new CourseProfile(course, this);
-        courses.put(course, courseProfile)
+        courses.put(course, courseProfile);
     }
 
     public HashMap<Course, CourseProfile> getCourses() {
