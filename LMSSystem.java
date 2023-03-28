@@ -108,6 +108,8 @@ public class LMSSystem{
          }
     }
 
+
+
     public boolean checkEmail(String email){
       users = getUserList();
       for(User user : users){
@@ -140,8 +142,11 @@ public class LMSSystem{
       return currentUser != null;
       // the information you put in is null, like email, password, all that.
     }
-    public void logOut(){
 
+    public void logOut(){
+         UserList.getInstance().saveStudents();
+         UserList.getInstance().saveCourseCreators();
+         CourseList.getInstance().saveCourses();
     }
 
     public Date getDateFromString(String data){
@@ -201,6 +206,13 @@ public class LMSSystem{
    public Quiz createQuiz(ArrayList<Question> questions){
       return new Quiz(questions);
    }
+
+   //Edit a previously Created Course
+   public void editCourse(){
+      System.out.println(courseList.getCourses());
+   }
+
+   //Show Different Course Module Titles
 
    /**
     * Student View

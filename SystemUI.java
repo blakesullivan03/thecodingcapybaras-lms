@@ -33,8 +33,10 @@ public class SystemUI {
         while(true){
 
             login();
-
+            break;
         }
+
+        system.logOut();
 
     }
 
@@ -196,7 +198,7 @@ private void showCourseCreatorMainMenu(){
             case(1):
                 system.zeroOut();
                 //TODO Call Method from LMS
-                //system.editCourse();
+                system.editCourse();
                 break;
         }
     }
