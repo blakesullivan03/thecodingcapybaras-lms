@@ -333,7 +333,7 @@ public class SystemUI{
         for (Course course : currentUserCourses.keySet()) {
             System.out.println(currentUserCourses.get(course).toString());
         }
-    } 
+    } git
 
     // Credit to stackoverflow https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character
     private static boolean isValidPassword(String password) { 
