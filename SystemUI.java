@@ -36,6 +36,8 @@ public class SystemUI {
             break;
         }
 
+        System.out.println();
+
         system.logOut();
 
     }
