@@ -331,7 +331,7 @@ public class SystemUI{
         }
 
         for (Course course : currentUserCourses.keySet()) {
-            System.out.println((currentUserCourses).toString());
+            System.out.println(currentUserCourses.get(course).toString());
         }
     } 
 
