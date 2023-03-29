@@ -58,10 +58,11 @@ public class Student extends User{
 
     }
 
-    public void addQuizGrade(Course courseName, Student currentStudent, ArrayList<Double> grade) {
+    public void addQuizGrade(Course courseName, double grade) {
         //courses.get(course).enterGrade(grade);
-        CourseProfile courseProf = new CourseProfile(courseName, currentStudent, grade);
-        courses.put(courseName, courseProf);
+        /*CourseProfile courseProf = new CourseProfile(courseName, currentStudent, grade);
+        courses.put(courseName, courseProf);*/
+        courses.get(courseName).enterGrade(grade);
     }
 
     public String toString(){

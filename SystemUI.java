@@ -294,8 +294,9 @@ private void showCourseCreatorMainMenu(){
         CourseList courseList = CourseList.getInstance();
         ArrayList<Course> courses = courseList.getCourses();
 
-        Course currentCourse = courses.get(courseIndex);
-
+        system.setCurrentCourse(courses.get(courseIndex));
+        
+        Course currentCourse = system.getCurrentCourse();
         Student currentStudent = system.getCurrentStudent();
 
         ArrayList<Module> modules = currentCourse.getModules();

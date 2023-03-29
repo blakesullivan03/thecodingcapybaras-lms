@@ -38,14 +38,14 @@ public class CourseProfile {
     public void enterGrade(double grade){
         
         moduleGrades.add(grade);
-        
+
         courseGrade = courseGrade + ((grade-courseGrade)/moduleGrades.size()); // avg(new) = avg(old) + ((val - avg(old))/size(new))
 
     }
 
     public String toString() {
         modules = course.getModules();
-        String ret =  "Course: " + course.getTitle();
+        String ret =  "Course: " + course.getTitle() + " Grade: " + courseGrade + "\nModule Grades:  ";
         for(int i = 0; i < modules.size(); ++i) {
             ret += "\n\tModule: " + modules.get(i).getTitle() + "\n\t\tGrade: ";
             if(moduleGrades.size() > i)
