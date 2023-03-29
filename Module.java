@@ -32,6 +32,10 @@ public class Module {
         return topics;
     }
 
+    public ArrayList<Comment> getComments(){
+        return comments;
+    }
+
     public Question getQuestionByIndex(int index){
         return questions.get(index); 
     }
@@ -71,7 +75,7 @@ public class Module {
         String result = "";
         result += "Module: " + title;
         for(Topic topic : topics){
-            result += "\n" + "Topic: " + topic.getTitle() + "\n" + "\n" + topic.getLesson();
+            result += "\n" + "Topic: " + topic.getTitle() + "\n" + "Lesson: " + topic.getLesson();
         }
         return result;
     }
