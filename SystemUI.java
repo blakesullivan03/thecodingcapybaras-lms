@@ -13,6 +13,7 @@ public class SystemUI {
     private static String[] mainMenuStrings = {"Begin Course", "Resume Course", "Check Course Progress", "Logout"};
     private static String[] courseCreatorStrings = {"Create Course", "Edit Course", "Logout"};
     private static String[] coursesStrings = {"Intro to JavaScript", "Intro to C", "Intro to Python"};
+    private String[] moduleTitleString = {"Basics", "Strings", "Functions", "Classes", "Conditional Statements", "Exceptions", "File Reading", "9", "10", };
     private static Scanner scanner;
     private static LMSSystem system;
 
@@ -31,11 +32,7 @@ public class SystemUI {
 
         System.out.println("Welcome to the LMS!");
 
-        while(true){
-
-            login();
-
-        }
+        login();
 
     }
 
@@ -114,6 +111,19 @@ public class SystemUI {
             return true;
     }
 
+    private int getUserCommand(int numCommand){
+
+        String input = scanner.nextLine();
+
+        int command = Integer.parseInt(input) - 1;
+    
+        if(command >= 0 && command <= numCommand -1){
+            return command;
+        }
+
+        return -1;
+    }
+
     public void showStudentWelcomeScreen(){
         System.out.println("\n********Main Menu********");
         System.out.println("Please Choose one of the Following:");
@@ -147,6 +157,7 @@ public class SystemUI {
             if(command == mainMenuStrings.length-1){
                 system.zeroOut();
                 System.out.println("Sucesfully Logged Out");
+                system.logOut();
                 System.exit(0);
             }
 
@@ -171,7 +182,7 @@ public class SystemUI {
 
 private void showCourseCreatorMainMenu(){
     while(true){
-        int command = getUserCommand(mainMenuStrings.length);
+        int command = getUserCommand(courseCreatorStrings.length);
 
         if(command == -1){
             System.out.println("Invalid Command");
@@ -184,6 +195,7 @@ private void showCourseCreatorMainMenu(){
         if(command == courseCreatorStrings.length-1){
             system.zeroOut();
             System.out.println("Sucesfully Logged Out");
+            system.logOut();
             System.exit(0);
         }
 
@@ -192,29 +204,88 @@ private void showCourseCreatorMainMenu(){
                 system.zeroOut();
                 //TODO Call Method from LMS
                 //system.createCourse();
+                returnToCourseCreatorHomeScreen();
                 break;
 
             case(1):
                 system.zeroOut();
-                //TODO Call Method from LMS
-                //system.editCourse();
+                System.out.println("Editing Python Course");
+                editModule();
+                returnToCourseCreatorHomeScreen();
                 break;
         }
     }
 }
 
-    private int getUserCommand(int numCommand){
+private void editModule(){
+    system.addModules();
+    while(true){
 
-        String input = scanner.nextLine();
+        int command = getUserCommand(moduleTitleString.length);
 
-        int command = Integer.parseInt(input) - 1;
-    
-        if(command >= 0 && command <= numCommand -1){
-            return command;
+        if(command == -1){
+            System.out.println("Invalid Command");
+            continue;
+        }else{
+                system.zeroOut();
+                //Variables
+                ArrayList<Module> modules = system.getModules();
+                Module currentModule = system.getModules().get(command);
+                String moduleTitle = system.getModules().get(command).getTitle();
+                Quiz currentQuiz = currentModule.getQuiz();
+                ArrayList<Topic> topics = new ArrayList<>();
+
+                //Show Current Module
+                System.out.println(currentModule);
+                
+                //Add a new Topic to the Exisitng Module
+                System.out.println("\n**********************************************************************************");
+                System.out.println("\nAdding a New Topic to the Existing Module");
+                System.out.println("\nModule : " + moduleTitle);
+                System.out.println("\tAdd Topic");
+                System.out.print("\t\tTitle - ");
+                String topicTitle = scanner.nextLine();
+                System.out.print("\t\tLesson - ");
+                String topicLesson = scanner.nextLine();
+                Topic currentTopic = system.createTopic(topicTitle, topicLesson);
+                topics.add(currentTopic);
+
+                //Update Module to Have New Topics
+                currentModule = system.createModule(moduleTitle, topics, currentQuiz, null);
+                system.zeroOut();
+
+                //Go Back to Module
+                System.out.println("Module : " + system.getModules().get(command).getTitle());
+
+                //Look at Quiz
+                System.out.println("Quiz\n" + currentQuiz.getQuestions());
+
+                //Add a New Question to the Current/Existing Quiz
+                System.out.println("\nAdding a New Question to the Existing Module");
+                System.out.println("\nModule : " + system.getModules().get(command).getTitle());
+                System.out.println("\tAdd Question");
+                System.out.print("\t\tQuestion - ");
+                String question = scanner.nextLine();
+                ArrayList<String> answerString = new ArrayList<>();
+                    for(int i = 0; i < 3; i++)
+                    {
+                        System.out.print("\t\tAnswers - ");
+                        String answers = scanner.nextLine();
+                        answerString.add(answers);
+                    }
+                System.out.print("\t\tCorrect Answer - ");
+                String correctAnswerString = scanner.nextLine();
+                Long correctAnswer = Long.parseLong(correctAnswerString);
+                Question newQuestion =  system.createQuestion(question, answerString, correctAnswer);
+                currentQuiz.addQuestion(newQuestion);
+
+                currentModule = system.createModule((system.getModules().get(command).getTitle()), topics, currentQuiz, null);
+                modules.add(currentModule);
+                break;
         }
-
-        return -1;
+        
     }
+}
     
 
     private void beginCourse(){
@@ -370,6 +441,21 @@ private void showCourseCreatorMainMenu(){
 
     }
 
+    private void returnToCourseCreatorHomeScreen(){
+        System.out.println("\nWould you like to return to the Home Screen? Y/N");
+
+        String dec = scanner.nextLine();
+            
+        if(dec.equalsIgnoreCase("Y")){
+            system.zeroOut();
+            showTeacherWelcomeScreen();
+            showCourseCreatorMainMenu();
+        }else{
+            system.zeroOut();
+            System.out.println("Continue");
+        }
+
+    }
     /**
      * Check Course Progress
      */
@@ -414,5 +500,12 @@ private void showCourseCreatorMainMenu(){
         }else
             return false;
     }
+
+    /**
+     * Course Creator View
+     */
+
+    
+
 }
-// get date and convert to string, private method  
+

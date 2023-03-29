@@ -26,8 +26,10 @@ public class LMSSystem{
     private ArrayList<Module> modules;
     private ArrayList<Topic> topics;
     private ArrayList<Question> questions;
+    private ArrayList<Comment> comments;
     private ArrayList<String> answers;
     private ArrayList<Double> moduleGrades;
+    private String[] moduleTitles = {"Basics", "Strings", "Functions", "Classes", "Conditional Statements", "Exceptions", "File Reading", "9", "10", "10"};
     // private ArrayList<Long> array = new ArrayList<>();
 
 
@@ -111,6 +113,8 @@ public class LMSSystem{
          }
     }
 
+
+
     public boolean checkEmail(String email){
       users = getUserList();
       for(User user : users){
@@ -143,8 +147,11 @@ public class LMSSystem{
       return currentUser != null;
       // the information you put in is null, like email, password, all that.
     }
-    public void logOut(){
 
+    public void logOut(){
+         UserList.getInstance().saveStudents();
+         UserList.getInstance().saveCourseCreators();
+         CourseList.getInstance().saveCourses();
     }
 
     public Date getDateFromString(String data){
@@ -193,16 +200,40 @@ public class LMSSystem{
       return courseList.addCourse(id, title, language, courseCreatorUUID, modules);
    }
    
-   public boolean createModule(String title, ArrayList<Topic> topics, Quiz quiz, ArrayList<Comment> comments){
-      return modules.add(new Module(title, topics, quiz, comments));
+   public Module createModule(String title, ArrayList<Topic> topics, Quiz quiz, ArrayList<Comment> comments){
+      return new Module(title, topics, quiz, comments);
    }
 
-   public boolean createQuestion(String question, ArrayList<String> answers, Long correctAnswer){
-      return questions.add(new Question(question, answers, null));
+   public Topic createTopic(String title, String lesson){
+      return new Topic(title, lesson);
+   }
+
+   public Question createQuestion(String question, ArrayList<String> answers, Long correctAnswer){
+      return new Question(question, answers, correctAnswer);
    }
 
    public Quiz createQuiz(ArrayList<Question> questions){
       return new Quiz(questions);
+   }
+
+   //Edit a previously Created Course
+   public void editCourse(){
+      System.out.println(courseList.getCourses());
+   }
+
+   //Show Different Course Module Titles
+   public void addModules(){
+      System.out.println("\tModules");
+      currentCourse = courseList.getCourseByIndex(0);
+      modules = currentCourse.getModules();
+      System.out.println("\t\t" + (1) + ") " + modules.get(0).getTitle());
+      for(int i = 1; i < moduleTitles.length; i++){
+         topics = null;
+         currentQuiz = null;
+         comments = null;
+         modules.add(new Module((moduleTitles[i-1]), topics, currentQuiz, comments));
+         System.out.println("\t\t" + (i+1) + ") " + modules.get(i).getTitle());
+      }
    }
 
    /**
