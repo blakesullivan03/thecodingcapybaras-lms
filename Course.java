@@ -10,18 +10,18 @@ public class Course {
     private ArrayList<Comment> comments;
     private ArrayList<Topic> topics;
     private ArrayList<Question> questions;
-    private User courseCreatorUUID;
+    private User courseCreator;
 
     /**
      * Creating New Instance of Course 
      * @param title
      * @param language
      */
-    public Course(String title, Language language, User courseCreatorUUID, ArrayList<Module> modules){
+    public Course(String title, Language language, User courseCreator, ArrayList<Module> modules){
         this.id = UUID.randomUUID();
         this.title = title;
         this.language = language;
-        this.courseCreatorUUID = courseCreatorUUID;
+        this.courseCreator = courseCreator;
         this.modules = modules;
     }
     
@@ -31,11 +31,11 @@ public class Course {
      * @param title
      * @param language
      */
-    public Course(UUID id, String title, Language language, User courseCreatorUUID,   ArrayList<Module> modules){
+    public Course(UUID id, String title, Language language, User courseCreator,   ArrayList<Module> modules){
         this.id = id;
         this.title = title;
         this.language = language;
-        this.courseCreatorUUID = courseCreatorUUID;
+        this.courseCreator = courseCreator;
         this.modules = modules;
     }
     
@@ -43,8 +43,8 @@ public class Course {
         return id;
     }
 
-    public User getCourseCreatorUUID(){
-        return UserList.getInstance().getUserByID(id);
+    public UUID getCourseCreatorUUID(){
+        return courseCreator.getId();
     }
 
     public Language getLanguage(){
@@ -55,16 +55,16 @@ public class Course {
         return title;
     }
 
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
     public void setLanguage(Language language){
         this.language = language;
     }
 
     public void setTitle(String title){
         this.title = title;
-    }
-
-    public void enroll(Student student){
-
     }
 
     // May need to add a for loop later on but getting something in here

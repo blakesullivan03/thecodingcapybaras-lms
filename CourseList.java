@@ -24,6 +24,11 @@ public class CourseList {
     public Course getCourseByIndex(int index) {
         return courses.get(index);
     }
+
+    public int indexOf(Course course) {
+        return courses.indexOf(course);
+    }
+
     public boolean haveCourse(UUID id) {
 		for(Course course : courses) {
 			if(course.getID().equals(id)) {

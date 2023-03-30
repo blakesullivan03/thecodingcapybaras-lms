@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.security.KeyStore.Entry;
+// import java.security.KeyStore.Entry;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -372,9 +372,6 @@ private void editModule(){
 
         ArrayList<Module> modules = currentCourse.getModules();
 
-        //Quiz currentQuiz = modules.get(0).getQuiz();
-        //ArrayList<Double> grades = system.getQuizGrade(currentQuiz);
-        
         if(!currentStudent.getCourses().containsKey(currentCourse))
             currentStudent.enroll(currentCourse);
         
@@ -383,11 +380,15 @@ private void editModule(){
             System.out.println(i + ". " + module.getTitle());
             i++;
         }
-
+        System.out.println(i + ". " + "View Course Comments");
         System.out.print("\n Select Module: ");
-        int moduleSelection = getUserCommand(modules.size());
-        system.setCurrentModule(currentCourse.getModuleByIndex(moduleSelection));
-        showModule(currentCourse.getModuleByIndex(moduleSelection));
+        int moduleSelection = getUserCommand(modules.size()+1);
+        if(moduleSelection == modules.size()) {
+            viewCourseComments();
+        } else {
+            system.setCurrentModule(currentCourse.getModuleByIndex(moduleSelection));
+            showModule(currentCourse.getModuleByIndex(moduleSelection));
+        }
     }
 
     private void showModule(Module currentModule) {
@@ -483,6 +484,15 @@ private void editModule(){
         }   
     } 
 
+    public void viewCourseComments() {
+        ArrayList<Comment> comments = system.getCurrentCourse().getComments();
+        system.zeroOut();
+        if(comments == null)
+            showCourseHome(system.getCurrentCourseIndex());
+        for (Comment comment : comments)
+            System.out.println(comment);
+    }
+    
     // Credit to stackoverflow https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character
     private static boolean isValidPassword(String password) { 
         if(password.length()>=8 && password.length()<=25)

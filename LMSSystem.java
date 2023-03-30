@@ -59,9 +59,11 @@ public class LMSSystem{
    }
 
    public Course getCurrentCourse(){
-      return getCourseByIndex(0);
+      return currentCourse;
    }
-
+   public int getCurrentCourseIndex()  {
+      return courseList.indexOf(currentCourse);
+   }
    public CourseCreator getCurrentCreator() {
       return currentCourseCreator;
    }
@@ -298,12 +300,7 @@ public class LMSSystem{
    }
 
    public void addQuizGrade(Quiz currentQuiz){
-         //Course currentCourse = getCurrentCourse();
-         //Student currentStudent = getCurrentStudent();
          Double quizGrade = getQuizGrade(currentQuiz);
-         //ArrayList<Double> moduleGrades = new ArrayList<>();
-         //moduleGrades.add(quizGrade);
-         //System.out.println(moduleGrades);
          currentStudent.addQuizGrade(currentCourse, quizGrade);
          System.out.println("\n" + quizGrade + " out of 100!");  
    }
@@ -322,15 +319,9 @@ public class LMSSystem{
       return ((result/(double)userAnswers.size()) * 100);
    }
 
-   /*public void addGrade(double grade){
-
-      currentStudent.addQuizGrade(currentCourse, grade);
-   }*/
-
    /**
     * Clears the Console
     */
-
    public void zeroOut(){
       System.out.print("\033[H\033[2J");
       System.out.flush();
