@@ -122,14 +122,14 @@ public class UserList {
      * @param id the username of the User to be retrieved
      * @return the User object corresponding to the given username, or null if no such User exists
      * */
-    public User getUser(String id){
+    /**public User getUser(String id){
         for(User user : users) {
 			if(user.getUserName().equalsIgnoreCase(id)) {
 				return user;
 			}
 		}
 		return null;
-    }
+    }*/
     /**
      * Retrieves a User object based on its email and password.
      * @param email the email address of the User to be retrieved
