@@ -144,6 +144,8 @@ public class DataLoader extends DataConstants{
 		ArrayList<Module> modules = new ArrayList<>();
 
 		JSONArray modulesJSON = (JSONArray)courseJSON.get(MODULE_ARRAY);
+
+		JSONArray commentJSONArray = (JSONArray)courseJSON.get(COMMENT_ARRAY);
 			
 		for(int i=0; i < modulesJSON.size(); i++) {
 			JSONObject moduleJSON = (JSONObject)modulesJSON.get(i);
@@ -156,7 +158,7 @@ public class DataLoader extends DataConstants{
 
 			Quiz quiz = getQuiz(questions);
 
-			ArrayList<Comment> comments = getComments(moduleJSON);
+			ArrayList<Comment> comments = getComments(commentJSONArray);
 
 			modules.add(new Module(moduleTitle, topics, quiz, comments));
 		}
@@ -203,26 +205,27 @@ public class DataLoader extends DataConstants{
 		return questions;
 	}
 
-	private static ArrayList<Comment> getComments(JSONObject courseJSON){
+	private static ArrayList<Comment> getComments(JSONArray commentJSONArray){
 		UserList user = UserList.getInstance();
 
 		ArrayList<Comment> comments = new ArrayList<>();
-		JSONArray commentsJSON = (JSONArray)courseJSON.get(COMMENT_ARRAY);
+		//JSONArray commentsJSON = (JSONArray)courseJSON.get(COMMENT_ARRAY);
 
-		for(int i=0; i < commentsJSON.size(); i++) {
-			JSONObject commentJSON = (JSONObject)commentsJSON.get(i);
+		for(int i=0; i < commentJSONArray.size(); i++) {
+			JSONObject commentJSON = (JSONObject)commentJSONArray.get(i);
 
 			UUID studentUUID = UUID.fromString( (String)commentJSON.get(COMMENT_ID) );
 			User studentID = (Student)user.getUserByID(studentUUID);
 			String text = (String)commentJSON.get(COMMENT_TEXT);
-			ArrayList<Comment> replies = getReplies( (JSONArray)commentJSON.get(COMMENT_REPLIES) );
+			ArrayList<Comment> replies = getComments( (JSONArray)commentJSON.get(COMMENT_REPLIES) );
+
 			comments.add(new Comment(studentID, text, replies));
 		}
 
 		return comments;
 	}
 
-	private static ArrayList<Comment> getReplies(JSONArray jsonCommentArray){
+	/**private static ArrayList<Comment> getReplies(JSONArray jsonCommentArray){
 		ArrayList<Comment> replies = new ArrayList<>();
 		UserList users = UserList.getInstance();
 		for(int i=0; i < jsonCommentArray.size(); i++) {
@@ -238,4 +241,5 @@ public class DataLoader extends DataConstants{
 
 		return replies;
 	}
+	*/
 }

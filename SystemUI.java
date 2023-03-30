@@ -471,6 +471,7 @@ private void editModule(){
         system.zeroOut();
         System.out.println("Checking Course Progress");
         showCourseProgress();
+
         returnToHomeScreen();
     }
     
@@ -485,6 +486,7 @@ private void editModule(){
         }else{
             for(Course courseKey : currentUserCourses.keySet()) {
                 System.out.println(currentUserCourses.get(courseKey));
+                certificate(currentUserCourses.get(courseKey));
             }
 
         }   
@@ -500,6 +502,10 @@ private void editModule(){
     }
     
     public void certificate(CourseProfile grade){
+        if(grade.getGrades().size() < grade.getCourse().getModules().size()) {
+            System.out.println("Complete the course with an 80 or greater to recieve a certificate!");
+            return;
+        }
         if(grade.getGrade() >= 80) {
             System.out.println("If you want to receive your certificate now press 1!");
             int option = scanner.nextInt();
@@ -513,7 +519,7 @@ private void editModule(){
         } else {
             System.out.println("You do not have a high enough score yet!");
             System.out.println("Returning you to the homes screen");
-            returnToCourseCreatorHomeScreen();
+            returnToHomeScreen();
         }
     }
     // Credit to stackoverflow https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character
