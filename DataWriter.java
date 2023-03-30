@@ -198,4 +198,16 @@ public class DataWriter extends DataConstants{
 		return main;
 	}
 
+	public static void certificateFile() {
+		try {
+			FileWriter myWriter = new FileWriter("certificate.txt");
+			myWriter.write("Congratulations Scout Solace completing your JavaScript course\n!");
+			myWriter.write("You have completed to the course with above an 80%!");
+			myWriter.close();
+			System.out.println("Wrote to file successfully!");
+		  } catch (IOException e) {
+			System.out.println("Did not succesfully write to the file");
+			e.printStackTrace();
+		  }
+		}
 }

@@ -43,6 +43,10 @@ public class CourseProfile {
 
     }
 
+    public static void certificate(){
+        DataWriter.certificateFile();
+    }
+
     public String toString() {
         modules = course.getModules();
         String ret =  "Course: " + course.getTitle() + " Grade: " + courseGrade + "\nModule Grades:  ";
