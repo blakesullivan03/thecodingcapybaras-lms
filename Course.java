@@ -10,18 +10,18 @@ public class Course {
     private ArrayList<Comment> comments;
     private ArrayList<Topic> topics;
     private ArrayList<Question> questions;
-    private User courseCreatorUUID;
+    private User courseCreator;
 
     /**
      * Creating New Instance of Course 
      * @param title
      * @param language
      */
-    public Course(String title, Language language, User courseCreatorUUID, ArrayList<Module> modules){
+    public Course(String title, Language language, User courseCreator, ArrayList<Module> modules){
         this.id = UUID.randomUUID();
         this.title = title;
         this.language = language;
-        this.courseCreatorUUID = courseCreatorUUID;
+        this.courseCreator = courseCreator;
         this.modules = modules;
     }
     
@@ -31,11 +31,11 @@ public class Course {
      * @param title
      * @param language
      */
-    public Course(UUID id, String title, Language language, User courseCreatorUUID,   ArrayList<Module> modules){
+    public Course(UUID id, String title, Language language, User courseCreator,   ArrayList<Module> modules){
         this.id = id;
         this.title = title;
         this.language = language;
-        this.courseCreatorUUID = courseCreatorUUID;
+        this.courseCreator = courseCreator;
         this.modules = modules;
     }
     
@@ -43,12 +43,21 @@ public class Course {
         return id;
     }
 
-    public User getCourseCreatorUUID(){
-        return UserList.getInstance().getUserByID(id);
+    /**public User getCourseCreator(){
+        User user = UserList.getInstance().getUserByID(id);
+        return user;
+    }*/
+
+    public UUID getCourseCreatorUUID(){
+        return courseCreator.getId();
     }
 
     public Language getLanguage(){
         return language;
+    }
+
+     public String getLanguageString(){
+        return language.toString();
     }
 
     public String getTitle(){
@@ -62,6 +71,11 @@ public class Course {
     public void setTitle(String title){
         this.title = title;
     }
+
+    public void setID(UUID id){
+        this.id = id;
+    }
+
 
     public void enroll(Student student){
 
@@ -102,12 +116,12 @@ public class Course {
         return modules.get(index);
     }
 
-    public void saveCourses(){
-        DataWriter.saveCourses();
+    public String toString(){
+        return "Course: " + title + "\nLanguage: " + language + "\nCourse CreatorID: " + getCourseCreatorUUID() + modules;
     }
 
-    public String toString(){
-        return "Course: " + title + "\nLanguage: " + language + "\nModules: " + modules;
+    public void saveCourses(){
+        DataWriter.saveCourses();
     }
 
 }

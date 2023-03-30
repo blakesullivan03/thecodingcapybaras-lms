@@ -28,6 +28,17 @@ public class CourseCreator extends User{
     }
 
     public String toString(){
-        return firstName + " " + lastName;
+        UserList users = UserList.getInstance();
+		ArrayList<CourseCreator> courseCreators = users.getCourseCreators();
+        String result = "";
+        if(courseCreators == null){
+            return result;
+        }
+        else{
+            for(CourseCreator CC : courseCreators){
+                result += "\n\n" + "UUID: " + CC.getId() + "First Name: " + CC.getFirstName() + " Last Name: " + CC.getLastName() + "DOB: " + CC.getDateOfBirth() + "Email " + CC.getEmail();
+            }
+        }
+        return result;
     }
 }

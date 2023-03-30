@@ -194,7 +194,7 @@ private void showCourseCreatorMainMenu(){
         if(command == courseCreatorStrings.length-1){
             system.zeroOut();
             System.out.println("Sucesfully Logged Out");
-            system.logOut();
+            DataWriter.saveCourses();
             System.exit(0);
         }
 
@@ -209,6 +209,7 @@ private void showCourseCreatorMainMenu(){
             case(1):
                 system.zeroOut();
                 System.out.println("Editing Python Course");
+                system.addModules();
                 editModule();
                 returnToCourseCreatorHomeScreen();
                 break;
@@ -217,7 +218,6 @@ private void showCourseCreatorMainMenu(){
 }
 
 private void editModule(){
-    system.addModules();
     while(true){
 
         int command = getUserCommand(moduleTitleString.length);
@@ -228,11 +228,12 @@ private void editModule(){
         }else{
                 system.zeroOut();
                 //Variables
+                int moduleNumber = command;
                 ArrayList<Module> modules = system.getModules();
                 Module currentModule = system.getModules().get(command);
                 String moduleTitle = system.getModules().get(command).getTitle();
                 Quiz currentQuiz = currentModule.getQuiz();
-                ArrayList<Topic> topics = new ArrayList<>();
+                ArrayList<Topic> topics = currentModule.getTopics();
 
                 //Show Current Module
                 System.out.println(currentModule);
@@ -254,14 +255,14 @@ private void editModule(){
                 system.zeroOut();
 
                 //Go Back to Module
-                System.out.println("Module : " + system.getModules().get(command).getTitle());
+                System.out.println("\nModule : " + moduleTitle);
 
                 //Look at Quiz
                 System.out.println("Quiz\n" + currentQuiz.getQuestions());
 
                 //Add a New Question to the Current/Existing Quiz
                 System.out.println("\nAdding a New Question to the Existing Module");
-                System.out.println("\nModule : " + system.getModules().get(command).getTitle());
+                System.out.println("\nModule : " + moduleTitle);
                 System.out.println("\tAdd Question");
                 System.out.print("\t\tQuestion - ");
                 String question = scanner.nextLine();
@@ -275,11 +276,16 @@ private void editModule(){
                 System.out.print("\t\tCorrect Answer - ");
                 String correctAnswerString = scanner.nextLine();
                 Long correctAnswer = Long.parseLong(correctAnswerString);
+
+                //Create a New Question Given Input
                 Question newQuestion =  system.createQuestion(question, answerString, correctAnswer);
                 currentQuiz.addQuestion(newQuestion);
 
-                currentModule = system.createModule((system.getModules().get(command).getTitle()), topics, currentQuiz, null);
-                modules.add(currentModule);
+                currentModule = system.createModule(moduleTitle, topics, currentQuiz, null);
+
+                modules.set(moduleNumber, currentModule);
+
+                //System.out.println(modules.get(moduleNumber));
                 break;
         }
         

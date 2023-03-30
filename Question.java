@@ -19,6 +19,10 @@ public class Question {
         return correctAnswer;
     }
 
+    public ArrayList<String> getAnswerChoices(){
+        return answers;
+    }
+
     public boolean isCorrect(Long userAnswer){
         if(userAnswer == correctAnswer){
             return true;

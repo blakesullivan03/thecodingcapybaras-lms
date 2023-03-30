@@ -67,6 +67,7 @@ public class LMSSystem{
    }
 
    public void setUser(String email, String password) {
+      UserList usersList = UserList.getInstance();
       User user = UserList.getInstance().getUser(email, password);
 
       String accountType = UserList.getInstance().getUserType(email, password);
@@ -114,6 +115,7 @@ public class LMSSystem{
 
     public boolean checkEmail(String email){
       users = getUserList();
+      System.out.println(users);
       for(User user : users){
          if(email.equalsIgnoreCase(user.getEmail())){
             return true;
@@ -143,12 +145,6 @@ public class LMSSystem{
       currentUser = UserList.getInstance().addCourseCreator(firstName, lastName, email, password, DoB, type);
       return currentUser != null;
       // the information you put in is null, like email, password, all that.
-    }
-
-    public void logOut(){
-         UserList.getInstance().saveStudents();
-         UserList.getInstance().saveCourseCreators();
-         CourseList.getInstance().saveCourses();
     }
 
     public Date getDateFromString(String data){
@@ -333,5 +329,10 @@ public class LMSSystem{
       System.out.flush();
    }
 
+   public void logOut(){
+     //UserList.getInstance().saveCourseCreators();
+      UserList.getInstance().saveStudents();
+      courseList.saveCourses();
+ }
 
 }

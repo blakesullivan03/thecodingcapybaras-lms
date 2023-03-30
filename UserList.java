@@ -5,6 +5,7 @@ import java.util.Date;
 public class UserList {
     private static UserList userList;
     private ArrayList<User> users;
+
     private ArrayList<Student> students;
     private ArrayList<CourseCreator> courseCreators;
 
@@ -104,6 +105,7 @@ public class UserList {
     }
 
     public ArrayList<User> getUsers(){
+        System.out.println(users);
         return users;
     }
 
@@ -117,7 +119,7 @@ public class UserList {
         DataWriter.saveStudents();
     }
 
-    public void saveCourseCreators(){
+    /**public void saveCourseCreators(){
         DataWriter.saveCourseCreator();
-    }
+    }*/
 }

@@ -37,6 +37,10 @@ public class Student extends User{
 
     }
 
+    public ArrayList<Language> getFavoriteLanguages(){
+        return favoriteLanguages;
+    }
+
     public void addFavoriteLanguage(Language language){
         favoriteLanguages.add(language);
 
@@ -62,7 +66,18 @@ public class Student extends User{
     }
 
     public String toString(){
-        return firstName + " " + lastName + " - " + favoriteLanguages + " " + getFormattedDate(DoB);
+        UserList users = UserList.getInstance();
+		ArrayList<Student> students = users.getStudents();
+        String result = "";
+        if(students == null){
+            return result;
+        }
+        else{
+            for(Student currentStudent : students){
+                result += "\n\n" + "UUID: " + currentStudent.getId() + "First Name: " + currentStudent.getFirstName() + " Last Name: " + currentStudent.getLastName() + "DOB: " + currentStudent.getDateOfBirth() + "Email " + currentStudent.getEmail();
+            }
+        }
+        return result;
     }
 
     private String getFormattedDate(Date date) {

@@ -46,7 +46,9 @@ public class Module {
         while(!questions.empty()) {
             ret.add(questions.pop());
         }
+        System.out.println(ret);
         return ret;
+        
     }
 
     public Topic getTopicByIndex(int index){
@@ -73,19 +75,14 @@ public class Module {
 
     public String toString(){
         String result = "";
-        result += "Module: " + title;
-        for(Topic topic : topics){
-            result += "\n" + "Topic: " + topic.getTitle() + "\n" + "Lesson: " + topic.getLesson();
+        result += "\nModule: " + title;
+        if(topics == null){
+            return result;
         }
-        return result;
-    }
-
-    public String courseProgressToString(){
-        //Input If Statements for Completion Status
-        String result = "";
-        result += "\n" +  "Your Courses" + "\n" + "Modules: " + "\n" + "\t" + "1) " + title;
-        for(Topic topic : topics){
-            result += "\n" + "Topic: " + "\n" + "\t" + "1) " + topic.getTitle();
+        else{
+            for(Topic topic : topics){
+                result += "\n\n" + "Topic: " + topic.getTitle() + "\n" + "Lesson: " + topic.getLesson();
+            }
         }
         return result;
     }
