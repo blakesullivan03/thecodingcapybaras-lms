@@ -120,7 +120,7 @@ public class SystemUI {
         String type = scanner.nextLine();
         
 
-        // I think this needs to be a while loop.
+
         while(!isValidPassword(password)) {
             System.out.println("\nThis is not a valid password please try again");
             return false;
@@ -466,6 +466,10 @@ private void editModule(){
      * Quiz Functions
      */
 
+     /**
+      * Giving the user the option to take the quiz, if they are ready
+      * they will take the quiz, if not they can keep studying
+      */
     private void displayQuiz(){
         System.out.println("\nAre you ready to take the Quiz? Y/N\n");
 
@@ -480,6 +484,11 @@ private void editModule(){
         }
     }
 
+    /**
+     * While there are more questions the quiz displays that to the studwnent
+     * and while there are not it gives the student a grade then brings them back
+     * to the home screen
+     */
     private void takeQuiz(){
         Quiz currentQuiz = system.getQuiz();
             while(currentQuiz.hasMoreQuestions()) {
@@ -492,6 +501,10 @@ private void editModule(){
             returnToHomeScreen();
     }
 
+    /**
+     * If the student would like to return to the home screen the system will do so
+     * but if not the student will stay put
+     */
     private void returnToHomeScreen(){
         System.out.println("\nWould you like to return to the Home Screen? Y/N");
 
@@ -508,6 +521,10 @@ private void editModule(){
 
     }
 
+    /**
+     * If the course creator would like to return to the home screen the system will do so
+     * but if not the course creator will stay put
+     */
     private void returnToCourseCreatorHomeScreen(){
         System.out.println("\nWould you like to return to the Home Screen? Y/N");
 
@@ -523,10 +540,10 @@ private void editModule(){
         }
 
     }
+   
     /**
-     * Check Course Progress
+     * Checks the Course Progress and how far along a student is
      */
-    
     private void checkCourseProgress(){
         system.zeroOut();
         System.out.println("Checking Course Progress");
@@ -535,6 +552,11 @@ private void editModule(){
         returnToHomeScreen();
     }
     
+    /**
+     * Helper method to show the progress, if the user is not in any courses
+     * then they will be told that, but if they are enrolled they can see how 
+     * far along they are
+     */
     private void showCourseProgress(){
         HashMap<Course, CourseProfile> currentUserCourses;
         Student currentUser = system.getCurrentStudent();
@@ -552,6 +574,10 @@ private void editModule(){
         }   
     } 
 
+    /**
+     * Allowing the user to see the comments under a course if there are any
+     * comments to be seen
+     */
     public void viewCourseComments() {
         ArrayList<Comment> comments = system.getCurrentCourse().getComments();
         system.zeroOut();
@@ -562,6 +588,10 @@ private void editModule(){
             System.out.println(comment);
     }
 
+    /**
+     * Allowing the user to see the comments under a module if there are any
+     * comments to be seen
+     */
     public void viewModuleComments() {
         ArrayList<Comment> comments = system.getCurrentModule().getComments();
         system.zeroOut();
@@ -571,6 +601,12 @@ private void editModule(){
             System.out.println(comment);
 
     }
+
+    /**
+     * Giving the user their certificate if their grade in the course is greater than an 80
+     * If not they will just be returned to the home screen
+     * @param grade the grade of the course
+     */
     public void certificate(CourseProfile grade){
         if(grade.getGrades().size() < grade.getCourse().getModules().size()) {
             System.out.println("Complete the course with an 80 or greater to recieve a certificate!");
@@ -593,6 +629,12 @@ private void editModule(){
         }
     }
     // Credit to stackoverflow https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character
+    /**
+     * Checking if a password is valid or not to be able to sign up
+     * @param password the password used to sign up for an account
+     * @return true if the password is between 8 and 25 characters and includes at least 
+     * one number and one special character and false if it does not meet that criteria
+     */
     private static boolean isValidPassword(String password) { 
         if(password.length()>=8 && password.length()<=25)
         {
@@ -609,12 +651,5 @@ private void editModule(){
         }else
             return false;
     }
-
-    /**
-     * Course Creator View
-     */
-
-    
-
 }
 
