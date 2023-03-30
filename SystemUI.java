@@ -393,12 +393,16 @@ private void editModule(){
             viewCourseComments();
         } else {
             system.setCurrentModule(currentCourse.getModuleByIndex(moduleSelection));
-            showModule(currentCourse.getModuleByIndex(moduleSelection));
+            showModule(system.getCurrentModule());
         }
     }
 
     private void showModule(Module currentModule) {
         System.out.println(currentModule);
+        System.out.println("Enter 1 to view comments.");
+        int viewComments = getUserCommand(1);
+        if(viewComments == 0)
+            viewModuleComments();
         displayQuiz();
     }
 
@@ -494,11 +498,21 @@ private void editModule(){
         ArrayList<Comment> comments = system.getCurrentCourse().getComments();
         system.zeroOut();
         if(comments == null)
+            System.out.println("No comments on course");
             showCourseHome(system.getCurrentCourseIndex());
         for (Comment comment : comments)
             System.out.println(comment);
     }
-    
+
+    public void viewModuleComments() {
+        ArrayList<Comment> comments = system.getCurrentModule().getComments();
+        system.zeroOut();
+        if(comments == null)
+            System.out.println("No comments on modules");
+        for (Comment comment : comments)
+            System.out.println(comment);
+
+    }
     // Credit to stackoverflow https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character
     private static boolean isValidPassword(String password) { 
         if(password.length()>=8 && password.length()<=25)
