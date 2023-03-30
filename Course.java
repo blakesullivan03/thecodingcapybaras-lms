@@ -43,11 +43,6 @@ public class Course {
         return id;
     }
 
-    /**public User getCourseCreator(){
-        User user = UserList.getInstance().getUserByID(id);
-        return user;
-    }*/
-
     public UUID getCourseCreatorUUID(){
         return courseCreator.getId();
     }
@@ -64,21 +59,16 @@ public class Course {
         return title;
     }
 
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
     public void setLanguage(Language language){
         this.language = language;
     }
 
     public void setTitle(String title){
         this.title = title;
-    }
-
-    public void setID(UUID id){
-        this.id = id;
-    }
-
-
-    public void enroll(Student student){
-
     }
 
     // May need to add a for loop later on but getting something in here

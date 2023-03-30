@@ -91,11 +91,11 @@ public class DataLoader extends DataConstants{
 		ArrayList<Course> course = new ArrayList<Course>();
 		UserList user = UserList.getInstance();
 		//Hash Map of Students and Grades
-		HashMap<User, ArrayList<Double>> courseHashMap = new HashMap<>();
+		HashMap<User, ArrayList<Double>> courseHashMap = new HashMap<User, ArrayList<Double>>();
 		//When Course is Made go find Student and Update
 		try {
 			FileReader reader = new FileReader(COURSE_FILE_NAME);
-			JSONParser parser = new JSONParser();
+			//JSONParser parser = new JSONParser();
 			JSONArray courseJSON = (JSONArray)new JSONParser().parse(reader);
 			
 			for(int i=0; i < courseJSON.size(); i++) {

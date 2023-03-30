@@ -59,9 +59,11 @@ public class LMSSystem{
    }
 
    public Course getCurrentCourse(){
-      return getCourseByIndex(0);
+      return currentCourse;
    }
-
+   public int getCurrentCourseIndex()  {
+      return courseList.indexOf(currentCourse);
+   }
    public CourseCreator getCurrentCreator() {
       return currentCourseCreator;
    }
@@ -94,6 +96,9 @@ public class LMSSystem{
       this.currentCourse = course;
    }
    
+   public void setCurrentCourse(Course course) {
+      this.currentCourse = course;
+   }
 
     /**
      * Log In and Sign Up Functions
@@ -291,12 +296,8 @@ public class LMSSystem{
    }
 
    public void addQuizGrade(Quiz currentQuiz){
-         Course currentCourse = getCurrentCourse();
-         Student currentStudent = getCurrentStudent();
-         double quizGrade = getQuizGrade(currentQuiz);
-         ArrayList<Double> moduleGrades = new ArrayList<>();
-         moduleGrades.add(quizGrade);
-         addGrade(currentCourse, currentStudent, moduleGrades);
+         Double quizGrade = getQuizGrade(currentQuiz);
+         currentStudent.addQuizGrade(currentCourse, quizGrade);
          System.out.println("\n" + quizGrade + " out of 100!");  
    }
 
@@ -314,16 +315,9 @@ public class LMSSystem{
       return ((result/(double)userAnswers.size()) * 100);
    }
 
-   public void addGrade(Course currentCourse, Student currentStudent, ArrayList<Double> moduleGrades){
-      currentCourse = getCurrentCourse();
-      currentStudent = getCurrentStudent();
-      currentStudent.addQuizGrade(currentCourse, currentStudent, moduleGrades);
-   }
-
    /**
     * Clears the Console
     */
-
    public void zeroOut(){
       System.out.print("\033[H\033[2J");
       System.out.flush();

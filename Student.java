@@ -22,13 +22,16 @@ public class Student extends User{
         this.courses = new HashMap<Course, CourseProfile>();
     }
     
-    public void enroll(Course course, Student student){
+    public void enroll(Course course){
         //System.out.println(course.getTitle() + "1");
-        CourseProfile courseProfile =  new CourseProfile(course, student);
-        courses.put(course, courseProfile); 
+        CourseProfile courseProfile =  new CourseProfile(course, this);
+        courses.put(course, courseProfile);
     }
 
     public HashMap<Course, CourseProfile> getCourses() {
+        //debug println
+        //for (Course c : courses.keySet())
+            //System.out.println(c.getTitle());
         return courses;
     }
 
@@ -59,10 +62,11 @@ public class Student extends User{
 
     }
 
-    public void addQuizGrade(Course courseName, Student currentStudent, ArrayList<Double> grade) {
+    public void addQuizGrade(Course courseName, double grade) {
         //courses.get(course).enterGrade(grade);
-        CourseProfile courseProf = new CourseProfile(courseName, currentStudent, grade);
-        courses.put(courseName, courseProf);
+        /*CourseProfile courseProf = new CourseProfile(courseName, currentStudent, grade);
+        courses.put(courseName, courseProf);*/
+        courses.get(courseName).enterGrade(grade);
     }
 
     public String toString(){
