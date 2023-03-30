@@ -61,6 +61,10 @@ public class LMSSystem{
    public Course getCurrentCourse(){
       return currentCourse;
    }
+
+   public Module getCurrentModule() {
+      return currentModule;
+   }
    public int getCurrentCourseIndex()  {
       return courseList.indexOf(currentCourse);
    }
@@ -194,8 +198,8 @@ public class LMSSystem{
    }*/
    
    //Creates a New Course
-   public boolean createCourse(UUID id, String title, Language language, User courseCreatorUUID, ArrayList<Module> modules){
-      return courseList.addCourse(id, title, language, courseCreatorUUID, modules);
+   public boolean createCourse(UUID id, String title, Language language, User courseCreator, ArrayList<Module> modules){
+      return courseList.addCourse(id, title, language, courseCreator, modules);
    }
    
    public Module createModule(String title, ArrayList<Topic> topics, Quiz quiz, ArrayList<Comment> comments){
@@ -251,8 +255,8 @@ public class LMSSystem{
    public ArrayList<Course> getCourses(String keyword){
       for(Course course : courses){
          if(course.equals(keyword)){
-             courses.add(course);
-             return courses;
+            courses.add(course);
+            return courses;
          }
      }
      return null;

@@ -210,6 +210,7 @@ public class DataLoader extends DataConstants{
 
 		ArrayList<Comment> comments = new ArrayList<>();
 		//JSONArray commentsJSON = (JSONArray)courseJSON.get(COMMENT_ARRAY);
+		//JSONArray commentsJSON = (JSONArray)courseJSON.get(COMMENT_ARRAY);
 
 		for(int i=0; i < commentJSONArray.size(); i++) {
 			JSONObject commentJSON = (JSONObject)commentJSONArray.get(i);
@@ -217,8 +218,7 @@ public class DataLoader extends DataConstants{
 			UUID studentUUID = UUID.fromString( (String)commentJSON.get(COMMENT_ID) );
 			User studentID = (Student)user.getUserByID(studentUUID);
 			String text = (String)commentJSON.get(COMMENT_TEXT);
-			ArrayList<Comment> replies = getComments( (JSONArray)commentJSON.get(COMMENT_REPLIES) );
-
+			ArrayList<Comment> replies = getReplies( (JSONArray)commentJSON.get(COMMENT_REPLIES) );
 			comments.add(new Comment(studentID, text, replies));
 		}
 
