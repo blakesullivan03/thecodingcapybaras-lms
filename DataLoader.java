@@ -218,7 +218,7 @@ public class DataLoader extends DataConstants{
 			UUID studentUUID = UUID.fromString( (String)commentJSON.get(COMMENT_ID) );
 			User studentID = (Student)user.getUserByID(studentUUID);
 			String text = (String)commentJSON.get(COMMENT_TEXT);
-			ArrayList<Comment> replies = getReplies( (JSONArray)commentJSON.get(COMMENT_REPLIES) );
+			ArrayList<Comment> replies = getComments( (JSONArray)commentJSON.get(COMMENT_REPLIES) );
 			comments.add(new Comment(studentID, text, replies));
 		}
 

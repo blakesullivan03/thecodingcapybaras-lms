@@ -399,7 +399,7 @@ private void editModule(){
 
     private void showModule(Module currentModule) {
         System.out.println(currentModule);
-        System.out.println("Enter 1 to view comments.");
+        System.out.println("\nEnter 1 to View Comments or Enter 2 to Take Quiz");
         int viewComments = getUserCommand(1);
         if(viewComments == 0)
             viewModuleComments();

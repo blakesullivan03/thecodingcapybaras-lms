@@ -201,7 +201,7 @@ public class DataWriter extends DataConstants{
 	public static void certificateFile() {
 		try {
 			FileWriter myWriter = new FileWriter("certificate.txt");
-			myWriter.write("Congratulations Scout Solace completing your JavaScript course\n!");
+			myWriter.write("Congratulations Scout Solace completing your Python Course!\n");
 			myWriter.write("You have completed to the course with above an 80%!");
 			myWriter.close();
 			System.out.println("Wrote to file successfully!");
