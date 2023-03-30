@@ -499,6 +499,23 @@ private void editModule(){
             System.out.println(comment);
     }
     
+    public void certificate(CourseProfile grade){
+        if(grade.getGrade() >= 80) {
+            System.out.println("If you want to receive your certificate now press 1!");
+            int option = scanner.nextInt();
+            scanner.nextLine();
+            if(option == 1) {
+                CourseProfile.certificate();
+            } else{
+                System.out.println("Returning you to home screen now");
+                returnToHomeScreen();
+            }
+        } else {
+            System.out.println("You do not have a high enough score yet!");
+            System.out.println("Returning you to the homes screen");
+            returnToCourseCreatorHomeScreen();
+        }
+    }
     // Credit to stackoverflow https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character
     private static boolean isValidPassword(String password) { 
         if(password.length()>=8 && password.length()<=25)
