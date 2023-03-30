@@ -9,6 +9,11 @@ import java.util.HashMap;
  * User Interface for the System
  * @author Blake Turner
  */
+
+    /**
+     * Constructs a new SystemUI object.
+     * Initializes the Scanner and LMSSystem objects.
+     */
 public class SystemUI {
     private static String[] mainMenuStrings = {"Begin Course", "Resume Course", "Check Course Progress", "Logout"};
     private static String[] courseCreatorStrings = {"Create Course", "Edit Course", "Logout"};
@@ -16,7 +21,11 @@ public class SystemUI {
     private String[] moduleTitleString = {"Basics", "Strings", "Functions", "Classes", "Conditional Statements", "Exceptions", "File Reading", "9", "10", };
     private static Scanner scanner;
     private static LMSSystem system;
-
+    /**
+     * The main method that starts the program.
+     * Creates a new SystemUI object and runs it.
+     * @param args An array of strings representing command line arguments.
+     */
     public static void main(String[] args){
         SystemUI systemInterface = new SystemUI();
         systemInterface.run();
@@ -26,7 +35,10 @@ public class SystemUI {
         scanner = new Scanner(System.in);
         system = new LMSSystem();
     }
-
+    /**
+     * Runs the command-line interface for the LMS.
+     * Prompts the user to log in or sign up, and once logged in, provides different options based on the user's account type (student or teacher/course creator).
+     */
     public void run(){
         UserList users = UserList.getInstance();
 
@@ -35,7 +47,12 @@ public class SystemUI {
         login();
 
     }
-
+    /**
+     * Prompts the user to log in, and checks if the email and password are valid.
+     * If the user does not have an account, prompts the user to sign up.
+     * If the email and password are valid, sets the current user in the LMSSystem object and shows the appropriate menu based on the user's account type.
+     * @return true if the user successfully logs in, false otherwise.
+     */
     public boolean login(){
         System.out.println("Log In.\nIf you do not have an account, press 1. Otherwise, press any number.");
         
@@ -77,6 +94,10 @@ public class SystemUI {
     }
 }
 
+    /**
+     * This method allows a user to sign up for an account by providing necessary information
+     * @return a boolean indicating whether the sign up process was successful
+    */
     public boolean signup(){
         System.out.println("Please enter the Following Info");
 
@@ -110,7 +131,11 @@ public class SystemUI {
             DataWriter.saveStudents();
             return true;
     }
-
+    /**
+    Gets the user command from input and returns it.
+    @param numCommand the number of possible commands.
+    @return the user command or -1 if invalid.
+    */
     private int getUserCommand(int numCommand){
 
         String input = scanner.nextLine();
@@ -123,7 +148,9 @@ public class SystemUI {
 
         return -1;
     }
-
+    /**
+    Displays the welcome screen for students.
+    */
     public void showStudentWelcomeScreen(){
         System.out.println("\n********Main Menu********");
         System.out.println("Please Choose one of the Following:");
@@ -132,7 +159,9 @@ public class SystemUI {
         }
         System.out.println("\n");
     }
-
+    /**
+    Displays the welcome screen for teachers.
+    */
     public void showTeacherWelcomeScreen(){
         System.out.println("\n********Main Menu********");
         System.out.println("Please Choose one of the Following:");
@@ -141,7 +170,9 @@ public class SystemUI {
         }
         System.out.println("\n");
     }
-
+    /**
+    Displays the main menu for students and handles user input.
+    */
     private void showStudentMainMenu(){
         while(true){
             int command = getUserCommand(mainMenuStrings.length);
@@ -179,7 +210,11 @@ public class SystemUI {
             }
         }
 }
-
+/**
+Gets the user command from input and returns it.
+@param numCommand the number of possible commands.
+@return the user command or -1 if invalid.
+*/
 private void showCourseCreatorMainMenu(){
     while(true){
         int command = getUserCommand(courseCreatorStrings.length);
@@ -217,6 +252,15 @@ private void showCourseCreatorMainMenu(){
         }
     }
 }
+/**
+ * Method that allows the course creator to edit a module of a course.
+ * The method will display a menu of available modules, allow the user to
+ * select a module, and then display the options for editing the module.
+ * The user can then edit the module by inputting valid commands, which are
+ * based on the editModuleStrings array. If the user inputs an invalid command,
+ * the method will continue to loop until a valid command is inputted.
+ * @see getUserCommand
+ */
 
 private void editModule(){
     while(true){
@@ -293,7 +337,10 @@ private void editModule(){
     }
 }
     
-
+/**
+ * Presents the user with a list of available courses to begin and prompts the user to choose one.
+ * Once a course is chosen, calls the showCourseHome method for the chosen course.
+*/
     private void beginCourse(){
         System.out.println("Choose a New Course to Begin: ");
         for(int i = 0; i < coursesStrings.length; i++){
@@ -330,7 +377,10 @@ private void editModule(){
         }
 
     }
-
+    /**
+     *Displays the menu for resuming a course and prompts the user to select a course to resume. Once a course is selected,
+     *the method calls showCourseHome() to display the home screen of the selected course.
+     */
     private void resumeCourse(){
         System.out.println("Resume Course");
         for(int i = 0; i < coursesStrings.length; i++){
@@ -366,7 +416,10 @@ private void editModule(){
             }
         }
     }
-
+    /**
+     * Displays the home screen for a course, including all modules and an option to view comments. 
+     * @param courseIndex the index of the course to display the home screen for
+     */
     private void showCourseHome(int courseIndex){
         CourseList courseList = CourseList.getInstance();
         ArrayList<Course> courses = courseList.getCourses();
@@ -396,7 +449,10 @@ private void editModule(){
             showModule(system.getCurrentModule());
         }
     }
-
+    /**
+     * Displays the current module's details, and prompts the user to either view comments or take the quiz.
+     * @param currentModule the module to display details for
+     */
     private void showModule(Module currentModule) {
         System.out.println(currentModule);
         System.out.println("\nEnter 1 to View Comments or Enter 2 to Take Quiz");
