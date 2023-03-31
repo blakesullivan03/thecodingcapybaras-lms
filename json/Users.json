@@ -1,9 +1,9 @@
 [{
     "id": "d022ea4a-1f9b-4203-ad9f-48d57ef8802f",
-    "firstName":"Georgina", 
-    "lastName":"Flippina", 
+    "firstName":"John", 
+    "lastName":"Wisdom", 
     "dateOfBirth":"8/27/1996",
-    "email":"GeorgieF@email.sdsu.edu",
+    "email":"Johnw@email.sdsu.edu",
     "password":"sharksarecool9?",
     "type":"Course Creator"
 },{

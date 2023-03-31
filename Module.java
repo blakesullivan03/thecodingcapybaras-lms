@@ -135,6 +135,13 @@ public class Module {
     }
 
     /**
+     * The Study Guide for Users who Need It
+     */
+    public static void studyGuide(Module module){
+        DataWriter.studyGuide(module);
+    }
+
+    /**
      * Displaying the module's information
      * @return the module's information (topic and lesson) if there is a topic
      * or the module and its title if there is not.

@@ -462,7 +462,7 @@ private void editModule(){
      */
     private void showModule(Module currentModule) {
         System.out.println(currentModule);
-        displayQuiz();
+        displayQuiz(currentModule);
     }
 
     /**
@@ -473,7 +473,7 @@ private void editModule(){
       * Giving the user the option to take the quiz, if they are ready
       * they will take the quiz, if not they can keep studying
       */
-    private void displayQuiz(){
+    private void displayQuiz(Module currentModule){
         System.out.println("\nAre you ready to take the Quiz? Y/N\n");
 
         String ready = scanner.nextLine();
@@ -484,6 +484,8 @@ private void editModule(){
             takeQuiz();
         }else if(ready.equalsIgnoreCase("N")){
             System.out.println("\nContinue Studying");
+            //Print Out Information on the Module to a Text File
+            studyGuide(currentModule);
         }
     }
 
@@ -666,5 +668,21 @@ private void editModule(){
             return false;
     }
 
+    /**
+     * Giving the user a study guide if they feel as If they Need It
+     * If not they will just be returned to the Home screen
+     * @param currentModule the module for the study guide
+     */
+    public void studyGuide(Module currentModule){
+            System.out.println("If you would like a Study Guide on the Module, Press 1");
+            int option = scanner.nextInt();
+            scanner.nextLine();
+            if(option == 1) {
+                Module.studyGuide(currentModule);
+            } else{
+                System.out.println("Returning you to the Home Screen");
+                returnToHomeScreen();
+            }
+        }
 }
 

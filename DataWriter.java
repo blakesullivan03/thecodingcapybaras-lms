@@ -170,4 +170,16 @@ public class DataWriter extends DataConstants{
 			e.printStackTrace();
 		  }
 		}
+
+		public static void studyGuide(Module currentModule) {
+			try {
+				FileWriter myWriter = new FileWriter("studyguide.txt");
+				myWriter.write("Study Guide\n" + currentModule.toString());
+				myWriter.close();
+				System.out.println("Wrote to file successfully!");
+			  } catch (IOException e) {
+				System.out.println("Did not succesfully Write to File");
+				e.printStackTrace();
+			  }
+			}
 }
