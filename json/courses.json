@@ -1,1 +1,50 @@
-[{"courseCreatorID":"d022ea4a-1f9b-4203-ad9f-48d57ef8802f","language":"PYTHON","title":"Foundations of Python","courseID":"9a812c80-9970-4d48-9b87-8e80fc233a70","modules":[{"quiz":[],"comments":[{"studentID":"260c9289-a36a-4135-bf93-f21a118d0f61","replies":[{"studentID":"88e183f7-0a67-4983-b0e5-37c4ddf16b57","replies":[],"text":"Just focus on your code bruh"}],"text":"Your mom lol"},{"studentID":"88e183f7-0a67-4983-b0e5-37c4ddf16b57","replies":[{"studentID":"260c9289-a36a-4135-bf93-f21a118d0f61","replies":[],"text":"Bro I would literally go 30-0 on you don't try me"}],"text":"1v1 me in rust kid"},{"studentID":"174a27fb-9632-44ad-a5cb-31f549e52731","replies":[{"studentID":"260c9289-a36a-4135-bf93-f21a118d0f61","replies":[],"text":"Literally post your code you wont lol"}],"text":"Your code is aight"}],"moduleTitle":"Loops","topics":[{"lesson":"A for loop is used for iterating over a sequence. \n\nThis is less like the for keyword in other programming languages, and works more like an iterator method as found in other object-orientated programming languages.\n\nWith the for loop we can execute a set of statements, once for each item in a list, tuple, set etc.\n \nSyntax of a For Loop\nfruits = [\"apple\", \"banana\", \"cherry\"] \nfor x in fruits:\n\tprint(x)","topicTitle":"For Loops"},{"lesson":"Using a While Loop","topicTitle":"While Loops"}]}]}]
+[
+    {
+      "courseID":"9a812c80-9970-4d48-9b87-8e80fc233a70",
+      "title":"Foundations of Python",
+      "language": "Python",
+      "courseCreatorID": "d022ea4a-1f9b-4203-ad9f-48d57ef8802f",
+      "modules":[{"moduleTitle": "Loops",
+                  "topics": [{"topicTitle":"For Loops",
+                              "lesson": "A for loop is used for iterating over a sequence. \n\nThis is less like the for keyword in other programming languages, and works more like an iterator method as found in other object-orientated programming languages.\n\nWith the for loop we can execute a set of statements, once for each item in a list, tuple, set etc.\n \nSyntax of a For Loop\nfruits = [\"apple\", \"banana\", \"cherry\"] \nfor x in fruits:\n\tprint(x)"}],
+                  "quiz": [{"question":"Why do we need loops in programming?",
+                                "answers": ["For Iterations", "All of the Above", "For avoiding repeated code"],
+                                "correct-ans": 1},
+                                {"question": "What is the output of the following code \nfruits = [\"apple\", \"banana\", \"cherry\"] \nfor x in fruits:\n\tprint(x)",
+                                "answers": ["cherry, banna, apple", "apple, banna, cherry", "banna, apple, cherry"],
+                                "correct-ans":1},
+                                {"question": "Which of the following is not true about a for loop?",
+                                "answers": ["Following the for statement, the code to be executed is recognized by it being indented.", "A for loop needs a break statement to exit.", "The for loop can contain other for loops."],
+                                "correct-ans":1}],
+                  "comments": [{"studentID": "260c9289-a36a-4135-bf93-f21a118d0f61", 
+                                "text": "Your mom lol",
+                                  "replies":[
+                                  {
+                                    "studentID":"88e183f7-0a67-4983-b0e5-37c4ddf16b57",
+                                    "text": "Just focus on your code bruh",
+                                    "replies":[]
+                                  }
+                                  ]}, 
+                              {"studentID": "88e183f7-0a67-4983-b0e5-37c4ddf16b57",
+                                "text": "1v1 me in rust kid", 
+                                  "replies": [
+                                  {
+                                    "studentID": "260c9289-a36a-4135-bf93-f21a118d0f61",
+                                    "text": "Bro I would literally go 30-0 on you don't try me",
+                                    "replies": []
+                                  }
+                                  ]},
+                              {"studentID": "174a27fb-9632-44ad-a5cb-31f549e52731",
+                                "text": "Your code is aight",
+                                  "replies": [
+                                  {
+                                    "studentID": "260c9289-a36a-4135-bf93-f21a118d0f61",
+                                    "text": "Literally post your code you wont lol",
+                                    "replies": []
+                                  }
+                                ]
+                              }
+                              ]
+                  }]
+    }
+  ]

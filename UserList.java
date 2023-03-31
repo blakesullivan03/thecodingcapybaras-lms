@@ -112,7 +112,7 @@ public class UserList {
 
 
 
-    public User getUser(String email, String password) {
+    public User getUser(String email) {
         for(User user : users) {
 			if(user.getEmail().equalsIgnoreCase(email)) {
 				return user;

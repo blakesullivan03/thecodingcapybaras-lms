@@ -1,1 +1,40 @@
-[{"firstName":"Georgina","lastName":"Flippina","password":"sharksarecool9?","dateOfBirth":"08\/27\/1996","id":"d022ea4a-1f9b-4203-ad9f-48d57ef8802f","type":"Course Creator","email":"GeorgieF@email.sdsu.edu"},{"firstName":"John","lastName":"Pippen","overallGPA":0.0,"password":"basketballismylifeee22!","dateOfBirth":"05\/12\/2001","id":"260c9289-a36a-4135-bf93-f21a118d0f61","favLanguages":[],"type":"Student","email":"JbPippen@gmail.com"},{"firstName":"Miles","lastName":"Stark","overallGPA":0.0,"password":"IamRelatedtoIronMan1!","dateOfBirth":"05\/12\/1997","id":"174a27fb-9632-44ad-a5cb-31f549e52731","favLanguages":[],"type":"Student","email":"IamMilesStark@outlook.com"},{"firstName":"Peter","lastName":"Parker","overallGPA":0.0,"password":"GreenGoblinDeezNuts12!","dateOfBirth":"05\/12\/2003","id":"88e183f7-0a67-4983-b0e5-37c4ddf16b57","favLanguages":[],"type":"Student","email":"IamtotallynotSpiderMan1@starkindustries.org"}]
+[{
+    "id": "d022ea4a-1f9b-4203-ad9f-48d57ef8802f",
+    "firstName":"Georgina", 
+    "lastName":"Flippina", 
+    "dateOfBirth":"8/27/1996",
+    "email":"GeorgieF@email.sdsu.edu",
+    "password":"sharksarecool9?",
+    "type":"Course Creator"
+},{
+    "id": "260c9289-a36a-4135-bf93-f21a118d0f61",
+    "firstName":"John", 
+    "lastName":"Pippen", 
+    "dateOfBirth":"5/12/2001",
+    "email":"JbPippen@gmail.com",
+    "password":"basketballismylifeee22!",
+    "type": "Student",
+    "overallGPA":4.0,
+    "favLanguages":["Python", "C"]
+},{
+    "id": "174a27fb-9632-44ad-a5cb-31f549e52731",
+    "firstName":"Miles", 
+    "lastName":"Stark", 
+    "dateOfBirth":"5/12/1997",
+    "email":"IamMilesStark@outlook.com",
+    "password":"IamRelatedtoIronMan1!",
+    "type": "Student",
+    "overallGPA":3.0,
+    "favLanguages":["Python", "Javascript"]
+},{
+    "id": "88e183f7-0a67-4983-b0e5-37c4ddf16b57",
+    "firstName":"Peter", 
+    "lastName":"Parker", 
+    "dateOfBirth":"5/12/2003",
+    "email":"IamtotallynotSpiderMan1@starkindustries.org",
+    "password":"GreenGoblinDeezNuts12!",
+    "type": "Student",
+    "overallGPA":3.5,
+    "favLanguages":["C", "Javascript"]
+}
+]
