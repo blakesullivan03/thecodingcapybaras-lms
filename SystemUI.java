@@ -446,10 +446,10 @@ private void editModule(){
         }
 
         System.out.println(i + ". " + "View Comments");
-        System.out.print("\n Select Module: ");
+        System.out.print("\n Select Option: ");
         int moduleSelection = getUserCommand(modules.size()+1);
         if(moduleSelection == modules.size()) {
-            viewModuleComments();
+            viewModuleComments(currentStudent);
             returnToHomeScreen();
         } else {
             system.setCurrentModule(currentCourse.getModuleByIndex(moduleSelection));
@@ -524,6 +524,30 @@ private void editModule(){
 
     }
 
+    private void leaveAComment(User author){
+        System.out.println("\nWould you like to leave a Comment? Y/N");
+
+        String decision = scanner.nextLine();
+            
+        if(decision.equalsIgnoreCase("Y")){
+            System.out.println("\nWhom would you like to reply to with a Comment?");
+            int commentIndex = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println("\nEnter Comment");
+            String text = scanner.nextLine();
+            system.leaveComment(author, text, commentIndex);
+            showStudentWelcomeScreen();
+            showStudentMainMenu();
+        }else{
+            system.zeroOut();
+            showStudentWelcomeScreen();
+            showStudentMainMenu();
+        }
+
+    }
+
+
+
     /**
      * If the course creator would like to return to the home screen the system will do so
      * but if not the course creator will stay put
@@ -551,7 +575,6 @@ private void editModule(){
         system.zeroOut();
         System.out.println("Checking Course Progress");
         showCourseProgress();
-
         returnToHomeScreen();
     }
     
@@ -582,13 +605,14 @@ private void editModule(){
      * Allowing the user to see the comments under a module if there are any
      * comments to be seen
      */
-    public void viewModuleComments() {
+    public void viewModuleComments(User author) {
         ArrayList<Comment> comments = system.getCurrentCourse().getModuleByIndex(0).getComments();
         system.zeroOut();
         if(comments == null)
             System.out.println("No comments on modules");
-        for (Comment comment : comments)
-            System.out.println(comment);
+        for (int i = 0; i < comments.size(); i++)
+            System.out.println((i+1) + " "  + comments.get(i));
+        leaveAComment(author);
 
     }
 

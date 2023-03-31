@@ -8,8 +8,8 @@
     "type":"Course Creator"
 },{
     "id": "260c9289-a36a-4135-bf93-f21a118d0f61",
-    "firstName":"John", 
-    "lastName":"Pippen", 
+    "firstName":"Allie", 
+    "lastName":"Anderson", 
     "dateOfBirth":"5/12/2001",
     "email":"JbPippen@gmail.com",
     "password":"basketballismylifeee22!",
@@ -36,5 +36,15 @@
     "type": "Student",
     "overallGPA":3.5,
     "favLanguages":["C", "Javascript"]
+},{
+    "id": "13e5d92b-d05d-4b8c-8660-c0e4c1199969",
+    "firstName":"Scout", 
+    "lastName":"Solace", 
+    "dateOfBirth":"5/12/1997",
+    "email":"iamscoutsolace@outlook.com",
+    "password":"IamALoser!",
+    "type": "Student",
+    "overallGPA":3.0,
+    "favLanguages":["Python", "Javascript"]
 }
 ]

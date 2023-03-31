@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
-import java.util.concurrent.atomic.LongAccumulator;
 /**
 *The LMSSystem class represents a Learning Management System application.
 * It provides methods to manage users, courses, modules, and other LMS functionalities.
@@ -391,6 +390,13 @@ public class LMSSystem{
         return currentCourse;
    }
 
+   public void leaveComment(User author, String text, int commentIndex){
+      comments = getModuleByIndex(0).getComments();
+      comment = comments.get(commentIndex-1);
+      comment.reply(author, text);
+      zeroOut();
+   }
+
    public ArrayList<Module> getModules(){
       getCourseList();
       modules = currentCourse.getModules();
@@ -399,7 +405,6 @@ public class LMSSystem{
 
    public void setCurrentModule(Module module) {
       currentModule = module;
-
    }
 
    public Module getModuleByIndex(int index){

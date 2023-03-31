@@ -37,7 +37,8 @@ public class Comment {
     } 
 
     public String toString() {
-        String com = author.getFirstName() + " " + author.getLastName() + ": " + comment;
+        String com = "";
+        com += author.getFirstName() + " " + author.getLastName() + " : " + comment;
         if(replies.isEmpty())
             return com;
         return com + "\n\t" + replies.toString();
