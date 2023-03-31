@@ -16,11 +16,12 @@ import org.json.simple.parser.JSONParser;;
 public class DataLoader extends DataConstants{
 
 	/**public static void main(String[] args) {
-	ArrayList<User> students = getUsers();
+	 * ArrayList<User> students = getUsers();
 		for(User student : students){
 			System.out.println(student);
 		}
 	}
+
 	ArrayList<Course> courses = getCourses();
 		for(Course course : courses){
 			System.out.println(course);
@@ -145,10 +146,12 @@ public class DataLoader extends DataConstants{
 
 		JSONArray modulesJSON = (JSONArray)courseJSON.get(MODULE_ARRAY);
 
-		JSONArray commentJSONArray = (JSONArray)courseJSON.get(COMMENT_ARRAY);
+		//JSONArray commentJSONArray = (JSONArray)modulesJSON.get(COMMENT_ARRAY);
 			
 		for(int i=0; i < modulesJSON.size(); i++) {
 			JSONObject moduleJSON = (JSONObject)modulesJSON.get(i);
+
+			JSONArray commentJSONArray = (JSONArray)moduleJSON.get(COMMENT_ARRAY);
 
 			String moduleTitle = (String)moduleJSON.get(MODULE_TITLE);
 
@@ -209,8 +212,6 @@ public class DataLoader extends DataConstants{
 		UserList user = UserList.getInstance();
 
 		ArrayList<Comment> comments = new ArrayList<>();
-		//JSONArray commentsJSON = (JSONArray)courseJSON.get(COMMENT_ARRAY);
-		//JSONArray commentsJSON = (JSONArray)courseJSON.get(COMMENT_ARRAY);
 
 		for(int i=0; i < commentJSONArray.size(); i++) {
 			JSONObject commentJSON = (JSONObject)commentJSONArray.get(i);
@@ -224,22 +225,4 @@ public class DataLoader extends DataConstants{
 
 		return comments;
 	}
-
-	/**private static ArrayList<Comment> getReplies(JSONArray jsonCommentArray){
-		ArrayList<Comment> replies = new ArrayList<>();
-		UserList users = UserList.getInstance();
-		for(int i=0; i < jsonCommentArray.size(); i++) {
-
-			JSONObject replyJSON = ((JSONObject)jsonCommentArray.get(i));
-			String replyString = (String) replyJSON.get(COMMENT_TEXT);
-			UUID studentUUID = UUID.fromString((String)replyJSON.get(COMMENT_ID));
-			User replyAuthor = users.getUserByID(studentUUID);
-
-			Comment reply = new Comment (replyAuthor, replyString);
-			replies.add(reply);
-		}
-
-		return replies;
-	}
-	*/
 }

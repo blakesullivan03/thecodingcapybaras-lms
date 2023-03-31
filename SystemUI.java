@@ -106,8 +106,7 @@ public class SystemUI {
         }
             system.zeroOut();
             System.out.println("\nThank you, now you are successfully signed up and logged in!");
-            //currentStudent = (new Student(firstName, lastName, email, password, DoB, 0.0, new ArrayList<Language>(), type));
-            DataWriter.saveStudents();
+            DataWriter.saveUsers();
             return true;
     }
 
@@ -235,6 +234,7 @@ private void editModule(){
                 String moduleTitle = system.getModules().get(command).getTitle();
                 Quiz currentQuiz = currentModule.getQuiz();
                 ArrayList<Topic> topics = currentModule.getTopics();
+                ArrayList<Comment> comments = currentModule.getComments();
 
                 //Show Current Module
                 System.out.println(currentModule);
@@ -251,8 +251,10 @@ private void editModule(){
                 Topic currentTopic = system.createTopic(topicTitle, topicLesson);
                 topics.add(currentTopic);
 
+                
+
                 //Update Module to Have New Topics
-                currentModule = system.createModule(moduleTitle, topics, currentQuiz, null);
+                currentModule = system.createModule(moduleTitle, topics, currentQuiz, comments);
                 system.zeroOut();
 
                 //Go Back to Module
@@ -262,7 +264,7 @@ private void editModule(){
                 System.out.println("Quiz\n" + currentQuiz.getQuestions());
 
                 //Add a New Question to the Current/Existing Quiz
-                System.out.println("\nAdding a New Question to the Existing Module");
+                System.out.println("\nAdding a New Question to the Existing Module  Quiz");
                 System.out.println("\nModule : " + moduleTitle);
                 System.out.println("\tAdd Question");
                 System.out.print("\t\tQuestion - ");
@@ -282,7 +284,7 @@ private void editModule(){
                 Question newQuestion =  system.createQuestion(question, answerString, correctAnswer);
                 currentQuiz.addQuestion(newQuestion);
 
-                currentModule = system.createModule(moduleTitle, topics, currentQuiz, null);
+                currentModule = system.createModule(moduleTitle, topics, currentQuiz, comments);
 
                 modules.set(moduleNumber, currentModule);
 
@@ -380,17 +382,22 @@ private void editModule(){
 
         if(!currentStudent.getCourses().containsKey(currentCourse))
             currentStudent.enroll(currentCourse);
+            currentStudent.addFavoriteLanguage(currentCourse.getLanguage());
+
+        
         
         int i = 1;
         for (Module module : modules) {
             System.out.println(i + ". " + module.getTitle());
             i++;
         }
-        System.out.println(i + ". " + "View Course Comments");
+
+        System.out.println(i + ". " + "View Comments");
         System.out.print("\n Select Module: ");
         int moduleSelection = getUserCommand(modules.size()+1);
         if(moduleSelection == modules.size()) {
-            viewCourseComments();
+            viewModuleComments();
+            returnToHomeScreen();
         } else {
             system.setCurrentModule(currentCourse.getModuleByIndex(moduleSelection));
             showModule(system.getCurrentModule());
@@ -399,10 +406,6 @@ private void editModule(){
 
     private void showModule(Module currentModule) {
         System.out.println(currentModule);
-        System.out.println("\nEnter 1 to View Comments or Enter 2 to Take Quiz");
-        int viewComments = getUserCommand(1);
-        if(viewComments == 0)
-            viewModuleComments();
         displayQuiz();
     }
 
@@ -496,18 +499,8 @@ private void editModule(){
         }   
     } 
 
-    public void viewCourseComments() {
-        ArrayList<Comment> comments = system.getCurrentCourse().getComments();
-        system.zeroOut();
-        if(comments == null)
-            System.out.println("No comments on course");
-            showCourseHome(system.getCurrentCourseIndex());
-        for (Comment comment : comments)
-            System.out.println(comment);
-    }
-
     public void viewModuleComments() {
-        ArrayList<Comment> comments = system.getCurrentModule().getComments();
+        ArrayList<Comment> comments = system.getCurrentCourse().getModuleByIndex(0).getComments();
         system.zeroOut();
         if(comments == null)
             System.out.println("No comments on modules");
@@ -521,7 +514,7 @@ private void editModule(){
             return;
         }
         if(grade.getGrade() >= 80) {
-            System.out.println("If you want to receive your certificate now press 1!");
+            System.out.println("Congratulations! If you want to receive your certificate now press 1!");
             int option = scanner.nextInt();
             scanner.nextLine();
             if(option == 1) {
@@ -553,12 +546,6 @@ private void editModule(){
         }else
             return false;
     }
-
-    /**
-     * Course Creator View
-     */
-
-    
 
 }
 

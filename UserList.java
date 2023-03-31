@@ -21,31 +21,32 @@ public class UserList {
     }
 
     //overload 
-    public User addStudent(String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages, String type){
+    public boolean addStudent(String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages, String type){
         if(haveUser(email)){
-            return null;
+            return false;
         }
         //add user
         // depending on type, add student or add course creator
         Student newStudent = new Student(firstName, lastName, email, password, DoB, overallGPA, favoriteLanguages, type);
         users.add(newStudent);
-        return newStudent;
+        System.out.println(newStudent);
+        //System.out.println(users);
+        return true;
     }
 
-    public User addCourseCreator(String firstName, String lastName, String email, String password, Date DoB, String type){
+    public boolean addCourseCreator(String firstName, String lastName, String email, String password, Date DoB, String type){
         if(haveUser(email)){
-            return null;
+            return false;
         }
         //add user
         // depending on type, add student or add course creator
         CourseCreator newCourseCreator = new CourseCreator(firstName, lastName, email, password, DoB, type);
         users.add(newCourseCreator);
-        return newCourseCreator;
+        System.out.println(newCourseCreator);
+        System.out.println(users);
+        return true;
     }
     
-    public void deleteUser(User user){
-        //users.remove(user);
-    }
 
     // can have the same name, same password, same DOB, but not the same email
     public boolean haveUser(String email) {
@@ -77,27 +78,19 @@ public class UserList {
         return null;
     }
 
-    public User getUser(String id){
+
+    public User getUser(String email){
         for(User user : users) {
-			if(user.getUserName().equalsIgnoreCase(id)) {
+			if(user.getEmail().equalsIgnoreCase(email)) {
 				return user;
 			}
 		}
 		return null;
     }
 
-    public User getUser(String email, String password) {
+    public String getUserType(String email) {
         for(User user : users) {
-			if(user.getEmail().equalsIgnoreCase(email) && user.getPassword().equals(password)) {
-				return user;
-			}
-		}
-		return null;
-    }
-
-    public String getUserType(String email, String password) {
-        for(User user : users) {
-			if(user.getEmail().equalsIgnoreCase(email) && user.getPassword().equals(password)) {
+			if(user.getEmail().equalsIgnoreCase(email)) {
 				return user.getAccountType();
 			}
 		}
@@ -105,18 +98,19 @@ public class UserList {
     }
 
     public ArrayList<User> getUsers(){
-        System.out.println(users);
         return users;
     }
 
     public ArrayList<Student> getStudents(){
         return students;
     }
+
     public ArrayList<CourseCreator> getCourseCreators(){
         return courseCreators;
     }
-    public void saveStudents(){
-        DataWriter.saveStudents();
+
+    public void saveUsers(){
+        DataWriter.saveUsers();
     }
 
     /**public void saveCourseCreators(){

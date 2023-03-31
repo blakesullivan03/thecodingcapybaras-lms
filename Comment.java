@@ -18,22 +18,26 @@ public class Comment {
     }
 
     public String getText() {
-        return this.comment;
+        return comment;
     }
 
     public User getAuthor() {
-        return this.author;
+        return author;
     }
     
+    public ArrayList<Comment> getReplies(){
+        return replies;
+    }
+
     public void edit(String edited){
         this.comment = edited;
     } 
 
     public String toString() {
-        String com = "|" + this.author + ": " + this.comment;
+        String com = author.getFirstName() + " " + author.getLastName() + ": " + comment;
         if(replies.isEmpty())
             return com;
-        return com + "\n     " + replies.toString();
+        return com + "\n\t" + replies.toString();
 
     }
 

@@ -58,11 +58,7 @@ public class Course {
     public String getTitle(){
         return title;
     }
-
-    public ArrayList<Comment> getComments() {
-        return comments;
-    }
-
+    
     public void setLanguage(Language language){
         this.language = language;
     }

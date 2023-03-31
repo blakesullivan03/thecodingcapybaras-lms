@@ -49,7 +49,7 @@ public class CourseProfile {
 
     public String toString() {
         modules = course.getModules();
-        String ret =  "Course: " + course.getTitle() + " Grade: " + courseGrade + "\nModule Grades:  ";
+        String ret =  "Course: " + course.getTitle() + " - Overall Grade: " + courseGrade + "\nModule Grades:  ";
         for(int i = 0; i < modules.size(); ++i) {
             ret += "\n\tModule: " + modules.get(i).getTitle() + "\n\t\tGrade: ";
             if(moduleGrades.size() > i)

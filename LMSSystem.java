@@ -29,7 +29,7 @@ public class LMSSystem{
     private ArrayList<Comment> comments;
     private ArrayList<String> answers;
     private ArrayList<Double> moduleGrades;
-    private String[] moduleTitles = {"Basics", "Strings", "Functions", "Classes", "Conditional Statements", "Exceptions", "File Reading", "9", "10", "10"};
+    private String[] moduleTitles = {"Basics", "Strings", "Functions", "Classes", "Conditional Statements", "Exceptions", "File Reading", "Boolean Expressions", "Switch Case", "10"};
     // private ArrayList<Long> array = new ArrayList<>();
 
 
@@ -65,6 +65,7 @@ public class LMSSystem{
    public Module getCurrentModule() {
       return currentModule;
    }
+
    public int getCurrentCourseIndex()  {
       return courseList.indexOf(currentCourse);
    }
@@ -74,22 +75,27 @@ public class LMSSystem{
 
    public void setUser(String email, String password) {
       UserList usersList = UserList.getInstance();
-      User user = UserList.getInstance().getUser(email, password);
+      User user = usersList.getUser(email);
 
-      String accountType = UserList.getInstance().getUserType(email, password);
+      String accountType = userList.getUserType(email);
+      String firstName = user.getFirstName();
+		String lastName = user.getLastName();
+		Date DOB = user.DoB;
 
       if(accountType.equalsIgnoreCase("student")){
-            currentStudent = new Student(accountType, accountType, email, password, null, 0, null, accountType);
+			double overallGPA = 0.0;
+			ArrayList<Language> favoriteLanguages = new ArrayList<>();
+         currentStudent = new Student(firstName, lastName, email, password, DOB, overallGPA, favoriteLanguages, accountType);
       } else {
-            currentCourseCreator = new CourseCreator(accountType, accountType, email, password, null, accountType);
+         currentCourseCreator = new CourseCreator(firstName, lastName, email, password, DOB, accountType);
       }
 
    }
 
    public String returnAccountType(String email, String password){
-      User user = UserList.getInstance().getUser(email, password);
+      User user = UserList.getInstance().getUser(email);
 
-      String accountType = UserList.getInstance().getUserType(email, password);
+      String accountType = UserList.getInstance().getUserType(email);
 
       return accountType;
    
@@ -110,7 +116,7 @@ public class LMSSystem{
 
     public boolean logIn(String email, String password){
       
-      User user = UserList.getInstance().getUser(email, password);
+      User user = UserList.getInstance().getUser(email);
 
          if(user == null){
             return false;
@@ -124,7 +130,6 @@ public class LMSSystem{
 
     public boolean checkEmail(String email){
       users = getUserList();
-      System.out.println(users);
       for(User user : users){
          if(email.equalsIgnoreCase(user.getEmail())){
             return true;
@@ -145,13 +150,13 @@ public class LMSSystem{
 
     public boolean signupStudent(String firstName, String lastName, String email, String password, Date DoB, double overallGPA, ArrayList<Language> favoriteLanguages, String type){
       // do you need to put addStudent and addCourseCreator instead.
-      currentUser = UserList.getInstance().addStudent(firstName, lastName, email, password, DoB, overallGPA, favoriteLanguages, type);
+      //currentUser = UserList.getInstance().addStudent(firstName, lastName, email, password, DoB, overallGPA, favoriteLanguages, type);
       return currentUser != null;
     }
 
     public boolean signupCourseCreator(String firstName, String lastName, String email, String password, Date DoB, String type){
       // do you need to put addStudent and addCourseCreator instead.
-      currentUser = UserList.getInstance().addCourseCreator(firstName, lastName, email, password, DoB, type);
+      //currentUser = UserList.getInstance().addCourseCreator(firstName, lastName, email, password, DoB, type);
       return currentUser != null;
       // the information you put in is null, like email, password, all that.
     }
@@ -328,9 +333,8 @@ public class LMSSystem{
    }
 
    public void logOut(){
-     //UserList.getInstance().saveCourseCreators();
-      UserList.getInstance().saveStudents();
       courseList.saveCourses();
+      userList.saveUsers();
  }
 
 }

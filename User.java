@@ -12,6 +12,7 @@ public abstract class User {
     protected String password;
     protected String type;
     protected Date DoB;
+    protected Student student;
     
 
 
@@ -75,7 +76,6 @@ public abstract class User {
     public String getAccountType(){
         return type;
     }
-
 
 
     public void setAccountType(String type){

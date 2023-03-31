@@ -1,5 +1,4 @@
 import java.util.HashMap;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.Date;
@@ -44,9 +43,12 @@ public class Student extends User{
         return favoriteLanguages;
     }
 
+    public void setFavoriteLanguages(ArrayList<Language> favoriteLanguages){
+        this.favoriteLanguages = favoriteLanguages;
+    }
+
     public void addFavoriteLanguage(Language language){
         favoriteLanguages.add(language);
-
     }
 
     public boolean removeFavoriteLanguage(Language language){
@@ -69,6 +71,7 @@ public class Student extends User{
         courses.get(courseName).enterGrade(grade);
     }
 
+
     public String toString(){
         UserList users = UserList.getInstance();
 		ArrayList<Student> students = users.getStudents();
@@ -82,10 +85,5 @@ public class Student extends User{
             }
         }
         return result;
-    }
-
-    private String getFormattedDate(Date date) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        return simpleDateFormat.format(date);
     }
 }
