@@ -9,6 +9,11 @@ import java.util.HashMap;
  * User Interface for the System
  * @author Blake Turner
  */
+
+    /**
+     * Constructs a new SystemUI object.
+     * Initializes the Scanner and LMSSystem objects.
+     */
 public class SystemUI {
     private static String[] mainMenuStrings = {"Begin Course", "Resume Course", "Check Course Progress", "Logout"};
     private static String[] courseCreatorStrings = {"Create Course", "Edit Course", "Logout"};
@@ -16,7 +21,11 @@ public class SystemUI {
     private String[] moduleTitleString = {"Basics", "Strings", "Functions", "Classes", "Conditional Statements", "Exceptions", "File Reading", "9", "10", };
     private static Scanner scanner;
     private static LMSSystem system;
-
+    /**
+     * The main method that starts the program.
+     * Creates a new SystemUI object and runs it.
+     * @param args An array of strings representing command line arguments.
+     */
     public static void main(String[] args){
         SystemUI systemInterface = new SystemUI();
         systemInterface.run();
@@ -26,7 +35,10 @@ public class SystemUI {
         scanner = new Scanner(System.in);
         system = new LMSSystem();
     }
-
+    /**
+     * Runs the command-line interface for the LMS.
+     * Prompts the user to log in or sign up, and once logged in, provides different options based on the user's account type (student or teacher/course creator).
+     */
     public void run(){
         UserList users = UserList.getInstance();
 
@@ -35,7 +47,12 @@ public class SystemUI {
         login();
 
     }
-
+    /**
+     * Prompts the user to log in, and checks if the email and password are valid.
+     * If the user does not have an account, prompts the user to sign up.
+     * If the email and password are valid, sets the current user in the LMSSystem object and shows the appropriate menu based on the user's account type.
+     * @return true if the user successfully logs in, false otherwise.
+     */
     public boolean login(){
         System.out.println("Log In.\nIf you do not have an account, press 1. Otherwise, press any number.");
         
@@ -77,6 +94,10 @@ public class SystemUI {
     }
 }
 
+    /**
+     * This method allows a user to sign up for an account by providing necessary information
+     * @return a boolean indicating whether the sign up process was successful
+    */
     public boolean signup(){
         System.out.println("Please enter the Following Info");
 
@@ -99,7 +120,7 @@ public class SystemUI {
         String type = scanner.nextLine();
         
 
-        // I think this needs to be a while loop.
+
         while(!isValidPassword(password)) {
             System.out.println("\nThis is not a valid password please try again");
             return false;
@@ -109,7 +130,11 @@ public class SystemUI {
             DataWriter.saveUsers();
             return true;
     }
-
+    /**
+    Gets the user command from input and returns it.
+    @param numCommand the number of possible commands.
+    @return the user command or -1 if invalid.
+    */
     private int getUserCommand(int numCommand){
 
         String input = scanner.nextLine();
@@ -122,7 +147,9 @@ public class SystemUI {
 
         return -1;
     }
-
+    /**
+    Displays the welcome screen for students.
+    */
     public void showStudentWelcomeScreen(){
         System.out.println("\n********Main Menu********");
         System.out.println("Please Choose one of the Following:");
@@ -131,7 +158,9 @@ public class SystemUI {
         }
         System.out.println("\n");
     }
-
+    /**
+    Displays the welcome screen for teachers.
+    */
     public void showTeacherWelcomeScreen(){
         System.out.println("\n********Main Menu********");
         System.out.println("Please Choose one of the Following:");
@@ -140,7 +169,9 @@ public class SystemUI {
         }
         System.out.println("\n");
     }
-
+    /**
+    Displays the main menu for students and handles user input.
+    */
     private void showStudentMainMenu(){
         while(true){
             int command = getUserCommand(mainMenuStrings.length);
@@ -178,7 +209,11 @@ public class SystemUI {
             }
         }
 }
-
+/**
+Gets the user command from input and returns it.
+@param numCommand the number of possible commands.
+@return the user command or -1 if invalid.
+*/
 private void showCourseCreatorMainMenu(){
     while(true){
         int command = getUserCommand(courseCreatorStrings.length);
@@ -216,6 +251,15 @@ private void showCourseCreatorMainMenu(){
         }
     }
 }
+/**
+ * Method that allows the course creator to edit a module of a course.
+ * The method will display a menu of available modules, allow the user to
+ * select a module, and then display the options for editing the module.
+ * The user can then edit the module by inputting valid commands, which are
+ * based on the editModuleStrings array. If the user inputs an invalid command,
+ * the method will continue to loop until a valid command is inputted.
+ * @see getUserCommand
+ */
 
 private void editModule(){
     while(true){
@@ -295,7 +339,10 @@ private void editModule(){
     }
 }
     
-
+/**
+ * Presents the user with a list of available courses to begin and prompts the user to choose one.
+ * Once a course is chosen, calls the showCourseHome method for the chosen course.
+*/
     private void beginCourse(){
         System.out.println("Choose a New Course to Begin: ");
         for(int i = 0; i < coursesStrings.length; i++){
@@ -332,7 +379,10 @@ private void editModule(){
         }
 
     }
-
+    /**
+     *Displays the menu for resuming a course and prompts the user to select a course to resume. Once a course is selected,
+     *the method calls showCourseHome() to display the home screen of the selected course.
+     */
     private void resumeCourse(){
         System.out.println("Resume Course");
         for(int i = 0; i < coursesStrings.length; i++){
@@ -368,7 +418,10 @@ private void editModule(){
             }
         }
     }
-
+    /**
+     * Displays the home screen for a course, including all modules and an option to view comments. 
+     * @param courseIndex the index of the course to display the home screen for
+     */
     private void showCourseHome(int courseIndex){
         CourseList courseList = CourseList.getInstance();
         ArrayList<Course> courses = courseList.getCourses();
@@ -403,7 +456,10 @@ private void editModule(){
             showModule(system.getCurrentModule());
         }
     }
-
+    /**
+     * Displays the current module's details, and prompts the user to either view comments or take the quiz.
+     * @param currentModule the module to display details for
+     */
     private void showModule(Module currentModule) {
         System.out.println(currentModule);
         displayQuiz();
@@ -413,6 +469,10 @@ private void editModule(){
      * Quiz Functions
      */
 
+     /**
+      * Giving the user the option to take the quiz, if they are ready
+      * they will take the quiz, if not they can keep studying
+      */
     private void displayQuiz(){
         System.out.println("\nAre you ready to take the Quiz? Y/N\n");
 
@@ -427,6 +487,11 @@ private void editModule(){
         }
     }
 
+    /**
+     * While there are more questions the quiz displays that to the studwnent
+     * and while there are not it gives the student a grade then brings them back
+     * to the home screen
+     */
     private void takeQuiz(){
         Quiz currentQuiz = system.getQuiz();
             while(currentQuiz.hasMoreQuestions()) {
@@ -439,6 +504,10 @@ private void editModule(){
             returnToHomeScreen();
     }
 
+    /**
+     * If the student would like to return to the home screen the system will do so
+     * but if not the student will stay put
+     */
     private void returnToHomeScreen(){
         System.out.println("\nWould you like to return to the Home Screen? Y/N");
 
@@ -455,6 +524,10 @@ private void editModule(){
 
     }
 
+    /**
+     * If the course creator would like to return to the home screen the system will do so
+     * but if not the course creator will stay put
+     */
     private void returnToCourseCreatorHomeScreen(){
         System.out.println("\nWould you like to return to the Home Screen? Y/N");
 
@@ -470,10 +543,10 @@ private void editModule(){
         }
 
     }
+   
     /**
-     * Check Course Progress
+     * Checks the Course Progress and how far along a student is
      */
-    
     private void checkCourseProgress(){
         system.zeroOut();
         System.out.println("Checking Course Progress");
@@ -482,6 +555,11 @@ private void editModule(){
         returnToHomeScreen();
     }
     
+    /**
+     * Helper method to show the progress, if the user is not in any courses
+     * then they will be told that, but if they are enrolled they can see how 
+     * far along they are
+     */
     private void showCourseProgress(){
         HashMap<Course, CourseProfile> currentUserCourses;
         Student currentUser = system.getCurrentStudent();
@@ -499,6 +577,11 @@ private void editModule(){
         }   
     } 
 
+
+    /**
+     * Allowing the user to see the comments under a module if there are any
+     * comments to be seen
+     */
     public void viewModuleComments() {
         ArrayList<Comment> comments = system.getCurrentCourse().getModuleByIndex(0).getComments();
         system.zeroOut();
@@ -508,6 +591,12 @@ private void editModule(){
             System.out.println(comment);
 
     }
+
+    /**
+     * Giving the user their certificate if their grade in the course is greater than an 80
+     * If not they will just be returned to the home screen
+     * @param grade the grade of the course
+     */
     public void certificate(CourseProfile grade){
         if(grade.getGrades().size() < grade.getCourse().getModules().size()) {
             System.out.println("Complete the course with an 80 or greater to recieve a certificate!");
@@ -530,6 +619,12 @@ private void editModule(){
         }
     }
     // Credit to stackoverflow https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character
+    /**
+     * Checking if a password is valid or not to be able to sign up
+     * @param password the password used to sign up for an account
+     * @return true if the password is between 8 and 25 characters and includes at least 
+     * one number and one special character and false if it does not meet that criteria
+     */
     private static boolean isValidPassword(String password) { 
         if(password.length()>=8 && password.length()<=25)
         {
