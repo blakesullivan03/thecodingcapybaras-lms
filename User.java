@@ -161,7 +161,7 @@ public abstract class User {
         }
         else{
             for(User currentUser : userList){
-                result += "\n\n" + "UUID: " + currentUser.getId() + "First Name: " + currentUser.getFirstName() + " Last Name: " + currentUser.getLastName() + "DOB: " + currentUser.getDateOfBirth() + "Email " + currentUser.getEmail();
+                result += "\n\n" + "UUID: " + currentUser.getId() + " First Name: " + currentUser.getFirstName() + " Last Name: " + currentUser.getLastName() + " DOB: " + currentUser.getDateOfBirth() + " Email " + currentUser.getEmail() + " Type: " + currentUser.getAccountType();
             }
         }
         return result;

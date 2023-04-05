@@ -6,8 +6,6 @@ public class UserList {
     private static UserList userList;
     private ArrayList<User> users;
 
-    private ArrayList<Student> students;
-    private ArrayList<CourseCreator> courseCreators;
     /**
      * Constructs a new UserList object.
      * The list of users is initialized by loading data from the DataLoader class.
@@ -142,27 +140,43 @@ public class UserList {
     public ArrayList<User> getUsers(){
         return users;
     }
+    
     /**
      * Retrieves a list of all Student objects.
      * @return an ArrayList containing all Student objects in the system
      * */
 
     public ArrayList<Student> getStudents(){
-        return students;
+        ArrayList<Student> studentList = new ArrayList<>();
+        for(int i = 0; i < users.size(); i++){
+            if(users.get(i).getAccountType().equalsIgnoreCase("Student")){
+                Student currentStudent = (Student) users.get(i);
+                studentList.add(currentStudent);
+            }
+        }
+        return studentList;
     }
+
     /**
      * Retrieves a list of all CourseCreator objects.
      * @return an ArrayList containing all CourseCreator objects in the system
      * */
     public ArrayList<CourseCreator> getCourseCreators(){
-        return courseCreators;
+        ArrayList<CourseCreator> courseCreatorList = new ArrayList<>();
+        for(int i = 0; i < users.size(); i++){
+            if(users.get(i).getAccountType().equalsIgnoreCase("course creator")){
+                CourseCreator currentCourseCreator = (CourseCreator) users.get(i);
+                courseCreatorList.add(currentCourseCreator);
+            }
+        }
+        return courseCreatorList;
     }
 
-    public void saveUsers(){
-        DataWriter.saveUsers();
+    public void saveStudents(){
+        DataWriter.saveStudents();
     }
 
-    /**public void saveCourseCreators(){
-        DataWriter.saveCourseCreator();
-    }*/
+    public void saveCourseCreators(){
+        DataWriter.saveCourseCreators();
+    }
 }

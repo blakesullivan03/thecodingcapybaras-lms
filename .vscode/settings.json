@@ -1,6 +1,10 @@
 {
     "java.project.referencedLibraries": [
-        "lib/**/*.jar"
+        "lib/**/*.jar",
+        "junit-platformconsole-standalone-1.8.2.jar",
+        "json-simple-1.1.1.jar"
     ],
-    "java.debug.settings.onBuildFailureProceed": true
+    "java.text.config": {
+        "workingDirectory": "$workspaceFolder"
+    }
 }

@@ -29,7 +29,7 @@ public class DataLoader extends DataConstants{
 	}*/
 
     public static ArrayList<User> getUsers() {
-		ArrayList<User> users = new ArrayList<User>();
+		ArrayList<User> users = new ArrayList<>();
 		
 		try {
 			FileReader reader = new FileReader(USER_FILE_NAME);
