@@ -138,7 +138,7 @@ public class Student extends User{
         }
         else{
             for(Student currentStudent : students){
-                result += "\n\n" + "UUID: " + currentStudent.getId() + "First Name: " + currentStudent.getFirstName() + " Last Name: " + currentStudent.getLastName() + "DOB: " + currentStudent.getDateOfBirth() + "Email " + currentStudent.getEmail();
+                result += "\n\n" + "UUID: " + currentStudent.getId() + " First Name: " + currentStudent.getFirstName() + " Last Name: " + currentStudent.getLastName() + " DOB: " + currentStudent.getDateOfBirth() + " Email " + currentStudent.getEmail() + " Type: " + currentStudent.getAccountType();
             }
         }
         return result;

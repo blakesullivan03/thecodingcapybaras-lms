@@ -127,7 +127,8 @@ public class SystemUI {
         }
             system.zeroOut();
             System.out.println("\nThank you, now you are successfully signed up and logged in!");
-            DataWriter.saveUsers();
+            DataWriter.saveStudents();
+            DataWriter.saveCourseCreators();
             return true;
     }
     /**
@@ -679,6 +680,7 @@ private void editModule(){
             scanner.nextLine();
             if(option == 1) {
                 Module.studyGuide(currentModule);
+                returnToHomeScreen();
             } else{
                 System.out.println("Returning you to the Home Screen");
                 returnToHomeScreen();

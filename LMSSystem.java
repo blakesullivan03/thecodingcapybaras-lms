@@ -460,7 +460,8 @@ public class LMSSystem{
 
    public void logOut(){
       courseList.saveCourses();
-      userList.saveUsers();
+      userList.saveCourseCreators();
+      userList.saveStudents();
  }
 
 }

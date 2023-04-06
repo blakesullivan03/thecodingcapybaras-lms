@@ -74,7 +74,7 @@ public class CourseCreator extends User{
         }
         else{
             for(CourseCreator CC : courseCreators){
-                result += "\n\n" + "UUID: " + CC.getId() + "First Name: " + CC.getFirstName() + " Last Name: " + CC.getLastName() + "DOB: " + CC.getDateOfBirth() + "Email " + CC.getEmail();
+                result += "\n\n" + "UUID: " + CC.getId() + " First Name: " + CC.getFirstName() + " Last Name: " + CC.getLastName() + " DOB: " + CC.getDateOfBirth() + " Email " + CC.getEmail() + " Type: " + CC.getAccountType();
             }
         }
         return result;

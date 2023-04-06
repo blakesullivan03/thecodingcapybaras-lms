@@ -8,9 +8,7 @@ import java.util.Stack;
 
 public class DataWriter extends DataConstants{
 
-	/**public static void main(String[] args) {
-		saveCourses();
-	}*/
+	public static JSONArray userJSONArray = new JSONArray();
 
     public static void saveCourses() {
 		CourseList course = CourseList.getInstance();
@@ -33,31 +31,58 @@ public class DataWriter extends DataConstants{
         }
 	}
 
-    public static void saveUsers() {
+	/**
+	 * Saves the Students to the JSON
+	 */
+	public static void saveStudents() {
 		UserList user = UserList.getInstance();
-		ArrayList<User> userList = user.getUsers();
-		JSONArray jsonStudents = new JSONArray();
+		ArrayList<Student> studentList = user.getStudents();
 		
 		//creating all the json objects
-		for(int i=0; i < userList.size(); i++) {
-			jsonStudents.add(getUserJsonObject(userList.get(i)));
+		for(int i=0; i < studentList.size(); i++) {
+			userJSONArray.add(getStudentJSON(studentList.get(i)));
 		}
 		
 		//Write JSON file
         try (FileWriter file = new FileWriter(USER_FILE_NAME)) {
  
-            file.write(jsonStudents.toJSONString());
-            file.flush();
+            file.write(userJSONArray.toJSONString());
+			file.flush();
  
         } catch (IOException e) {
             e.printStackTrace();
         }
 	}
 
-    /**
-     * Return Users JSON
-     */
-	public static JSONObject getUserJsonObject(User user){
+	/**
+	 * Saves the Course Creators to the User JSON
+	 */
+
+	public static void saveCourseCreators() {
+		UserList user = UserList.getInstance();
+		ArrayList<CourseCreator> creatorList = user.getCourseCreators();
+		
+		//creating all the json objects
+		for(int i=0; i < creatorList.size(); i++) {
+			userJSONArray.add(getCourseCreatorJSON(creatorList.get(i)));
+		}
+		
+		//Write JSON file
+        try (FileWriter file = new FileWriter(USER_FILE_NAME)) {
+ 
+            file.write(userJSONArray.toJSONString());
+			file.flush();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+
+	/**
+	 * Return Student Details for User JSON
+	 */
+
+	 public static JSONObject getStudentJSON(Student user){
 		JSONObject userDetails = new JSONObject();
 		
 		userDetails.put(USER_ID, user.getId().toString());
@@ -69,21 +94,33 @@ public class DataWriter extends DataConstants{
 		userDetails.put(TYPE, user.getAccountType());
 		if(user.getAccountType().equalsIgnoreCase("student"))
 		{
-			String firstName = user.getFirstName();
-			String lastName = user.getLastName();
-			String email = user.getEmail();
-			String password = user.getPassword();
-			String type = user.getAccountType();
-			Date DOB = user.DoB;
-			double overallGPA = 0.0;
-			ArrayList<Language> favoriteLanguages = new ArrayList<>();
-			Student student = new Student(firstName, lastName, email, password, DOB, overallGPA, favoriteLanguages, type);
-			userDetails.put(STUDENT_FAV_LANGUAGES, student.getFavoriteLanguages());
-			userDetails.put(STUDENT_OVERALL_GPA, student.getGPA());
+			userDetails.put(STUDENT_FAV_LANGUAGES, user.getFavoriteLanguages().toString());
+			userDetails.put(STUDENT_OVERALL_GPA, user.getGPA());
 		}
 
 		return userDetails;
 	}
+
+	/**
+	 * Return CourseCreator Details for User JSON
+	 */
+
+	 public static JSONObject getCourseCreatorJSON(CourseCreator user){
+		JSONObject userDetails = new JSONObject();
+		
+		userDetails.put(USER_ID, user.getId().toString());
+		userDetails.put(USER_FIRST_NAME, user.getFirstName());
+		userDetails.put(USER_LAST_NAME, user.getLastName());
+        userDetails.put(USER_DOB, user.getDateOfBirth());
+		userDetails.put(USER_EMAIL, user.getEmail());
+        userDetails.put(USER_PASSWORD, user.getPassword());
+		userDetails.put(TYPE, user.getAccountType());
+
+		return userDetails;
+	}
+
+
+//******************************************************************************************************************************************************* */
 
 
 	/**
