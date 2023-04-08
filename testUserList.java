@@ -1,5 +1,6 @@
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,17 +10,20 @@ import org.junit.jupiter.api.Test;
 public class testUserList {
     private UserList users = UserList.getInstance();
 	private ArrayList<User> userList = users.getUsers();
+    ArrayList<Language> favLang = new ArrayList<Language>();
 
     @Test
     public void addValidStudent() {
         Date date = getDateFromString("05/12/2003");
-        boolean result = users.addStudent("Miles", "Morales", "IamtotallySpiderMan1@starkindustries.org", "Hypnotize123!", date, 3.5, new array list, "Student");
-       assertTrue(result);
+        favLang.add(Language.PYTHON);
+        boolean result = users.addStudent("Miles", "Morales", "IamtotallySpiderMan1@starkindustries.org", "Hypnotize123!", date, 3.5, favLang, "Student");
+        assertTrue(result);
     }
     //null favoritelanguages
     @Test
     public void addStudentDuplicate() {
         Date date = getDateFromString("05/12/2003");
+        favLang.add(Language.PYTHON);
         boolean result = users.addStudent("Peter", "Parker", "IamtotallynotSpiderMan1@starkindustries.org", "GreenGoblinDeezNuts12!", date, 3.5, null, "Student");
        assertFalse(result);
     }
