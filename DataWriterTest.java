@@ -2,6 +2,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +24,7 @@ class DataWriterTest {
         DataWriter.saveCourseCreators();
     }
 
-    @AfterEach
+    //@AfterEach
 	public void tearDown() {
 		UserList.getInstance().getUsers().clear();
         DataWriter.saveStudents();
@@ -49,7 +50,8 @@ class DataWriterTest {
 	
 	@Test
 	void testWritingFiveUsers() {
-		users.add(new CourseCreator("Blake", "Turner", "IamBlakeTurner@outlook.com", "IamRelatedToIronMan1!", new Date(05/29/2003), "course creator"));
+		Date date = getDateFromString("05/12/1452");
+		users.add(new CourseCreator("Blake", "Turner", "IamBlakeTurner@outlook.com", "IamRelatedToIronMan1!", date, "course creator"));
 		users.add(new CourseCreator("Blake", "Turner", "IamBlakeTurner@outlook.com", "IamRelatedToIronMan1!", new Date(05/29/2003), "course creator"));
 		users.add(new Student("Jonas", "Kovacs", "IamJonasKovacs@outlook.com", "IamRelatedToIronMan1!", new Date(05/29/2003), 0.0, favLanguages, "student"));
 		users.add(new Student("Matt", "Fowler", "IamMattFowler@outlook.com", "IamRelatedToIronMan1!", new Date(05/29/2003), 0.0, favLanguages, "student"));
@@ -69,9 +71,19 @@ class DataWriterTest {
 	
 	@Test
 	void testWritingNullUser() {
-		users.add(new Student("", "", null, "", new Date(),0.0, favLanguages, ""));
+		users.add(new Student("", "", null, "", new Date(05/29/2003),0.0, favLanguages, ""));
 		DataWriter.saveStudents();
 		DataWriter.saveCourseCreators();
 		assertEquals(null, DataLoader.getUsers().get(0).getEmail());
 	}
+
+	private Date getDateFromString(String data){
+		try {
+            return new SimpleDateFormat("MM/dd/yyyy").parse(data);
+        } catch (Exception e) {
+            System.out.println("here");
+            return new Date();
+        }
+	}
+	
 }

@@ -65,6 +65,10 @@ public abstract class User {
 		return id;
 	}
 
+    public Date getDate(){
+        return DoB;
+    }
+
     /**
      * Getting the user's email
      * @return the user's email
@@ -118,7 +122,7 @@ public abstract class User {
      * @return the user's date of birth in the correct format
      */
 	public String getDateOfBirth(){
-		return getFormattedDate(DoB);
+		return getFormattedDate();
 	}
 	
     /**
@@ -142,10 +146,19 @@ public abstract class User {
      * @param date the date for date of birth
      * @return the date in the right format
      */
-    private String getFormattedDate(Date date) {
+    public String getFormattedDate() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        return simpleDateFormat.format(date);
+        return simpleDateFormat.format(DoB);
     }
+    
+    	private Date getDateFromString(String data){
+		try {
+            return new SimpleDateFormat("MM/dd/yyyy").parse(data);
+        } catch (Exception e) {
+            System.out.println("here");
+            return new Date();
+        }
+	}
 
     /**
      * Displaying the user's information
