@@ -1,1 +1,41 @@
-[{"firstName":"Jonas","lastName":"Kovacs","overallGPA":0.0,"password":"IamRelatedToIronMan1!","dateOfBirth":"Wed Dec 31 19:00:00 EST 1969","id":"ddfdcb39-3043-40ae-a5a8-af14f3dd4578","favLanguages":"[]","type":"student","email":"IamJonasKovacs@outlook.com"},{"firstName":"Matt","lastName":"Fowler","overallGPA":0.0,"password":"IamRelatedToIronMan1!","dateOfBirth":"Wed Dec 31 19:00:00 EST 1969","id":"20203e3c-b622-4df3-9a12-da84d1b7f1ff","favLanguages":"[]","type":"student","email":"IamMattFowler@outlook.com"},{"firstName":"Michael","lastName":"Hernandez","overallGPA":0.0,"password":"IamRelatedToIronMan1!","dateOfBirth":"Wed Dec 31 19:00:00 EST 1969","id":"14188011-98c8-40f4-8dbb-f4931306e456","favLanguages":"[]","type":"student","email":"IamMichaelHernandez@outlook.com"},{"firstName":"Blake","lastName":"Turner","password":"IamRelatedToIronMan1!","dateOfBirth":"05\/12\/1452","id":"c7b09ef9-7139-47e7-8a33-cc7cbead5285","type":"course creator","email":"IamBlakeTurner@outlook.com"},{"firstName":"Blake","lastName":"Turner","password":"IamRelatedToIronMan1!","dateOfBirth":"12\/31\/1969","id":"9b130378-b021-4b4d-86fe-e849fa87ee19","type":"course creator","email":"IamBlakeTurner@outlook.com"}]
+[
+    {
+        "id": "d022ea4a-1f9b-4203-ad9f-48d57ef8802f",
+        "firstName":"Georgina", 
+        "lastName":"Flippina", 
+        "dateOfBirth":"8/27/1996",
+        "email":"GeorgieF@email.sdsu.edu",
+        "password":"sharksarecool9?",
+        "type":"Course Creator"
+    },{
+        "id": "260c9289-a36a-4135-bf93-f21a118d0f61",
+        "firstName":"John", 
+        "lastName":"Pippen", 
+        "dateOfBirth":"5/12/2001",
+        "email":"JbPippen@gmail.com",
+        "password":"basketballismylifeee22!",
+        "type": "Student",
+        "overallGPA":4.0,
+        "favLanguages":["Python", "C"]
+    },{
+        "id": "174a27fb-9632-44ad-a5cb-31f549e52731",
+        "firstName":"Miles", 
+        "lastName":"Stark", 
+        "dateOfBirth":"5/12/1997",
+        "email":"IamMilesStark@outlook.com",
+        "password":"IamRelatedtoIronMan1!",
+        "type": "Student",
+        "overallGPA":3.0,
+        "favLanguages":["Python", "Javascript"]
+    },{
+        "id": "88e183f7-0a67-4983-b0e5-37c4ddf16b57",
+        "firstName":"Peter", 
+        "lastName":"Parker", 
+        "dateOfBirth":"5/12/2003",
+        "email":"IamtotallynotSpiderMan1@starkindustries.org",
+        "password":"GreenGoblinDeezNuts12!",
+        "type": "Student",
+        "overallGPA":3.5,
+        "favLanguages":["C", "Javascript"]
+    }
+]
