@@ -18,15 +18,51 @@ class testUserList {
         Date date = getDateFromString("05-12-2003");
         favLang.add(Language.PYTHON);
         boolean result = userList.add(new Student("Miles", "Morales", "IamtotallySpiderMan1@starkindustries.org", "Hypnotize123!", date, 3.5, favLang, "Student"));
+        boolean result = userList.add(new Student("Miles", "Morales", "IamtotallySpiderMan1@starkindustries.org", "Hypnotize123!", date, 3.5, favLang, "Student"));
         assertTrue(result);
     }
-    //null favoritelanguages
     @Test
     public void addStudentDuplicate() {
         Date date = getDateFromString("05-12-2003");
         favLang.add(Language.PYTHON);
         boolean result = userList.add(new Student("Peter", "Parker", "IamtotallynotSpiderMan1@starkindustries.org", "GreenGoblinDeezNuts12!", date, 3.5, null, "Student"));
        assertTrue(result);
+        boolean result = users.addStudent("Peter", "Parker", "IamtotallynotSpiderMan1@starkindustries.org", "GreenGoblinDeezNuts12!", date, 3.5, favLang, "Student");
+        assertFalse(result);
+    }
+    @Test
+    public void addStudentNullFavLanguages() {
+        Date date = getDateFromString("05/12/2003");
+        boolean result = users.addStudent("Jack", "Parker", "JP@starkindustries.org", "GreenGoblinDeezNuts12!", date, 3.5, null, "Student");
+        assertFalse(result);
+    }
+    @Test
+    public void addStudentNoFirstName() {
+        Date date = getDateFromString("05/12/2003");
+        favLang.add(Language.PYTHON);
+        boolean result = users.addStudent("", "Strange", "ShouldabeenSupreme@outlook.com", "", date, 3.5, favLang, "Student");
+        assertFalse(result);
+    }
+    @Test
+    public void addStudentNullFirstName() {
+        Date date = getDateFromString("05/12/2003");
+        favLang.add(Language.PYTHON);
+        boolean result = users.addStudent(null, "Strange", "ShouldabeenSupreme@outlook.com", "", date, 3.5, favLang, "Student");
+        assertFalse(result);
+    }
+    @Test
+    public void addStudentNoLastName() {
+        Date date = getDateFromString("05/12/2003");
+        favLang.add(Language.PYTHON);
+        boolean result = users.addStudent("Stephen", "", "ShouldabeenSupreme@outlook.com", "", date, 3.5, favLang, "Student");
+        assertFalse(result);
+    }
+    @Test
+    public void addStudentNullLastName() {
+        Date date = getDateFromString("05/12/2003");
+        favLang.add(Language.PYTHON);
+        boolean result = users.addStudent("Stephen", null, "ShouldabeenSupreme@outlook.com", "", date, 3.5, favLang, "Student");
+        assertFalse(result);
     }
     @Test
     public void addStudentNullEmail() {
@@ -55,7 +91,8 @@ class testUserList {
     @Test
     public void addStudentTooYoung(){
         Date date = getDateFromString("05-12-2082");
-        boolean result = userList.add(new Student("Stephen", "Strange", "aaaa@", "GreenGoblinDeezNuts12!", date, 3.5, null, "Student"));
+        favLang.add(Language.PYTHON);
+        boolean result = userList.add(new Student("Stephen", "Strange", "a123@outlook.com", "GreenGoblinDeezNuts12!", date, 3.5, favLang, "Student"));
         assertTrue(result);
     }
     @Test
@@ -71,11 +108,139 @@ class testUserList {
         assertTrue(result);
     }
     @Test
-    public void addStudentNoFavLanguages(){
-        Date date = getDateFromString("05-12-1452");
-        boolean result = userList.add(new Student("Stephen", "Strange", "aaaa@", "GreenGoblinDeezNuts12!", date, 8.9, null, "Student"));
+    public void addStudentInvalidType(){
+        favLang.add(Language.PYTHON);
+        Date date = getDateFromString("05/12/2003");
+        boolean result = users.addStudent("Stephen", "Strange", "a123@outlook.com", "GreenGoblinDeezNuts12!", date, 3.5, favLang, "Shadow Wizard Money Gang");
+        assertFalse(result);
+    }
+    
+
+    // Course Creator Tests
+    @Test
+    public void addValidCourseCreator() {
+        Date date = getDateFromString("12/18/1997");
+        boolean result = users.addCourseCreator("John", "Popper", "Jpop@UCLA.edu", "Hypnotize123!", date, "Course Creator");
         assertTrue(result);
     }
+    @Test
+    public void addCourseCreatorDuplicate() {
+        Date date = getDateFromString("12/18/1997");
+        boolean result = users.addCourseCreator("Georgina", "Filipina", "GeorgieF@email.sdsu.edu", "sharksarecool9?", date, "Course Creator");
+        assertFalse(result);
+    }
+    @Test
+    public void addCourseCreatorNoEmail() {
+        Date date = getDateFromString("12/18/1997");
+        boolean result = users.addCourseCreator("John", "Popper", "", "Hypnotize123!", date, "Course Creator");
+        assertFalse(result);
+    }
+    @Test
+    public void addCourseCreatorNonEduEmail() {
+        Date date = getDateFromString("12/18/1997");
+        boolean result = users.addCourseCreator("John", "Popper", "Jpop@UCLA.org", "Hypnotize123!", date, "Course Creator");
+        assertFalse(result);
+    }
+    @Test
+    public void addCourseCreatorInvalidEmail() {
+        Date date = getDateFromString("12/18/1997");
+        boolean result = users.addCourseCreator("John", "Popper", "Jpop@aa", "Hypnotize123!", date, "Course Creator");
+        assertFalse(result);
+    }
+    @Test
+    public void addCourseCreatorNullEmail() {
+        Date date = getDateFromString("12/18/1997");
+        boolean result = users.addCourseCreator("John", "Popper", null, "Hypnotize123!", date, "Course Creator");
+        assertFalse(result);
+    }
+    @Test
+    public void addCourseCreatorNoPassword() {
+        Date date = getDateFromString("12/18/1997");
+        boolean result = users.addCourseCreator("John", "Popper", "Jpop@UCLA.edu", "", date, "Course Creator");
+        assertFalse(result);
+    }
+    @Test
+    public void addCourseCreatorNullPassword() {
+        Date date = getDateFromString("12/18/1997");
+        boolean result = users.addCourseCreator("John", "Popper", "Jpop@UCLA.edu", null, date, "Course Creator");
+        assertFalse(result);
+    }
+    @Test
+    public void addCourseCreatorInvalidPassword() {
+        Date date = getDateFromString("12/18/1997");
+        boolean result = users.addCourseCreator("John", "Popper", "Jpop@UCLA.org", "bluearmy!", date, "Course Creator");
+        assertFalse(result);
+    }
+    @Test
+    public void addCourseCreatorTooYoung() {
+        Date date = getDateFromString("12/18/2022");
+        boolean result = users.addCourseCreator("John", "Popper", "Jpop@UCLA.edu", "Hypnotize123!", date, "Course Creator");
+        assertFalse(result);
+    }
+    @Test
+    public void addCourseCreatorTooOld() {
+        Date date = getDateFromString("12/18/1420");
+        boolean result = users.addCourseCreator("John", "Popper", "Jpop@UCLA.edu", "Hypnotize123!", date, "Course Creator");
+        assertFalse(result);
+    }
+    @Test
+    public void addCourseCreatorNoFirstName() {
+        Date date = getDateFromString("12/18/1997");
+        boolean result = users.addCourseCreator("", "Popper", "Jpop@UCLA.edu", "Hypnotize123!", date, "Course Creator");
+        assertFalse(result);
+    }
+    @Test
+    public void addCourseCreatorNullFirstName() {
+        Date date = getDateFromString("12/18/1997");
+        boolean result = users.addCourseCreator(null, "Popper", "Jpop@UCLA.edu", "Hypnotize123!", date, "Course Creator");
+        assertFalse(result);
+    }
+    @Test
+    public void addCourseCreatorNoLastName() {
+        Date date = getDateFromString("12/18/1997");
+        boolean result = users.addCourseCreator("John", "", "Jpop@UCLA.edu", "Hypnotize123!", date, "Course Creator");
+        assertFalse(result);
+    }
+    @Test
+    public void addCourseCreatorNullLastName() {
+        Date date = getDateFromString("12/18/1997");
+        boolean result = users.addCourseCreator("John", null, "Jpop@UCLA.edu", "Hypnotize123!", date, "Course Creator");
+        assertFalse(result);
+    }
+    @Test
+    public void addCourseCreatorWrongType(){
+        Date date = getDateFromString("12/18/1997");
+        boolean result = users.addCourseCreator("John", "Popper", "JPop@UCLA.edu", "GreenGoblinDeezNuts12!", date, "Student");
+        assertFalse(result);
+    }
+    @Test
+    public void addCourseCreatorInvalidType(){
+        Date date = getDateFromString("12/18/1997");
+        boolean result = users.addCourseCreator("John", "Popper", "JPop@UCLA.edu", "GreenGoblinDeezNuts12!", date, "Bees Make Honey");
+        assertFalse(result);
+    }
+    @Test
+    public void haveUserValidContains(){
+        boolean result = users.haveUser("IamtotallynotSpiderMan1@starkindustries.org");
+        assertTrue(result);
+    }
+    @Test
+    public void haveUserNotContains(){
+        boolean result = users.haveUser("SheWantsSpider-ManButWalksPastPeterParkerEveryday@gmail.com");
+        assertFalse(result);
+    }
+    @Test
+    public void haveUserEmptyContains(){
+        boolean result = users.haveUser("");
+        assertFalse(result);
+    }
+    @Test
+    public void haveUserNullContains(){
+        boolean result = users.haveUser(null);
+        assertFalse(result);
+    }
+
+
 
     private Date getDateFromString(String data){
 		try {
