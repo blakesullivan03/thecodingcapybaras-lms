@@ -11,11 +11,7 @@ import org.junit.jupiter.api.Test;
 class DataWriterTest {
     private UserList userList = UserList.getInstance();
     private ArrayList<User> users = userList.getUsers();
-    //private ArrayList<Student> students = userList.getStudents();
-    //private ArrayList<CourseCreator> creators = userList.getCourseCreators();
 	private ArrayList<Language> favLanguages = new ArrayList<>();
-
-	
 
     @BeforeEach
     public void setup(){
@@ -24,7 +20,7 @@ class DataWriterTest {
         DataWriter.saveCourseCreators();
     }
 
-    //@AfterEach
+    @AfterEach
 	public void tearDown() {
 		UserList.getInstance().getUsers().clear();
         DataWriter.saveStudents();
@@ -34,36 +30,40 @@ class DataWriterTest {
 	
 	@Test
 	void testWritingZeroUsers() {
-		users = DataLoader.getUsers();
+		users = UserList.getInstance().getUsers();
 		assertEquals(0, users.size());
 	}
 
 	@Test
 	void testWritingOneStudentAndCourseCreator() {
-        users.add(new CourseCreator("Blake", "Turner", "IamBlakeTurner@outlook.com", "IamRelatedToIronMan1!", new Date(05/29/2003), "course creator"));
+		Date date = getDateFromString("05-29-2003");
+		favLanguages.add(Language.PYTHON);
+        users.add(new CourseCreator("Blake", "Turner", "IamBlakeTurner@outlook.com", "IamRelatedToIronMan1!", date, "course creator"));
+		users.add(new Student("Jonas", "Kovacs", "IamJonasKovacs@outlook.com", "IamRelatedToIronMan1!", date, 0.0, favLanguages, "student"));
 		DataWriter.saveStudents();
         DataWriter.saveCourseCreators();
-		assertEquals("IamBlakeTurner@outlook.com", DataLoader.getUsers().get(0).getEmail());
+		assertEquals("IamBlakeTurner@outlook.com", DataLoader.getUsers().get(1).getEmail());
 	}
 
 
 	
 	@Test
-	void testWritingFiveUsers() {
-		Date date = getDateFromString("05/12/1452");
+	void testWritingMultipleUsers() {
+		Date date = getDateFromString("05-29-2003");
+		favLanguages.add(Language.PYTHON);
 		users.add(new CourseCreator("Blake", "Turner", "IamBlakeTurner@outlook.com", "IamRelatedToIronMan1!", date, "course creator"));
-		users.add(new CourseCreator("Blake", "Turner", "IamBlakeTurner@outlook.com", "IamRelatedToIronMan1!", new Date(05/29/2003), "course creator"));
-		users.add(new Student("Jonas", "Kovacs", "IamJonasKovacs@outlook.com", "IamRelatedToIronMan1!", new Date(05/29/2003), 0.0, favLanguages, "student"));
-		users.add(new Student("Matt", "Fowler", "IamMattFowler@outlook.com", "IamRelatedToIronMan1!", new Date(05/29/2003), 0.0, favLanguages, "student"));
-		users.add(new Student("Michael", "Hernandez", "IamMichaelHernandez@outlook.com", "IamRelatedToIronMan1!", new Date(05/29/2003), 0.0, favLanguages, "student"));
+		users.add(new Student("Jonas", "Kovacs", "IamJonasKovacs@outlook.com", "IamRelatedToIronMan1!", date, 0.0, favLanguages, "student"));
+		users.add(new Student("Matt", "Fowler", "IamMattFowler@outlook.com", "IamRelatedToIronMan1!", date, 0.0, favLanguages, "student"));
+		users.add(new Student("Michael", "Hernandez", "IamMichaelHernandez@outlook.com", "IamRelatedToIronMan1!", date, 0.0, favLanguages, "student"));
 		DataWriter.saveStudents();
         DataWriter.saveCourseCreators();
-		assertEquals("IamBlakeTurner@outlook.com", DataLoader.getUsers().get(4).getEmail());
+		assertEquals("IamBlakeTurner@outlook.com", DataLoader.getUsers().get(1).getEmail());
 	}
 	
 	@Test
 	void testWritingEmptyUser() {
-		users.add(new Student("", "", "", "", new Date(), 0.0, favLanguages, "student"));
+		Date date = getDateFromString("05-29-2003");
+		users.add(new Student("", "", "", "", date, 0.0, favLanguages, "student"));
 		DataWriter.saveStudents();
 		DataWriter.saveCourseCreators();
 		assertEquals("", DataLoader.getUsers().get(0).getEmail());
@@ -71,7 +71,8 @@ class DataWriterTest {
 	
 	@Test
 	void testWritingNullUser() {
-		users.add(new Student("", "", null, "", new Date(05/29/2003),0.0, favLanguages, ""));
+		Date date = getDateFromString("");
+		users.add(new Student("", "", null, "", date,0.0, favLanguages, ""));
 		DataWriter.saveStudents();
 		DataWriter.saveCourseCreators();
 		assertEquals(null, DataLoader.getUsers().get(0).getEmail());
@@ -79,10 +80,9 @@ class DataWriterTest {
 
 	private Date getDateFromString(String data){
 		try {
-            return new SimpleDateFormat("MM/dd/yyyy").parse(data);
+            return new SimpleDateFormat("MM-dd-yyyy").parse(data);
         } catch (Exception e) {
-            System.out.println("here");
-            return new Date();
+            return null;
         }
 	}
 	

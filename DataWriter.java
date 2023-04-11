@@ -88,13 +88,13 @@ public class DataWriter extends DataConstants{
 		userDetails.put(USER_ID, user.getId().toString());
 		userDetails.put(USER_FIRST_NAME, user.getFirstName());
 		userDetails.put(USER_LAST_NAME, user.getLastName());
-        userDetails.put(USER_DOB, user.getDate().toString());
+        userDetails.put(USER_DOB, user.getFormattedDate());
 		userDetails.put(USER_EMAIL, user.getEmail());
         userDetails.put(USER_PASSWORD, user.getPassword());
 		userDetails.put(TYPE, user.getAccountType());
 		if(user.getAccountType().equalsIgnoreCase("student"))
 		{
-			userDetails.put(STUDENT_FAV_LANGUAGES, user.getFavoriteLanguages().toString());
+			userDetails.put(STUDENT_FAV_LANGUAGES, user.getFavoriteLanguageString());
 			userDetails.put(STUDENT_OVERALL_GPA, user.getGPA());
 		}
 
@@ -111,7 +111,7 @@ public class DataWriter extends DataConstants{
 		userDetails.put(USER_ID, user.getId().toString());
 		userDetails.put(USER_FIRST_NAME, user.getFirstName());
 		userDetails.put(USER_LAST_NAME, user.getLastName());
-        userDetails.put(USER_DOB, user.getDateOfBirth());
+        userDetails.put(USER_DOB, user.getFormattedDate());
 		userDetails.put(USER_EMAIL, user.getEmail());
         userDetails.put(USER_PASSWORD, user.getPassword());
 		userDetails.put(TYPE, user.getAccountType());

@@ -1,6 +1,7 @@
 import java.util.UUID;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.text.SimpleDateFormat;
 
 /**
@@ -147,18 +148,11 @@ public abstract class User {
      * @return the date in the right format
      */
     public String getFormattedDate() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        return simpleDateFormat.format(DoB);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy");
+        String formattedDate = simpleDateFormat.format(DoB);
+        System.out.println(formattedDate);
+        return formattedDate;
     }
-    
-    	private Date getDateFromString(String data){
-		try {
-            return new SimpleDateFormat("MM/dd/yyyy").parse(data);
-        } catch (Exception e) {
-            System.out.println("here");
-            return new Date();
-        }
-	}
 
     /**
      * Displaying the user's information

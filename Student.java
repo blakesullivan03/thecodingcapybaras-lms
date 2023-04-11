@@ -82,6 +82,14 @@ public class Student extends User{
         return favoriteLanguages;
     }
 
+    public ArrayList<String> getFavoriteLanguageString(){
+        ArrayList<String> favLang = new ArrayList<>();
+        for(int i = 0; i < favoriteLanguages.size(); i++){
+            favLang.add(favoriteLanguages.get(i).toString());
+        }
+        return favLang;
+    }
+
     /**
      * Allowing a user to add a favorite language
      * @param language the language being added to the favorite language list

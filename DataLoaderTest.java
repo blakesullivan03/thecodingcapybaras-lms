@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.AfterEach;
@@ -17,18 +18,18 @@ class DataLoaderTest {
 
 	@BeforeEach
 	public void setup() {
-		users.clear();
-		userList = UserList.getInstance();
-		users = userList.getUsers();
-		users.add(new CourseCreator("Blake", "Turner", "IamBlakeTurner@outlook.com", "IamRelatedToIronMan1!", new Date(2003, 05, 29), "course creator"));
-		users.add(new Student("Jonas", "Kovacs", "IamJonasKovacs@outlook.com", "IamRelatedToIronMan1!", new Date(8/07/2003), 0.0, favLanguages, "student"));
+		userList.getUsers().clear();
+		Date date = getDateFromString("05-29-2003");
+		favLanguages.add(Language.PYTHON);
+		users.add(new CourseCreator("Blake", "Turner", "IamBlakeTurner@outlook.com", "IamRelatedToIronMan1!", date, "course creator"));
+		users.add(new Student("Jonas", "Kovacs", "IamJonasKovacs@outlook.com", "IamRelatedToIronMan1!", date, 0.0, favLanguages, "student"));
 		DataWriter.saveStudents();
         DataWriter.saveCourseCreators();
 	}
 	
 	@AfterEach
 	public void tearDown() {
-		//userList.getUsers().clear();
+		userList.getUsers().clear();
 		DataWriter.saveStudents();
         DataWriter.saveCourseCreators();
 	}
@@ -36,13 +37,12 @@ class DataLoaderTest {
 	
 	@Test
 	void testGetUsersSize() {
-		users = DataLoader.getUsers();
-		assertEquals(1, users.size());
+		assertEquals(2, users.size());
 	}
 
 	@Test
 	void testGetUsersSizeZero() {
-		userList.getUsers().clear();
+		UserList.getInstance().getUsers().clear();
 		DataWriter.saveStudents();
         DataWriter.saveCourseCreators();
 		assertEquals(0, users.size());
@@ -52,5 +52,13 @@ class DataLoaderTest {
 	void testGetUserFirstUserEmail() {
 		users = DataLoader.getUsers();
 		assertEquals("IamBlakeTurner@outlook.com", users.get(1).getEmail());
+	}
+
+	private Date getDateFromString(String data){
+		try {
+            return new SimpleDateFormat("MM-dd-yyyy").parse(data);
+        } catch (Exception e) {
+            return null;
+        }
 	}
 }

@@ -16,12 +16,11 @@ import org.json.simple.parser.JSONParser;;
 public class DataLoader extends DataConstants{
 
 	/**public static void main(String[] args) {
-	 * ArrayList<User> students = getUsers();
+	 ArrayList<User> students = getUsers();
 		for(User student : students){
 			System.out.println(student);
 		}
 	}
-
 	ArrayList<Course> courses = getCourses();
 		for(Course course : courses){
 			System.out.println(course);
@@ -44,14 +43,14 @@ public class DataLoader extends DataConstants{
 				String email = (String)personJSON.get(USER_EMAIL);
 				String type = (String)personJSON.get(TYPE);
 				String password = (String)personJSON.get(USER_PASSWORD);
-                Date dob = getDateFromString((String)personJSON.get(USER_DOB));
+                Date dateOfBirth = getDateFromString((String)personJSON.get(USER_DOB));
 
 				if(type.equalsIgnoreCase("student")){
 					ArrayList<Language> favoriteLanguages = getLanguages((JSONArray)personJSON.get(STUDENT_FAV_LANGUAGES));
 					double overallGPA = (Double)personJSON.get(STUDENT_OVERALL_GPA);
-                	users.add(new Student(id, firstName, lastName, email, password, dob, overallGPA, favoriteLanguages, type));
+                	users.add(new Student(id, firstName, lastName, email, password, dateOfBirth, overallGPA, favoriteLanguages, type));
 				} else {
-					users.add(new CourseCreator(id, firstName, lastName, email, password, dob, type));
+					users.add(new CourseCreator(id, firstName, lastName, email, password, dateOfBirth, type));
 				}
 			}
 			
@@ -79,7 +78,7 @@ public class DataLoader extends DataConstants{
 
 	private static Date getDateFromString(String data){
 		try {
-            return new SimpleDateFormat("MM/dd/yyyy").parse(data);
+            return new SimpleDateFormat("MM-dd-yyyy").parse(data);
         } catch (Exception e) {
             System.out.println("here");
             return new Date();

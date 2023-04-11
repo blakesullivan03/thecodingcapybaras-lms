@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Stack;
-public class QuizTest {
+class QuizTest {
     @Test
     public void testGetNextQuestion() {
         // Create a list of questions
